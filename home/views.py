@@ -5,5 +5,5 @@ from django.shortcuts import render
 from . import models
 # Create your views here.
 def home (request):
-    hero=models.hero.objects.all
+    hero=models.hero.objects.get(show=True)
     return render(request,'home/index.html',{'hero':hero})

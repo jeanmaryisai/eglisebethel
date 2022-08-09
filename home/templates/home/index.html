@@ -6,15 +6,15 @@
     <aside id="fh5co-hero">
         <div class="flexslider">
             <ul class="slides">
-               <li style="background-image: url({% static 'home/images/img_bg_1.jpg' %});">
+               <li style="background-image: url({% static '{{hero.vid1.backgroud.url}}' %});">
                    <div class="overlay"></div>
                    <div class="container-fluid">
                        <div class="row">
                            <div class="col-md-6 col-md-offset-3 text-center">
                                <div class="slider-text">
                                    <div class="slider-text-inner">
-                                       <h1>Vivre &amp; repandre la bonne nouvelle</h1>
-                                        <h2>Live sermon du 4/53/34 <a href="http://freehtml5.co/" target="_blank">Pv...</a></h2>
+                                       <h1>{{hero.vid1.heading}}</h1>
+                                        <h2>{{hero.vid1.submenu1}}<a href="http://freehtml5.co/" target="_blank">{{hero.vid1.submenu2}}</a></h2>
                                         <p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
                                    </div>
                                </div>
@@ -22,38 +22,38 @@
                        </div>
                    </div>
                </li>
-               <li style="background-image: url({%static 'home/images/img_bg_2.jpg'%});">
-                   <div class="overlay"></div>
-                   <div class="container-fluid">
-                       <div class="row">
-                           <div class="col-md-6 col-md-offset-3 text-center">
-                               <div class="slider-text">
-                                   <div class="slider-text-inner">
-                                       <h1>Precher la bonne nouvelle</h1>
-                                        <h2>Live sermon le 12/32/12 <a href="http://freehtml5.co/" target="_blank">Petion ville</a></h2>
-                                        <p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </li>
-               <li style="background-image: url({static 'home/images/img_bg_3.jpg'});">
-                   <div class="overlay"></div>
-                   <div class="container-fluids">
-                       <div class="row">
-                           <div class="col-md-6 col-md-offset-3 text-center">
-                               <div class="slider-text">
-                                   <div class="slider-text-inner text-center">
-                                       <h1>Les Petites Choses</h1>
-                                        <h2>Short sermon <a href="#" target="_blank">En studio</a></h2>
-                                        <p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </li>
+               <li style="background-image: url({% static '{{hero.vid1.backgroud.url}}' %});">
+                <div class="overlay"></div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <div class="slider-text">
+                                <div class="slider-text-inner">
+                                    <h1>{{hero.vid2.heading}}</h1>
+                                     <h2>{{hero.vid2.submenu1}}<a href="http://freehtml5.co/" target="_blank">{{hero.vid2.submenu2}}</a></h2>
+                                     <p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li style="background-image: url({% static '{{hero.vid3.backgroud.url}}' %});">
+                <div class="overlay"></div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <div class="slider-text">
+                                <div class="slider-text-inner">
+                                    <h1>{{hero.vid3.heading}}</h1>
+                                     <h2>{{hero.vid3.submenu1}}<a href="http://freehtml5.co/" target="_blank">{{hero.vid3.submenu2}}</a></h2>
+                                     <p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
               </ul>
           </div>
     </aside>
@@ -305,7 +305,5 @@
     </div>
 </div>
 
-{% for x in hero %}
-<img src="{{x.vid1.video.url}}" alt="">
-{%  endfor %}
+
 {% endblock %}
