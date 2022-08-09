@@ -1,6 +1,7 @@
 from pickle import FALSE, TRUE
 from re import M
 from tkinter import CASCADE
+from turtle import title
 from django.db import models
 
 # Create your models here.
@@ -170,3 +171,10 @@ class evenement(models.Model):
 
     def isfinished(self):
         return True
+
+class evenement_main_page(models.Model):
+    title=models.CharField(max_length=30)
+    subtitle=models.TextField()
+    e1=models.ForeignKey(evenement)
+    e2=models.ForeignKey(evenement)
+    e3=models.ForeignKey(evenement)
