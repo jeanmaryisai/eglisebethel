@@ -43,6 +43,7 @@ class firstSection(models.Model):
     submain= models.TextField(default="Nous rependons la parole de Dieu qu'importe ou nous allons et nous agissons selon les prescriptions laisser par Jesus Christ")
     show= models.BooleanField(default= True)
     
+    
     def __str__ (self):
         return self.main
 
@@ -70,6 +71,10 @@ class statSection(models.Model):
     sat3=models.IntegerField()
     sat4=models.IntegerField()
     show= models.BooleanField(default= True)
+    anneCourante=models.IntegerField(null=True,blank=True)
+
+    def __str__ (self):
+        return f'{self.anneCourante}'
 
     def save(self, *args, **kwargs):
         if self.show== True:
@@ -85,7 +90,7 @@ class statSection(models.Model):
         super(statSection, self).save(*args, **kwargs)
 
 class serviceSingle(models.Model):
-    name= models.CharField(max_length=50,unique=True)
+    title= models.CharField(max_length=50,unique=True)
     slug= models.SlugField(unique=True)
     imageBackground=models.FileField(null=True, upload_to='media/images/%y')
     description_bref=models.TextField()
@@ -93,23 +98,16 @@ class serviceSingle(models.Model):
     horraire=models.CharField(max_length=15)
     show= models.BooleanField(default=True)
 
-    def save(self, *args, **kwargs):
-        if self.show== True:
-            self.show= False
-            try:
-                heros= serviceSingle.objects.get(show=True)
-                heros.show=False
-                heros.save()
-            except:
-                pass
-            self.show=True
+    def __str__ (self):
+        return self.title
 
-        super(serviceSingle, self).save(*args, **kwargs)
 
 class Service(models.Model):
-    title=models.CharField(max_length=30, default="Services")
+    title=models.CharField(max_length=30,unique=True, default="Services")
     submenu=models.TextField(default="Nos horraires nous permettent de vous offrir une large evantaille de possibilitee pour vous de nous assister")    
     show=models.BooleanField(default=True)
+    def __str__ (self):
+        return self.title
 
     def save(self, *args, **kwargs):
         if self.show== True:
@@ -125,18 +123,24 @@ class Service(models.Model):
         super(Service, self).save(*args, **kwargs)
 
 class Sermon(models.Model):
-    title= models.CharField(max_length=30)
+    title= models.CharField(max_length=30,unique=True)
     orator=models.CharField(max_length=20)
     tumbnail= models.FileField(upload_to='media/images/%y')
     youtubeurl=models.TextField()
 
+    def __str__ (self):
+        return self.title
+
 class Sermons_main_section(models.Model):
-    title=models.CharField(max_length=30, default="Nos Sermons")
+    title=models.CharField(max_length=30,unique=True, default="Nos Sermons")
     submenu=models.TextField(default="Profitez de nos Sermons")
     show=models.BooleanField(default=True)
     s1= models.ForeignKey(Sermon,on_delete=models.CASCADE,related_name='s1')
     s2= models.ForeignKey(Sermon,on_delete=models.CASCADE,related_name='s2')
     s3= models.ForeignKey(Sermon,on_delete=models.CASCADE,related_name='s3')
+
+    def __str__ (self):
+        return self.title
 
     def save(self, *args, **kwargs):
         if self.show== True:
@@ -152,15 +156,20 @@ class Sermons_main_section(models.Model):
         super(Sermons_main_section, self).save(*args, **kwargs)
 
 class verset(models.Model):
-    ref=models.CharField(max_length=15)
+    ref=models.CharField(max_length=15,unique=True)
     verset= models.TextField()
+    def __str__ (self):
+        return self.ref
 
 class verset_main_page(models.Model):
-    theme= models.CharField(max_length=50)
+    theme= models.CharField(max_length=50,unique=True)
     v1=models.ForeignKey(verset,on_delete=models.CASCADE,related_name='v1')
     v2=models.ForeignKey(verset,on_delete=models.CASCADE,related_name='v2')
     v3=models.ForeignKey(verset,on_delete=models.CASCADE,related_name='v3')
     show=models.BooleanField(default=True)
+
+    def __str__ (self):
+        return self.theme
 
     def save(self, *args, **kwargs):
         if self.show== True:
@@ -176,18 +185,24 @@ class verset_main_page(models.Model):
         super(verset_main_page, self).save(*args, **kwargs)
 
 class evenement(models.Model):
-    title=models.CharField(max_length=50)
+    title=models.CharField(max_length=50,unique=True)
     slug=models.SlugField(unique=True)
     startdate=models.DurationField()
     description=models.TextField(null=True)
+    
+    def __str__(self) -> str:
+        return self.title
 
 class evenement_main_page(models.Model):
-    title=models.CharField(max_length=30)
+    title=models.CharField(max_length=30,unique=True)
     subtitle=models.TextField()
     e1=models.ForeignKey(evenement,on_delete=models.CASCADE,related_name='e1')
     e2=models.ForeignKey(evenement,on_delete=models.CASCADE,related_name='e2')
     e3=models.ForeignKey(evenement,on_delete=models.CASCADE,related_name='e3')
     show=models.BooleanField(default=True)
+
+    def __str__ (self):
+        return self.title
 
     def save(self, *args, **kwargs):
         if self.show== True:
@@ -203,9 +218,12 @@ class evenement_main_page(models.Model):
         super(evenement_main_page, self).save(*args, **kwargs)
 
 class secteur_main(models.Model):
-    title=models.CharField(max_length=30,default="Nos Secteurs")
+    title=models.CharField(max_length=30,unique=True,default="Nos Secteurs")
     subtitle=models.TextField()
     show=models.BooleanField(default=True)
+
+    def __str__ (self):
+        return self.title
 
     def save(self, *args, **kwargs):
         if self.show== True:
@@ -221,8 +239,10 @@ class secteur_main(models.Model):
         super(secteur_main, self).save(*args, **kwargs)
 
 class secteur(models.Model):
-    title=models.CharField(max_length=40,null=True,blank=True)
-    description= models.TextField(null=True,blank=True,default= 'this is the default populated description')
-    slug=models.SlugField(null=True,blank=True,default= 'this is the default populated slug')
+    title=models.CharField(max_length=40,null=True,blank=True,unique=True)
+    description= models.TextField(null=True,blank=True,unique=True,default= 'this is the default populated description')
+    slug=models.SlugField(null=True,blank=True)
     tumbail= models.FileField(null=True,blank=True)
     titit= models.CharField(max_length=50,null=True,blank=True)
+    def __str__ (self):
+        return self.title

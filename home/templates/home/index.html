@@ -14,15 +14,15 @@
                                <div class="slider-text">
                                    <div class="slider-text-inner">
                                        <h1>{{hero.vid1.heading}}</h1>
-                                        <h2>{{hero.vid1.submenu1}}<a href="http://freehtml5.co/" target="_blank">{{hero.vid1.submenu2}}</a></h2>
-                                        <p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
+                                        <h2>{{hero.vid1.submenu1}}, <a href="#" target="_blank">{{hero.vid1.submenu2}}</a></h2>
+                                        <p><a class="btn btn-primary btn-demo popup-vimeo" href="#"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
                                    </div>
                                </div>
                            </div>
                        </div>
                    </div>
                </li>
-               <li style="background-image: url({% static '{{hero.vid1.backgroud.url}}' %});">
+               <li style="background-image: url('{{hero.vid2.backgroud.url}}');">
                 <div class="overlay"></div>
                 <div class="container-fluid">
                     <div class="row">
@@ -30,15 +30,15 @@
                             <div class="slider-text">
                                 <div class="slider-text-inner">
                                     <h1>{{hero.vid2.heading}}</h1>
-                                     <h2>{{hero.vid2.submenu1}}<a href="http://freehtml5.co/" target="_blank">{{hero.vid2.submenu2}}</a></h2>
-                                     <p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
+                                     <h2>{{hero.vid2.submenu1}}, <a href="#" target="_blank">{{hero.vid2.submenu2}}</a></h2>
+                                     <p><a class="btn btn-primary btn-demo popup-vimeo" href="#"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </li>
-            <li style="background-image: url({% static '{{hero.vid3.backgroud.url}}' %});">
+            <li style="background-image: url('{{hero.vid3.backgroud.url}}');">
                 <div class="overlay"></div>
                 <div class="container-fluid">
                     <div class="row">
@@ -46,8 +46,8 @@
                             <div class="slider-text">
                                 <div class="slider-text-inner">
                                     <h1>{{hero.vid3.heading}}</h1>
-                                     <h2>{{hero.vid3.submenu1}}<a href="http://freehtml5.co/" target="_blank">{{hero.vid3.submenu2}}</a></h2>
-                                     <p><a class="btn btn-primary btn-demo popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
+                                     <h2>{{hero.vid3.submenu1}}, <a href="#" target="_blank">{{hero.vid3.submenu2}}</a></h2>
+                                     <p><a class="btn btn-primary btn-demo popup-vimeo" href="#"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
                                 </div>
                             </div>
                         </div>
@@ -60,8 +60,8 @@
     <div id="fh5co-intro">
         <div class="row animate-box">
             <div class="col-md-12 col-md-offset-0 text-center">
-                <h2>Prions sans cesse</h2>
-                <span>Notres statistique durants les deux dernier annees</span>
+                <h2>{{firstSection.main}}</h2>
+                <span>{{firstSection.submain}}</span>
             </div>
         </div>
     </div>
@@ -69,28 +69,28 @@
     <div id="fh5co-counter" class="fh5co-counters">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center animate-box">
-                <p>Nous rependons la parole de Dieu qu'importe ou nous allons et nous agissons selon les prescriptions laisser par Jesus Christ</p>
+                <p>{{statSection.text}}</p>
                 </div>
         </div>
         <div class="row animate-box">
             <div class="col-md-8 col-md-offset-2">
                 <div class="row">
                     <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                        <span class="fh5co-counter js-counter" data-from="0" data-to="9452" data-speed="5000" data-refresh-interval="50"></span>
-                        <span class="fh5co-counter-label">Membres</span>
+                        <span class="fh5co-counter js-counter" data-from="0" data-to="{{statSection.sat1}}" data-speed="5000" data-refresh-interval="50"></span>
+                        <span class="fh5co-counter-label">{{statSection.sat1Name}}</span>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                        <span class="fh5co-counter js-counter" data-from="0" data-to="214" data-speed="5000" data-refresh-interval="50"></span>
-                        <span class="fh5co-counter-label">Ministeres</span>
+                        <span class="fh5co-counter js-counter" data-from="0" data-to="{{statSection.sat2}}" data-speed="5000" data-refresh-interval="50"></span>
+                        <span class="fh5co-counter-label">{{statSection.sat2Name}}</span>
                     </div>
                     <div class="clearfix visible-sm-block visible-xs-block"></div>
                     <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                        <span class="fh5co-counter js-counter" data-from="0" data-to="433" data-speed="5000" data-refresh-interval="50"></span>
-                        <span class="fh5co-counter-label">Missions</span>
+                        <span class="fh5co-counter js-counter" data-from="0" data-to="{{statSection.sat3}}" data-speed="5000" data-refresh-interval="50"></span>
+                        <span class="fh5co-counter-label">{{statSection.sat3Name}}</span>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                        <span class="fh5co-counter js-counter" data-from="0" data-to="512" data-speed="5000" data-refresh-interval="50"></span>
-                        <span class="fh5co-counter-label">Activites</span>
+                        <span class="fh5co-counter js-counter" data-from="0" data-to="{{statSection.sat4}}" data-speed="5000" data-refresh-interval="50"></span>
+                        <span class="fh5co-counter-label">{{statSection.sat4Name}}</span>
                     </div>
                 </div>
             </div>
@@ -99,83 +99,65 @@
     <div id="fh5co-services" class="fh5co-light-grey">
         <div class="row animate-box">
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-                <h2>Services</h2>
-                <p>Nos horraires nous permettent de vous offrir une large evantaille de possibilitee pour vous de nous assister </p>
+                <h2>{{Service.title}}</h2>
+                <p>{{Service.submenu}}</p>
             </div>
         </div>
         <div class="row">
+            {% for x in serviceSingle %}
             <div class="col-md-4 animate-box">
                 <div class="services">
-                    <a href="#" class="img-holder"><img class="img-responsive" src="images/img-1.jpg" alt="Free HTML5 Website Template by freehtml5.co"></a>
+                    <a href="#" class="img-holder"><img class="img-responsive" src="{{x.imageBackground.url}}" alt="Free HTML5 Website Template by freehtml5.co"></a>
                     <div class="desc">
-                        <h3><a href="#">Nos service Lives</a></h3>
-                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-                        <a href="#">Read More <i class="icon-arrow-right3"></i></a>
+                        <h3><a href="#">{{x.title}}</a></h3>
+                        <p>{{x.description_bref}}</p>
+                        <a href="url ('{{x.slug}}')">Read More <i class="icon-arrow-right3"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 animate-box">
-                <div class="services">
-                    <a href="#" class="img-holder"><img class="img-responsive" src="images/img-3.jpg" alt="Free HTML5 Website Template by freehtml5.co"></a>
-                    <div class="desc">
-                        <h3><a href="#">Etudes Bibliques</a></h3>
-                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-                        <a href="#">Read More <i class="icon-arrow-right3"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 animate-box">
-                <div class="services">
-                    <a href="#" class="img-holder"><img class="img-responsive" src="images/img-2.jpg" alt="Free HTML5 Website Template by freehtml5.co"></a>
-                    <div class="desc">
-                        <h3><a href="#">Veille de Nuits</a></h3>
-                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-                        <a href="#">Read More <i class="icon-arrow-right3"></i></a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 
     <div id="fh5co-sermon">
         <div class="row animate-box">
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-                <h2>Nos sermons</h2>
-                <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                <h2>{{Sermons_main_section.title}}</h2>
+                <p>{{Sermons_main_section.submenu}}</p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4 text-center animate-box">
                 <div class="sermon-entry">
-                    <div class="sermon" style="background-image: url(images/sermon-1.jpg);">
+                    <div class="sermon" style="background-image: url({{Sermons_main_section.s1.tumbnail.url}});">
                         <div class="play">
-                            <a class="popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"><i class="icon-play3"></i></a>
+                            <a class="popup-vimeo" href="{{Sermons_main_section.s1.youtubeurl}}"><i class="icon-play3"></i></a>
                         </div>
                     </div>
-                    <h3>Ruigissez</h3>
-                    <span>Pstr. John Doe</span>
+                    <h3>{{Sermons_main_section.s1.title}}</h3>
+                    <span>{{Sermons_main_section.s1.orator}}</span>
                 </div>
             </div>
             <div class="col-md-4 text-center animate-box">
                 <div class="sermon-entry">
-                    <div class="sermon" style="background-image: url(images/sermon-3.jpg);">
+                    <div class="sermon" style="background-image: url({{Sermons_main_section.s2.tumbnail.url}});">
                         <div class="play">
-                            <a class="popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"><i class="icon-play3"></i></a>
+                            <a class="popup-vimeo" href="{{Sermons_main_section.s2.youtubeurl}}"><i class="icon-play3"></i></a>
                         </div>
                     </div>
-                    <h3>Les petites choses</h3>
-                    <span>Pstr. John Doe</span>
+                    <h3>{{Sermons_main_section.s2.title}}</h3>
+                    <span>{{Sermons_main_section.s1.orator}}</span>
                 </div>
             </div>
             <div class="col-md-4 text-center animate-box">
                 <div class="sermon-entry">
-                    <div class="sermon" style="background-image: url(images/sermon-2.jpg);">
+                    <div class="sermon" style="background-image: url({{Sermons_main_section.s3.tumbnail.url}});">
                         <div class="play">
-                            <a class="popup-vimeo" href="https://vimeo.com/channels/staffpicks/93951774"><i class="icon-play3"></i></a>
+                            <a class="popup-vimeo" href="{{Sermons_main_section.s3.youtubeurl}}"><i class="icon-play3"></i></a>
                         </div>
                     </div>
-                    <h3>Aux temps de la detresse</h3>
-                    <span>Pstr. John Doe</span>
+                    <h3>{{Sermons_main_section.s3.title}}</h3>
+                    <span>{{Sermons_main_section.s1.orator}}</span>
                 </div>
             </div>
         </div>
@@ -187,7 +169,7 @@
                 <div class="row animate-box">
                     <div class="owl-carousel owl-carousel-fullwidth">
                         <div class="item">
-                            <div class="bible-verse-slide active text-center">
+                            <div class="bible-verse-slider active text-center">
                                 <blockquote>
                                     <p>&ldquo;For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.&rdquo;</p>
                                     <span>John 3:16</span>
@@ -218,32 +200,32 @@
     <div id="fh5co-events">
         <div class="row animate-box">
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-                <h2>Nos evennements</h2>
-                <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                <h2>{{evenement_main_page.title}}</h2>
+                <p>{{evenement_main_page.subtitle}}</p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4 animate-box">
                 <div class="events-entry">
-                    <span class="date">March 10, 2023</span>
-                    <h3><a href="#">Reveil</a></h3>
-                    <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto culpa amet.</p>
+                    <span class="date">{{evenement_main_page.e1.startdate}}</span>
+                    <h3><a href="#">{{evenement_main_page.e1.title}}</a></h3>
+                    <p>{{evenement_main_page.e1.description}}</p>
                     <a href="#">Read More <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
             <div class="col-md-4 animate-box">
                 <div class="events-entry">
-                    <span class="date">March 20, 2017</span>
-                    <h3><a href="#">Semaine de Moisson</a></h3>
-                    <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto culpa amet.</p>
+                    <span class="date">{{evenement_main_page.e2.startdate}}</span>
+                    <h3><a href="#">{{evenement_main_page.e2.title}}</a></h3>
+                    <p>{{evenement_main_page.e2.description}}</p>
                     <a href="#">Read More <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
             <div class="col-md-4 animate-box">
                 <div class="events-entry">
-                    <span class="date">March 30, 2017</span>
-                    <h3><a href="#">Dimanche de la famille</a></h3>
-                    <p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto culpa amet.</p>
+                    <span class="date">{{evenement_main_page.e3.startdate}}</span>
+                    <h3><a href="#">{{evenement_main_page.e3.title}}</a></h3>
+                    <p>{{evenement_main_page.e3.description}}</p>
                     <a href="#">Read More <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
@@ -252,55 +234,26 @@
     <div id="fh5co-news" class="fh5co-light-grey">
         <div class="row animate-box">
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-                <h2>Nos Secteurs</h2>
-                <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                <h2>{{secteur_main.title}}</h2>
+                <p>{{secteur_main.subtitle}}</p>
             </div>
         </div>
+
+        
         <div class="row">
+            {% for x in secteur %}
             <div class="col-md-3 animate-box">
                 <div class="news">
-                    <a href="#" class="img-holder"><img class="img-responsive" src="images/img-1.jpg" alt="Free HTML5 Website Template by freehtml5.co"></a>
+                    <a href="#" class="img-holder"><img class="img-responsive" src="{{x.tumbail.url}}" alt="Free HTML5 Website Template by freehtml5.co"></a>
                     <div class="desc">
-                        <span class="date">Lorem ipsum dolor,</span>
-                        <h3><a href="#">AJEDPV</a></h3>
-                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                        <span class="date">{{x.titit}}</span>
+                        <h3><a href="#">{{x.title}}</a></h3>
+                        <p>{{x.description}}</p>
                         <a href="#">Read More <i class="icon-arrow-right3"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 animate-box">
-                <div class="news">
-                    <a href="#" class="img-holder"><img class="img-responsive" src="images/img-3.jpg" alt="Free HTML5 Website Template by freehtml5.co"></a>
-                    <div class="desc">
-                        <span class="date">Lorem ipsum dolor,</span>
-                        <h3><a href="#">Shekina</a></h3>
-                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-                        <a href="#">Read More <i class="icon-arrow-right3"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 animate-box">
-                <div class="news">
-                    <a href="#" class="img-holder"><img class="img-responsive" src="images/img-2.jpg" alt="Free HTML5 Website Template by freehtml5.co"></a>
-                    <div class="desc">
-                        <span class="date">Lorem ipsum dolor,</span>
-                        <h3><a href="#">Psycho-moment</a></h3>
-                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-                        <a href="#">Read More <i class="icon-arrow-right3"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 animate-box">
-                <div class="news">
-                    <a href="#" class="img-holder"><img class="img-responsive" src="images/img-4.jpg" alt="Free HTML5 Website Template by freehtml5.co"></a>
-                    <div class="desc">
-                        <span class="date">Lorem ipsum dolor,</span>
-                        <h3><a href="#">Gospel Asaph</a></h3>
-                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-                        <a href="#">Read More <i class="icon-arrow-right3"></i></a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
