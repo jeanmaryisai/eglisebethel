@@ -134,9 +134,9 @@ class Sermons_main_section(models.Model):
     title=models.CharField(max_length=30, default="Nos Sermons")
     submenu=models.TextField(default="Profitez de nos Sermons")
     show=models.BooleanField(default=True)
-    s1= models.ForeignKey(Sermon)
-    s2= models.ForeignKey(Sermon)
-    s3= models.ForeignKey(Sermon)
+    s1= models.ForeignKey(Sermon,on_delete=models.CASCADE,related_name='s1')
+    s2= models.ForeignKey(Sermon,on_delete=models.CASCADE,related_name='s2')
+    s3= models.ForeignKey(Sermon,on_delete=models.CASCADE,related_name='s3')
 
     def save(self, *args, **kwargs):
         if self.show== True:
@@ -152,14 +152,14 @@ class Sermons_main_section(models.Model):
         super(Sermons_main_section, self).save(*args, **kwargs)
 
 class verset(models.Model):
-    ref=models.CharField()
+    ref=models.CharField(max_length=15)
     verset= models.TextField()
 
 class verset_main_page(models.Model):
     theme= models.CharField(max_length=50)
-    v1=models.ForeignKey(verset)
-    v2=models.ForeignKey(verset)
-    v3=models.ForeignKey(verset)
+    v1=models.ForeignKey(verset,on_delete=models.CASCADE,related_name='v1')
+    v2=models.ForeignKey(verset,on_delete=models.CASCADE,related_name='v2')
+    v3=models.ForeignKey(verset,on_delete=models.CASCADE,related_name='v3')
     show=models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
@@ -179,14 +179,14 @@ class evenement(models.Model):
     title=models.CharField(max_length=50)
     slug=models.SlugField(unique=True)
     startdate=models.DurationField()
-    description=models.TextField()
+    description=models.TextField(null=True)
 
 class evenement_main_page(models.Model):
     title=models.CharField(max_length=30)
     subtitle=models.TextField()
-    e1=models.ForeignKey(evenement)
-    e2=models.ForeignKey(evenement)
-    e3=models.ForeignKey(evenement)
+    e1=models.ForeignKey(evenement,on_delete=models.CASCADE,related_name='e1')
+    e2=models.ForeignKey(evenement,on_delete=models.CASCADE,related_name='e2')
+    e3=models.ForeignKey(evenement,on_delete=models.CASCADE,related_name='e3')
     show=models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
@@ -221,8 +221,8 @@ class secteur_main(models.Model):
         super(secteur_main, self).save(*args, **kwargs)
 
 class secteur(models.Model):
-    title=models.CharField(max_length=40)
-    description= models.TextField()
-    slug=models.SlugField()
-    tumbail= models.FileField()
-    titit= models.CharField(max_length=50)
+    title=models.CharField(max_length=40,null=True,blank=True)
+    description= models.TextField(null=True,blank=True,default= 'this is the default populated description')
+    slug=models.SlugField(null=True,blank=True,default= 'this is the default populated slug')
+    tumbail= models.FileField(null=True,blank=True)
+    titit= models.CharField(max_length=50,null=True,blank=True)
