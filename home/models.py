@@ -139,7 +139,7 @@ class Sermons_main_section(models.Model):
     s1= models.ForeignKey(Sermon,on_delete=models.CASCADE,related_name='s1')
     s2= models.ForeignKey(Sermon,on_delete=models.CASCADE,related_name='s2')
     s3= models.ForeignKey(Sermon,on_delete=models.CASCADE,related_name='s3')
-
+    background=models.FileField(upload_to='media/images/%y', null=True)
     def __str__ (self):
         return self.title
 
@@ -188,7 +188,7 @@ class verset_main_page(models.Model):
 class evenement(models.Model):
     title=models.CharField(max_length=50,unique=True)
     slug=models.SlugField(unique=True)
-    startdate=models.DurationField()
+    startdate=models.DateField()
     description=models.TextField(null=True)
     
     def __str__(self) -> str:
@@ -201,6 +201,7 @@ class evenement_main_page(models.Model):
     e2=models.ForeignKey(evenement,on_delete=models.CASCADE,related_name='e2')
     e3=models.ForeignKey(evenement,on_delete=models.CASCADE,related_name='e3')
     show=models.BooleanField(default=True)
+    background=models.FileField(upload_to='media/images/%y', null=True)
 
     def __str__ (self):
         return self.title
@@ -276,4 +277,37 @@ class contact_page(models.Model):
             self.show=True
             
         super(contact_page, self).save(*args, **kwargs)
+
+class about_page(models.Model):
+    title=models.CharField(max_length=30, default='standard')
+    hero_img= models.FileField(upload_to='media/images/%y')
+    title_hero=models.CharField(max_length=30, default='A propos de nous')
+    subtile_hero= models.TextField(default="Nous somme une eglise protestante situe en Haiti")
+    show=models.BooleanField(default=True)
+    def save(self, *args, **kwargs):
+        if self.show== True:
+            self.show= False
+            try:
+                heros= about_page.objects.get(show=True)
+                heros.show=False
+                heros.save()
+            except:
+                pass
+            self.show=True
+            
+        super(about_page, self).save(*args, **kwargs)
+
+
+class li_subtitle_about(models.Model):
+    title=models.CharField(max_length=50)
+
+    def __str__ (self):
+        return self.title
+    
+class wrapper_about_page(models.Model):
+    wrapper_about_page=models.ManyToManyField(li_subtitle_about,blank=True)
+    title=models.CharField(max_length=100)
+    paragraph=models.TextField(null=True)
+    def __str__ (self):
+        return self.title
     

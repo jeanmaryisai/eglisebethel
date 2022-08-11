@@ -57,6 +57,7 @@
               </ul>
           </div>
     </aside>
+
     <div id="fh5co-intro">
         <div class="row animate-box">
             <div class="col-md-12 col-md-offset-0 text-center">
@@ -96,6 +97,7 @@
             </div>
         </div>
     </div>
+    <hr>
     <div id="fh5co-services" class="fh5co-light-grey">
         <div class="row animate-box">
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
@@ -118,12 +120,13 @@
             {% endfor %}
         </div>
     </div>
-
+    <hr>
     <div id="fh5co-sermon">
         <div class="row animate-box">
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
                 <h2>{{Sermons_main_section.title}}</h2>
                 <p>{{Sermons_main_section.submenu}}</p>
+                <h4><a href="#" target="_blank">Tout voir <i class="icon-arrow-right3"></i></a></h4>
             </div>
         </div>
         <div class="row">
@@ -171,24 +174,24 @@
                         <div class="item">
                             <div class="bible-verse-slide active text-center">
                                 <blockquote>
-                                    <p>&ldquo;For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.&rdquo;</p>
-                                    <span>John 3:16</span>
+                                    <p>&ldquo;{{verset_main_page.v1.verset}}&rdquo;</p>
+                                    <span>{{verset_main_page.v1.ref}}</span>
                                 </blockquote>
                             </div>
                         </div>
                         <div class="item">
                             <div class="bible-verse-slide active text-center">
                                 <blockquote>
-                                    <p>&ldquo;The LORD [is] my strength and my shield; my heart trusted in him, and I am helped: therefore my heart greatly rejoiceth; and with my song will I praise him.&rdquo;</p>
-                                    <span>Psalms 28:7</span>
+                                    <p>&ldquo;{{verset_main_page.v2.verset}}&rdquo;</p>
+                                    <span>{{verset_main_page.v2.ref}}</span>
                                 </blockquote>
                             </div>
                         </div>
                         <div class="item">
                             <div class="bible-verse-slide active text-center">
                                 <blockquote>
-                                    <p>&ldquo;And we have known and believed the love that God hath to us. God is love; and he that dwelleth in love dwelleth in God, and God in him.&rdquo;</p>
-                                    <span>1 John 4:16</span>
+                                    <p>&ldquo;{{verset_main_page.v3.verset}}&rdquo;</p>
+                                    <span>{{verset_main_page.v3.ref}}</span>
                                 </blockquote>
                             </div>
                         </div>
@@ -202,6 +205,7 @@
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
                 <h2>{{evenement_main_page.title}}</h2>
                 <p>{{evenement_main_page.subtitle}}</p>
+                <h4><a href="{%url 'events' %}" target="_blank">Tout voir <i class="icon-arrow-right3"></i></a></h4>
             </div>
         </div>
         <div class="row">
@@ -249,8 +253,8 @@
                         <span class="date">{{x.titit}}</span>
                         <h3><a href="#">{{x.title}}</a></h3>
                         <p>{{x.description}}</p>
-                        <a href="#">Read More <i class="icon-arrow-right3"></i></a>
-                    </div>
+                        <!-- <a href="#">Read More <i class="icon-arrow-right3"></i></a>
+                   --> </div> 
                 </div>
             </div>
             {% endfor %}

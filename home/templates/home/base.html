@@ -74,8 +74,8 @@
 							<li
 							{% block home_active %}{% endblock %}
 							><a href="{% url 'home' %}">Aceuil</a></li>
-							<li {% block sermon_active %}{% endblock %}><a href="sermons.html">Sermons</a></li>
-							<li class="has-dropdown {% block secteur_active %}{% endblock %}">
+							<li {% block sermon_active %}{% endblock %}><a href="{% url 'sermons'%}">Sermons</a></li>
+							<!-- <li class="has-dropdown {% block secteur_active %}{% endblock %}">
 								<a href="news.html">Secteurs</a>
 								<ul class="dropdown">
 									<li ><a href="#">AJEDPY</a></li>
@@ -83,9 +83,9 @@
 									<li><a href="#">Gospel Asaph</a></li>
 									<li><a href="#">Lorem dieds</a></li>
 								</ul>
-							</li>
-							<li {% block events_active %}{% endblock %}><a href="events.html">Evennements</a></li>
-							<li {% block about_active %}{% endblock %}><a href="about.html">A propos de nous</a></li>
+							</li> -->
+							<li {% block events_active %}{% endblock %}><a href="{% url 'events'%}">Evennements</a></li>
+							<li {% block about_active %}{% endblock %}><a href="{% url 'about'%}">A propos de nous</a></li>
 							<li {% block contact_active %}{% endblock %}><a href="{% url 'contact' %}">Contact</a></li>
 							<li {% block donate_active %}{% endblock %}><a href="#" class="donate">Bay Bondye</a></li>
 						</ul>
