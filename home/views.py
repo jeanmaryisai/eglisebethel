@@ -28,3 +28,7 @@ def home (request):
     except:
         context={}
     return render(request,'home/index.html',context)
+
+def contact(request):
+    context={}
+    return render(request,'home/contact.html',context)
