@@ -43,31 +43,43 @@ contactez nous
 				</ul>
 			</div>
 			<div class="col-md-7 col-md-pull-2 animate-box">
+
+				
 				<div class="row">
+					{% if name  %}
+					<h2>Merci de nous avoir ecris {{name}}</h2>
+					<p>Nous esperons que vous nous visiterai merci beaucoup a vous, vos supports comptesnt beaucoup pour nous.</p>
+					{%else%}
+					<form action="" method="post">
+						{% csrf_token %}
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Name">
+							<input type="text" name="name" class="form-control" placeholder="Name" required>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Email">
+							<input type="email" name='email' class="form-control" placeholder="Email" required>
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-group">
-							<textarea name="" class="form-control" id="" cols="30" rows="7" placeholder="Message"></textarea>
+							<input type="textarea" class="form-control" required name="message" cols="30" rows="7" placeholder="Message"></input>
 						</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-group">
-							<input type="submit" value="Envoyee" class="btn btn-primary btn-modify">
+							<input type="submit" id="btn" value="Envoyee" class="btn btn-primary btn-modify">
 						</div>
 					</div>
+					</form>
+					{%endif%}
 				</div>
+			
 			</div>
 		</div>
 	</div>
 </div>     
 {% endblock %}
+
 

@@ -3,6 +3,7 @@ from django import http
 import django
 from django.shortcuts import render
 from . import models
+from django.core.mail import send_mail
 # Create your views here.
 def home (request):
     try:
@@ -31,8 +32,33 @@ def home (request):
     return render(request,'home/index.html',context)
 
 def contact(request):
+    errorpost=True
     contact = models.contact_page.objects.get(show=True)
-    context={'contact':contact,}
+    context={'contact':contact,'error':errorpost}
+    if request.method=="POST":
+        
+        try:
+            name= request.POST['name']
+            msj= request.POST['message']
+            email= request.POST['email']
+            
+            if msj != '':
+                msj= f'{name} vous a laissez un message... </br> {msj}'
+                send_mail('On vous laissez un message sur votre blog '
+                    ,msj
+                    ,'jeanmaryisai@gmail.com'
+                    ,['jeanmaryisai@gmail.com',]
+                    ,
+                )
+                errorpost=False
+        except:
+            pass
+        context={'contact':contact,'error':errorpost,'name':name}
+        return render(request,'home/contact.html',context)
+        
+            
+    contact = models.contact_page.objects.get(show=True)
+    context={'contact':contact,'error':errorpost}
     return render(request,'home/contact.html',context)
 
 def about(request):
