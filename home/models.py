@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from pickle import FALSE, TRUE
 from pyexpat import model
 from re import M
@@ -242,7 +243,37 @@ class secteur(models.Model):
     title=models.CharField(max_length=40,null=True,blank=True,unique=True)
     description= models.TextField(null=True,blank=True,unique=True,default= 'this is the default populated description')
     slug=models.SlugField(null=True,blank=True)
-    tumbail= models.FileField(null=True,blank=True)
+    tumbail= models.FileField(null=True ,upload_to='media/images/%y')
     titit= models.CharField(max_length=50,null=True,blank=True)
     def __str__ (self):
         return self.title
+
+class contact_page(models.Model):
+    title=models.CharField(max_length=30, default='standard')
+    hero_img= models.FileField(upload_to='media/images/%y')
+    title_hero=models.CharField(max_length=30, default='Contactez Nous')
+    subtile_hero= models.TextField(default="Laissez nous un message, vos demande de prieres.")
+    title=models.CharField(max_length=30, default='Contactez Nous')
+    subtile= models.TextField(default="Qu'importe ou vous est dans le monde, la puissance du Seigneur reste et demeur le meme")
+    title2=models.CharField(max_length=10, default='Address')
+    address=models.CharField(max_length=50, default='Rue Louverture Rebecca prolongee #32')
+    telphone=models.CharField(max_length=30, default='+509 43 89 0007')
+    email=models.EmailField()
+    siteweb=models.CharField(max_length=20)
+    show=models.BooleanField(default=True)
+    def __str__ (self):
+        return self.title
+    
+    def save(self, *args, **kwargs):
+        if self.show== True:
+            self.show= False
+            try:
+                heros= contact_page.objects.get(show=True)
+                heros.show=False
+                heros.save()
+            except:
+                pass
+            self.show=True
+            
+        super(contact_page, self).save(*args, **kwargs)
+    

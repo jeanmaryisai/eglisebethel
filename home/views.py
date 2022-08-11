@@ -24,11 +24,13 @@ def home (request):
         'verset_main_page':verset_main_page,
         'evenement_main_page':evenement_main_page,
         'secteur_main':secteur_main,
-        'secteur':secteur}
+        'secteur':secteur,
+        'active':1}
     except:
         context={}
     return render(request,'home/index.html',context)
 
 def contact(request):
-    context={}
+    contact = models.contact_page.objects.get(show=True)
+    context={'active':2, 'contact':contact,}
     return render(request,'home/contact.html',context)

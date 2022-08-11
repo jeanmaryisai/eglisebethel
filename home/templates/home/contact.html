@@ -3,19 +3,20 @@
 {% block title %}
 contactez nous
 {% endblock %}
+{% block contact_active %}class="active"{% endblock %}
 {% block body %}
 <div class="container-wrap">
 	<aside id="fh5co-hero">
 		<div class="flexslider">
 			<ul class="slides">
-			   <li style="background-image: url(images/img_bg_2.jpg);">
+			   <li style="background-image: url({{contact.hero_img.url}});">
 				   <div class="overlay"></div>
 				   <div class="container-fluid">
 					   <div class="row">
 						   <div class="col-md-6 col-md-offset-3 text-center slider-text">
 							   <div class="slider-text-inner">
-								   <h1>Contactez nous</h1>
-									<h2>Laissez nous un message, vos demande de prieres.<a href="#" target="_blank">Dieu est Amour</a></h2>
+								   <h1>{{contact.title_hero}}</h1>
+									<h2>{{contact.subtile_hero}}</h2>
 							   </div>
 						   </div>
 					   </div>
@@ -27,18 +28,18 @@ contactez nous
 	<div id="fh5co-contact">
 		<div class="row animate-box">
 			<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-				<h2>Contactez nous</h2>
-				<p>Qu'importe ou vous est dans le monde, la puissance du Seigneur reste et demeur le meme.</p>
+				<h2>{{contact.title}}</h2>
+				<p>{{contact.subtitle}}</p>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-3 col-md-push-8 animate-box">
-				<h3>Notre address</h3>
+				<h3>{{contact.title2}}</h3>
 				<ul class="contact-info">
-					<li><i class="icon-location4"></i>Rue Louverture Rebecca prolongee #32</li>
-					<li><i class="icon-phone3"></i>+ 509 1235 2355 </li>
-					<li><i class="icon-location3"></i><a href="#">info@eglisebethel.com</a></li>
-					<li><i class="icon-globe2"></i><a href="#">www.eglisebethel.com</a></li>
+					<li><i class="icon-location4"></i>{{contact.address}}</li>
+					<li><i class="icon-phone3"></i>{{contact.telphone}}</li>
+					<li><i class="icon-location3"></i><a href="#">{{contact.email}}</a></li>
+					<li><i class="icon-globe2"></i><a href="#">{{contact.siteweb}}</a></li>
 				</ul>
 			</div>
 			<div class="col-md-7 col-md-pull-2 animate-box">
