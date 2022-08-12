@@ -1,10 +1,11 @@
-from distutils.command.upload import upload
-from pickle import FALSE, TRUE
-from pyexpat import model
-from re import M
-from tkinter import CASCADE
-from django.db import models
 
+from email.mime import image
+from django.db import models
+import datetime
+import pytz
+from django.utils.dateparse import parse_duration
+
+#from datetime import datetime, date, time, timedelta
 # Create your models here.
 
 class heroSingle(models.Model):
@@ -128,6 +129,8 @@ class Sermon(models.Model):
     orator=models.CharField(max_length=20)
     tumbnail= models.FileField(upload_to='media/images/%y')
     youtubeurl=models.TextField()
+    show=models.BooleanField(default=True, null=True)
+        
 
     def __str__ (self):
         return self.title
@@ -142,7 +145,6 @@ class Sermons_main_section(models.Model):
     background=models.FileField(upload_to='media/images/%y', null=True)
     def __str__ (self):
         return self.title
-
     def save(self, *args, **kwargs):
         if self.show== True:
             self.show= False
@@ -185,13 +187,42 @@ class verset_main_page(models.Model):
             
         super(verset_main_page, self).save(*args, **kwargs)
 
+
+class Img(models.Model):
+    img=models.ImageField(upload_to='media/images/%y')
 class evenement(models.Model):
+    
     title=models.CharField(max_length=50,unique=True)
-    slug=models.SlugField(unique=True)
+    slug=models.SlugField(unique=True, editable=False)
     startdate=models.DateTimeField(null=True)
     description=models.TextField(null=True)
     isprimaray=models.BooleanField(default=False,null=True)
-    
+    estimatedDuration=models.DurationField(null=True)
+    album=models.ManyToManyField(Img,null=True)
+    show=models.BooleanField(default=True)
+
+    @property
+    def isExpired(self): 
+        utc= pytz.UTC
+        dat=datetime.timedelta(days=30)
+        d=self.startdate + dat
+        t=utc.localize(datetime.datetime.now())
+        if(d>=t):
+            return True
+        return False
+    @property
+    def Haspassed(self): 
+        utc= pytz.UTC
+        duration = parse_duration(self.estimatedDuration)
+
+        seconds = duration.seconds
+        dat=datetime.timedelta(seconds=seconds)
+        d=self.startdate + dat
+        t=utc.localize(datetime.datetime.now())
+        if(d>=t):
+            return True
+        return False    
+
     def __str__(self) -> str:
         return self.title
 
@@ -247,6 +278,8 @@ class secteur(models.Model):
     slug=models.SlugField(null=True,blank=True)
     tumbail= models.FileField(null=True ,upload_to='media/images/%y')
     titit= models.CharField(max_length=50,null=True,blank=True)
+    show=models.BooleanField(default=True, null=True)
+        
     def __str__ (self):
         return self.title
 
@@ -301,7 +334,8 @@ class about_page(models.Model):
 
 class li_subtitle_about(models.Model):
     title=models.CharField(max_length=50)
-
+    show=models.BooleanField(default=True, null=True)
+        
     def __str__ (self):
         return self.title
     
@@ -316,6 +350,9 @@ class wrapper_about_page(models.Model):
 class live(evenement):
     link=models.URLField()
     tumnail=models.ImageField(upload_to='media/images/%y',null=True)
+    autoclosed=models.BooleanField(default=False, null=True)
+   
+
 
 class bay(models.Model):
     title=models.CharField(default="Standard1",max_length=50)

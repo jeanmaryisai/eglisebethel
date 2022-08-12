@@ -4,6 +4,7 @@ import django
 from django.shortcuts import render
 from . import models
 from django.core.mail import send_mail
+from datetime import date
 # Create your views here.
 def home (request):
     try:
@@ -76,6 +77,7 @@ def about(request):
 
 def events(request):
     evenement_main_page=models.evenement_main_page.objects.get(show=True)
+    print(evenement_main_page.e1.isExpired)
     evenement=models.evenement.objects.all().order_by('startdate').reverse
     context={'page':evenement_main_page,'event':evenement}
     return render(request,'home/eventsingle.html',context)
