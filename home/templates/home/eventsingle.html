@@ -1,0 +1,145 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block bay_active %} class="active" {% endblock %}
+{%block override%}
+<link rel="stylesheet" href="#">
+{%endblock%}
+{% block cssb %}
+<link rel="stylesheet" href="{% static 'home/css/css2.css' %}">
+{% endblock %}
+{% block body %}
+
+<div class="container-wrap">
+	<aside id="fh5co-hero">
+		<div class="flexslider">
+			<ul class="slides">
+			   <li style="background-image: url({{contact.hero_img.url}});">
+				   <div class="overlay"></div>
+				   <div class="container-fluid">
+					   <div class="row">
+						   <div class="col-md-6 col-md-offset-3 text-center slider-text">
+							   <div class="slider-text-inner">
+								   <h1>{{bay.title_hero}}</h1>
+									<h2>{{bay.subtitle_hero}}</h2>
+							   </div>
+						   </div>
+					   </div>
+				   </div>
+			   </li>
+			  </ul>
+		  </div>
+	</aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <main>
+
+  
+  
+        <!-- SINGLE EVENTS SECTION STARTS -->
+        <div class="single events-single default-section-spacing">
+  
+          <div class="container">
+  
+            <div class="row" style="float: left;">
+  
+              <div class="flex-lg-8" style="float: left;">
+  
+                <div class="single__content" style="float: left; margin-top: 10px;">
+  
+                  <div class="card single__featured--image no-padding" style="width: 82vw ;">
+                    <img src="{{page.background.url}}" alt="A man praying" class="card__image">
+                  </div><!-- .card ends -->
+  
+                  <div class="single__metas events-single__metas">
+  
+                    <div class="row align-items-center">
+  
+                      <div class="flex-sm-12">
+  
+                        <div class="event__metas vertical">
+                          <div class="event__meta--date meta"><i class="ri-calendar-event-line"></i>
+                            <span>05/28/2020</span>
+                          </div>
+                          <div class="event__meta--time meta"><i class="ri-time-line"></i> <span>11:45 AM - 12:45
+                              PM</span>
+                          </div>
+                          <div class="event__meta--location meta"><i class="ri-map-pin-line"></i> <span>123 Jay St,
+                              Albany,
+                              NY
+                              12203</span></div>
+                        </div><!-- .event__metas -->
+  
+                        <div class="event__title">
+                          <h2>Night prayer revival service @GLC</h2>
+                        </div>
+  
+                      </div><!-- .flex-* ends -->
+  
+                    </div><!-- .row ends -->
+  
+                  </div><!-- .single__metas ends -->
+  
+                  <div class="single__content--full">
+  
+                    <h3>Description</h3>
+  
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut consequuntur nulla voluptate quas
+                      excepturi aliquam mollitia aut veniam voluptates suscipit error voluptatibus deserunt, blanditiis
+                      necessitatibus dolorem aspernatur rerum unde similique ab praesentium? Sint minus repellendus vitae
+                      dignissimos autem nostrum quisquam nemo officia, facere, explicabo perferendis fugiat excepturi.</p>
+                    <p>Odio laborum unde voluptatum facilis quam consequuntur ut adipisci id, accusantium vel perspiciatis
+                      sed suscipit excepturi nobis distinctio quos consectetur a. Recusandae, quaerat assumenda fuga et
+                      facilis consectetur, consequuntur nihil provident officiis at nemo rerum similique incidunt corrupti
+                      cum voluptates ex sequi magnam impedit reprehenderit tempora soluta!</p>
+  
+                  </div><!-- .single__content--full ends -->
+  
+                </div><!-- .single__content ends -->
+  
+              </div><!-- .flex-* ends -->
+  
+             
+  
+            </div><!-- .row ends -->
+  
+          </div><!-- .container ends -->
+  
+        </div><!-- .single ends -->
+        <!-- SINGLE EVENTS SECTION ENDS -->
+  
+  
+        <!-- TIME AND LOCATION STARTS -->
+       <!-- .time-location ends -->
+        <!-- TIME AND LOCATION ENDS -->
+  
+  
+      </main><!-- main ends -->
+  
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+{%endblock%}
