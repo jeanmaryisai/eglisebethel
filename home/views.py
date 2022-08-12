@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 # Create your views here.
 def home (request):
     try:
+        live=models.live.objects.all().last
         hero=models.hero.objects.get(show=True)
         firstSection=models.firstSection.objects.get(show=True)
         statSection=models.statSection.objects.get(show=True)
@@ -26,7 +27,8 @@ def home (request):
         'evenement_main_page':evenement_main_page,
         'secteur_main':secteur_main,
         'secteur':secteur,
-        'active':1}
+        'active':1,
+        'live':live}
     except:
         context={}
     return render(request,'home/index.html',context)
@@ -74,7 +76,7 @@ def about(request):
 
 def events(request):
     evenement_main_page=models.evenement_main_page.objects.get(show=True)
-    evenement=models.evenement.objects.all
+    evenement=models.evenement.objects.all().order_by('startdate').reverse
     context={'page':evenement_main_page,'event':evenement}
     return render(request,'home/events.html',context)
 
@@ -83,3 +85,8 @@ def sermons(request):
     Sermons_main_section=models.Sermons_main_section.objects.get(show=True)
     context={'page':Sermons_main_section,'sermon':sermon}
     return render(request,'home/sermons.html',context)
+
+def bay(request):
+    bay=models.bay.objects.get(show=True)
+    context={'bay':bay}
+    return render(request,'home/baylibre.html',context)

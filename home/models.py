@@ -188,8 +188,9 @@ class verset_main_page(models.Model):
 class evenement(models.Model):
     title=models.CharField(max_length=50,unique=True)
     slug=models.SlugField(unique=True)
-    startdate=models.DateField()
+    startdate=models.DateTimeField(null=True)
     description=models.TextField(null=True)
+    isprimaray=models.BooleanField(default=False,null=True)
     
     def __str__(self) -> str:
         return self.title
@@ -308,6 +309,31 @@ class wrapper_about_page(models.Model):
     wrapper_about_page=models.ManyToManyField(li_subtitle_about,blank=True)
     title=models.CharField(max_length=100)
     paragraph=models.TextField(null=True)
+
     def __str__ (self):
         return self.title
+
+class live(evenement):
+    link=models.URLField()
+    tumnail=models.ImageField(upload_to='media/images/%y',null=True)
+
+class bay(models.Model):
+    title=models.CharField(default="Standard1",max_length=50)
+    title_hero=models.CharField( default="Bay Bondye",max_length=50)
+    subtitle_hero= models.TextField(null=True)
+    show=models.BooleanField(default=True)
+    def save(self, *args, **kwargs):
+        if self.show== True:
+            self.show= False
+            try:
+                heros= bay.objects.get(show=True)
+                heros.show=False
+                heros.save()
+            except:
+                pass
+            self.show=True
+            
+        super(bay, self).save(*args, **kwargs)
     
+    def __str__ (self):
+        return self.title

@@ -36,7 +36,7 @@
 	<link rel="stylesheet" href="{% static 'home/css/icomoon.css' %}">
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="{% static 'home/css/bootstrap.css' %}">
-    {% block css %}{% endblock %}
+    
 
 	<!-- Magnific Popup -->
 	<link rel="stylesheet" href="{% static 'home/css/magnific-popup.css' %}">
@@ -57,7 +57,7 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-
+{% block css %}{% endblock %}
 </head>
 <body>
 	<div class="fh5co-loader"></div>
@@ -87,7 +87,7 @@
 							<li {% block events_active %}{% endblock %}><a href="{% url 'events'%}">Evennements</a></li>
 							<li {% block about_active %}{% endblock %}><a href="{% url 'about'%}">A propos de nous</a></li>
 							<li {% block contact_active %}{% endblock %}><a href="{% url 'contact' %}">Contact</a></li>
-							<li {% block donate_active %}{% endblock %}><a href="#" class="donate">Bay Bondye</a></li>
+							<li {% block bay_active %}{% endblock %}><a href="{% url 'bay' %}" class="donate">Bay Bondye</a></li>
 						</ul>
 					</div>
 				</div>

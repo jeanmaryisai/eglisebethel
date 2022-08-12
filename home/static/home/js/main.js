@@ -219,7 +219,7 @@
 
 	var sliderMain = function() {
 		
-	  	$('#fh5co-hero .flexslider').flexslider({
+		  $('#fh5co-hero .flexslider').flexslider({
 			animation: "fade",
 			slideshowSpeed: 5000,
 			directionNav: true,
@@ -237,6 +237,7 @@
 			}
 
 	  	});
+
 
 	};
 
@@ -984,3 +985,6 @@ Toastr
             })
         });
 })(jQuery);
+
+console.log('hello world')
+
