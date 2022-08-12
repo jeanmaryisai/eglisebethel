@@ -78,7 +78,7 @@ def events(request):
     evenement_main_page=models.evenement_main_page.objects.get(show=True)
     evenement=models.evenement.objects.all().order_by('startdate').reverse
     context={'page':evenement_main_page,'event':evenement}
-    return render(request,'home/events.html',context)
+    return render(request,'home/eventsingle.html',context)
 
 def sermons(request):
     sermon=models.Sermon.objects.all
@@ -87,6 +87,11 @@ def sermons(request):
     return render(request,'home/sermons.html',context)
 
 def bay(request):
+    bay=models.bay.objects.get(show=True)
+    context={'bay':bay}
+    return render(request,'home/bay.html',context)
+
+def baylibre(request):
     bay=models.bay.objects.get(show=True)
     context={'bay':bay}
     return render(request,'home/baylibre.html',context)
