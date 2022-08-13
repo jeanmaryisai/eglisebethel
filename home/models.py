@@ -189,17 +189,20 @@ class verset_main_page(models.Model):
 
 
 class Img(models.Model):
+    description=models.TextField(null=True)
     img=models.ImageField(upload_to='media/images/%y')
 class evenement(models.Model):
     
     title=models.CharField(max_length=50,unique=True)
-    slug=models.SlugField(unique=True, editable=False)
+    slug=models.SlugField(unique=True)
     startdate=models.DateTimeField(null=True)
-    description=models.TextField(null=True)
+    description=models.CharField(max_length=100,null=True)
     isprimaray=models.BooleanField(default=False,null=True)
     estimatedDuration=models.DurationField(null=True)
-    album=models.ManyToManyField(Img,null=True)
+    album=models.ManyToManyField(Img,null=True,blank=True)
     show=models.BooleanField(default=True)
+    cover=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True,related_name="Backgroud")
+    fulldescription=models.TextField(null=True)
 
     @property
     def isExpired(self): 
@@ -207,21 +210,22 @@ class evenement(models.Model):
         dat=datetime.timedelta(days=30)
         d=self.startdate + dat
         t=utc.localize(datetime.datetime.now())
-        if(d>=t):
+        if(d<=t):
             return True
         return False
     @property
     def Haspassed(self): 
         utc= pytz.UTC
-        duration = parse_duration(self.estimatedDuration)
+        #duration = parse_duration(self.estimatedDuration)
 
-        seconds = duration.seconds
-        dat=datetime.timedelta(seconds=seconds)
+        #seconds = duration.seconds
+        
+        dat=datetime.timedelta(seconds=self.estimatedDuration.seconds)
         d=self.startdate + dat
         t=utc.localize(datetime.datetime.now())
         if(d>=t):
-            return True
-        return False    
+            return False
+        return True  
 
     def __str__(self) -> str:
         return self.title
@@ -351,14 +355,12 @@ class live(evenement):
     link=models.URLField()
     tumnail=models.ImageField(upload_to='media/images/%y',null=True)
     autoclosed=models.BooleanField(default=False, null=True)
-   
-
-
 class bay(models.Model):
     title=models.CharField(default="Standard1",max_length=50)
     title_hero=models.CharField( default="Bay Bondye",max_length=50)
     subtitle_hero= models.TextField(null=True)
     show=models.BooleanField(default=True)
+    hero_background=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True,related_name="hero")
     def save(self, *args, **kwargs):
         if self.show== True:
             self.show= False
@@ -371,6 +373,31 @@ class bay(models.Model):
             self.show=True
             
         super(bay, self).save(*args, **kwargs)
-    
     def __str__ (self):
         return self.title
+class participant(models.Model):
+    name=models.CharField(max_length=50)
+    montant=models.DecimalField(decimal_places=2, max_digits=19)
+class fundRaiser(models.Model):
+    But=models.CharField(max_length=50)
+    butArgent=models.DecimalField(decimal_places=2,max_digits=20)
+    participants= models.ManyToManyField(participant)
+
+    @property
+    def argentActuel(self):
+        y=0.00
+        try:
+            for x in self.participants.all:
+                y += x.montant
+        except:
+            pass
+        return y
+
+    @property
+    def iscomplete(self):
+        if self.argentActuel>=self.butArgent:
+            return True
+        else:
+            return False
+        
+

@@ -39,7 +39,7 @@ Evennements
 					<span class="date">{{x.startdate}}</span>
 					<h3><a href="#">{{x.title}}</a></h3>
 					<p>{{x.description}}</p>
-					<a href="#">Read More <i class="icon-arrow-right3"></i></a>
+					<a href="{% url 'singlevents' x.slug %}">Read More <i class="icon-arrow-right3"></i></a>
 				</div>
 			</div>
 			{% endfor %}

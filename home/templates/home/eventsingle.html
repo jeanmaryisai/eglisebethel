@@ -1,6 +1,6 @@
 {% extends 'home/base.html' %}
 {% load static %}
-{% block bay_active %} class="active" {% endblock %}
+{% block events_active %} class="active" {% endblock %}
 {%block override%}
 <link rel="stylesheet" href="#">
 {%endblock%}
@@ -13,14 +13,14 @@
 	<aside id="fh5co-hero">
 		<div class="flexslider">
 			<ul class="slides">
-			   <li style="background-image: url({{contact.hero_img.url}});">
+			   <li style="background-image: url({{page.background.url}});">
 				   <div class="overlay"></div>
 				   <div class="container-fluid">
 					   <div class="row">
 						   <div class="col-md-6 col-md-offset-3 text-center slider-text">
 							   <div class="slider-text-inner">
-								   <h1>{{bay.title_hero}}</h1>
-									<h2>{{bay.subtitle_hero}}</h2>
+								   <h1>{{page.title}}</h1>
+									<h2>Vivez tout nos events ici et maintenant</h2>
 							   </div>
 						   </div>
 					   </div>
@@ -61,7 +61,7 @@
                 <div class="single__content" style="float: left; margin-top: 10px;">
   
                   <div class="card single__featured--image no-padding" style="width: 82vw ;">
-                    <img src="{{page.background.url}}" alt="A man praying" class="card__image">
+                    <img src="{{event.cover.img.url}}" alt="A man praying" class="card__image">
                   </div><!-- .card ends -->
   
                   <div class="single__metas events-single__metas">
@@ -72,10 +72,10 @@
   
                         <div class="event__metas vertical">
                           <div class="event__meta--date meta"><i class="ri-calendar-event-line"></i>
-                            <span>05/28/2020</span>
+                            <span>{{event.startdate}}</span>
                           </div>
-                          <div class="event__meta--time meta"><i class="ri-time-line"></i> <span>11:45 AM - 12:45
-                              PM</span>
+                          <div class="event__meta--time meta"><i class="ri-time-line"></i> <span>{{event.estimatedDuration}}
+                              </span>
                           </div>
                           <div class="event__meta--location meta"><i class="ri-map-pin-line"></i> <span>123 Jay St,
                               Albany,
@@ -84,7 +84,7 @@
                         </div><!-- .event__metas -->
   
                         <div class="event__title">
-                          <h2>Night prayer revival service @GLC</h2>
+                          <h2>{{event.title}}</h2>
                         </div>
   
                       </div><!-- .flex-* ends -->
@@ -97,14 +97,9 @@
   
                     <h3>Description</h3>
   
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut consequuntur nulla voluptate quas
-                      excepturi aliquam mollitia aut veniam voluptates suscipit error voluptatibus deserunt, blanditiis
-                      necessitatibus dolorem aspernatur rerum unde similique ab praesentium? Sint minus repellendus vitae
-                      dignissimos autem nostrum quisquam nemo officia, facere, explicabo perferendis fugiat excepturi.</p>
-                    <p>Odio laborum unde voluptatum facilis quam consequuntur ut adipisci id, accusantium vel perspiciatis
-                      sed suscipit excepturi nobis distinctio quos consectetur a. Recusandae, quaerat assumenda fuga et
-                      facilis consectetur, consequuntur nihil provident officiis at nemo rerum similique incidunt corrupti
-                      cum voluptates ex sequi magnam impedit reprehenderit tempora soluta!</p>
+                    <p>
+                        {{ event.fulldescription }}
+                    </p>
   
                   </div><!-- .single__content--full ends -->
   
@@ -143,147 +138,31 @@
 
           <div class="section-heading text-center">
             <span>Gallery</span>
-            <h2 style="margin: 10px;">Some pictures from this event</h2>
+            <h2 style="margin: 10px;">Quelques photo de l'evennement</h2>
           </div><!-- .section-heading ends -->
 
           <div class="row" style="display:flex; flex-wrap: wrap;">
+            {% for x in imgs %}
 
             <div class="flex-md-6 flex-lg-3 no-padding no-margin">
 
-              <a href="{{page.background.url}}" class="gallery-link" data-lightbox="church-picture"
+              <a href="{{x.img.url}}" class="gallery-link" data-lightbox="church-picture"
                 data-title="Picture of the Holy Bible">
 
                 <div class="card gallery__card">
 
                   <div class="card__header">
-                    <img src="{{page.background.url}}" alt="Picture of the Holy Bible" class="card__image">
+                    <img src="{{x.img.url}}" alt="Picture of the Holy Bible" class="card__image">
                   </div>
 
                 </div><!-- .card ends -->
 
               </a><!-- .gallery-link -->
 
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-3 ">
-
-              <a href="{{page.background.url}}" class="gallery-link" data-lightbox="church-picture"
-                data-title="Picture of Jesus on a medal cross">
-
-                <div class="card gallery__card">
-
-                  <div class="card__header">
-                    <img src="{{page.background.url}}" alt="Picture of Jesus on a medal cross" class="card__image">
-                  </div>
-
-                </div><!-- .card ends -->
-
-              </a><!-- .gallery-link -->
 
             </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-3 no-padding no-margin">
-
-              <a href="images/gallery-3@2x.jpg" class="gallery-link" data-lightbox="church-picture"
-                data-title="Bible study">
-
-                <div class="card gallery__card">
-
-                  <div class="card__header">
-                    <img src="images/gallery-3@1.5x.jpg" alt="Bible study" class="card__image">
-                  </div>
-
-                </div><!-- .card ends -->
-
-              </a><!-- .gallery-link -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-3 no-padding no-margin">
-
-              <a href="{{page.background.url}}" class="gallery-link" data-lightbox="church-picture"
-                data-title="Inside of a church">
-
-                <div class="card gallery__card">
-
-                  <div class="card__header">
-                    <img src="{{page.background.url}}" alt="Inside of a church" class="card__image">
-                  </div>
-
-                </div><!-- .card ends -->
-
-              </a><!-- .gallery-link -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-3 no-padding no-margin">
-
-              <a href="{{page.background.url}}" class="gallery-link" data-lightbox="church-picture"
-                data-title="Picture of people worshiping in church">
-
-                <div class="card gallery__card">
-
-                  <div class="card__header">
-                    <img src="{{page.background.url}}" alt="Picture of people worshiping in church"
-                      class="card__image">
-                  </div>
-
-                </div><!-- .card ends -->
-
-              </a><!-- .gallery-link -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-3 no-padding no-margin">
-
-              <a href="{{page.background.url}}" class="gallery-link" data-lightbox="church-picture"
-                data-title="Picture of women laughing">
-
-                <div class="card gallery__card">
-
-                  <div class="card__header">
-                    <img src="images/gallery-6@1.5x.jpg" alt="Picture of women laughing" class="card__image">
-                  </div>
-
-                </div><!-- .card ends -->
-
-              </a><!-- .gallery-link -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-3 no-padding no-margin">
-
-              <a href="images/gallery-7@2x.jpg" class="gallery-link" data-lightbox="church-picture"
-                data-title="Picture of a worship leader singing">
-
-                <div class="card gallery__card">
-
-                  <div class="card__header">
-                    <img src="images/gallery-7@1.5x.jpg" alt="Picture of a worship leader singing" class="card__image">
-                  </div>
-
-                </div><!-- .card ends -->
-
-              </a><!-- .gallery-link -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-6 flex-lg-3 no-padding no-margin">
-
-              <a href="images/gallery-8@2x.jpg" class="gallery-link" data-lightbox="church-picture"
-                data-title="Picture of a smart kid at school">
-
-                <div class="card gallery__card">
-
-                  <div class="card__header">
-                    <img src="images/gallery-8@1.5x.jpg" alt="Picture of a smart kid at school" class="card__image">
-                  </div>
-
-                </div><!-- .card ends -->
-
-              </a><!-- .gallery-link -->
-
-            </div><!-- .flex-* ends -->
+{% empty %} <br> <h3 style="margin:50px auto ;">Pas de photos encore telecharger</h3>
+          {%endfor%}
 
           </div><!-- .row ends -->
 

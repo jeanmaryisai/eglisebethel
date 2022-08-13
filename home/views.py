@@ -8,21 +8,23 @@ from datetime import date
 # Create your views here.
 def home (request):
     try:
-        live=models.live.objects.all().last
-        hero=models.hero.objects.get(show=True)
-        firstSection=models.firstSection.objects.get(show=True)
-        statSection=models.statSection.objects.get(show=True)
-        serviceSingle=models.serviceSingle.objects.all
-        Service=models.Service.objects.get(show=True)
-        Sermons_main_section=models.Sermons_main_section.objects.get(show=True)
-        verset_main_page=models.verset_main_page.objects.get(show=True)
-        evenement_main_page=models.evenement_main_page.objects.get(show=True)
-        secteur_main=models.secteur_main.objects.get(show=True)
-        secteur=models.secteur.objects.all
+        live=models.live.objects.all().filter(show=True)
+    except:
+        live={}
+    hero=models.hero.objects.get(show=True)
+    firstSection=models.firstSection.objects.get(show=True)
+    statSection=models.statSection.objects.get(show=True)
+    serviceSingle=models.serviceSingle.objects.all().filter(show=True)
+    Service=models.Service.objects.get(show=True)
+    Sermons_main_section=models.Sermons_main_section.objects.get(show=True)
+    verset_main_page=models.verset_main_page.objects.get(show=True)
+    evenement_main_page=models.evenement_main_page.objects.get(show=True)
+    secteur_main=models.secteur_main.objects.get(show=True)
+    secteur=models.secteur.objects.all().filter(show=True)
 
-        context={'hero':hero, 'firstSection':firstSection, 'statSection':statSection,
-        'serviceSingle':serviceSingle,
-        'Service':Service,
+    context={'hero':hero, 'firstSection':firstSection, 'statSection':statSection,
+    'serviceSingle':serviceSingle,
+    'Service':Service,
         'Sermons_main_section':Sermons_main_section,
         'verset_main_page':verset_main_page,
         'evenement_main_page':evenement_main_page,
@@ -30,8 +32,6 @@ def home (request):
         'secteur':secteur,
         'active':1,
         'live':live}
-    except:
-        context={}
     return render(request,'home/index.html',context)
 
 def contact(request):
@@ -77,9 +77,15 @@ def about(request):
 
 def events(request):
     evenement_main_page=models.evenement_main_page.objects.get(show=True)
-    print(evenement_main_page.e1.isExpired)
     evenement=models.evenement.objects.all().order_by('startdate').reverse
     context={'page':evenement_main_page,'event':evenement}
+    return render(request,'home/events.html',context)
+
+def singlevents(request,slug):
+    evenement_main_page=models.evenement_main_page.objects.get(show=True)
+    evenement=models.evenement.objects.get(slug=slug)
+    imgs=evenement.album.all
+    context={'page':evenement_main_page,'event':evenement,'imgs':imgs}
     return render(request,'home/eventsingle.html',context)
 
 def sermons(request):
