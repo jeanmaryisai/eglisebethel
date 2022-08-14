@@ -43,9 +43,9 @@
 
 
 
-    <section class="donations default-section-spacing">
+     <section class="donations default-section-spacing">
 
-       <div style="margin:20px ;">
+        <div style="margin:20px ;">
 
           <div class="section-heading text-center">
             <span>Donation</span>
@@ -55,17 +55,25 @@
           <div class="card-wrapper"></div>
           <!-- needed for the card plugin. It does not show on smaller devices such as phone and tablet in portrait mode because there is not enough room -->
 
-          <form action="#" class="form donations__form">
-
+          <form action="" method="post" class="form donations__form">
+              {%csrf_token%}
             <div class="donations__amount">
-              <h3>La quantite</h3>
+              <h3>Choose an amount</h3>
 
               <div class="row">
+                <div class="flex-sm-4">
+
+                  <div class="form__group">
+                    <input type="radio" value="oneTime" name="donation-amount" class="form__radio" id="one-time">
+                    <label for="one-time" class="form__label form__label--radio">One-time</label>
+                  </div><!-- .form__group ends -->
+
+                </div>
 
                 <div class="flex-sm-6 flex-md-2">
 
                   <div class="form__group">
-                    <input type="radio" name="donation-amount" class="form__radio" id="25">
+                    <input value="first" type="radio" name="donation-amount" class="form__radio" id="25">
                     <label for="25" class="form__label form__label--radio">$25</label>
                   </div><!-- .form__group ends -->
 
@@ -117,11 +125,11 @@
               <h3>Choose a frequency</h3>
 
               <div class="row">
-
+                
                 <div class="flex-sm-4">
 
                   <div class="form__group">
-                    <input type="radio" name="donation-frequency" class="form__radio" id="one-time">
+                    <input type="radio" value="oneTime" name="donation-amount" class="form__radio" id="one-time">
                     <label for="one-time" class="form__label form__label--radio">One-time</label>
                   </div><!-- .form__group ends -->
 
@@ -130,7 +138,7 @@
                 <div class="flex-sm-4">
 
                   <div class="form__group">
-                    <input type="radio" name="donation-frequency" class="form__radio" id="monthly">
+                    <input type="radio" value="oneTime" name="donation-frequency" class="form__radio" id="monthly">
                     <label for="monthly" class="form__label form__label--radio">Monthly</label>
                   </div><!-- .form__group ends -->
 
@@ -139,7 +147,7 @@
                 <div class="flex-sm-4">
 
                   <div class="form__group">
-                    <input type="radio" name="donation-frequency" class="form__radio" id="yearly">
+                    <input type="radio" value="oneTime" name="donation-frequency" class="form__radio" id="yearly">
                     <label for="yearly" class="form__label form__label--radio">Yearly</label>
                   </div><!-- .form__group ends -->
 

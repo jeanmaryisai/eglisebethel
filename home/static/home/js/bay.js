@@ -21,7 +21,7 @@ function customAmount() {
     })
   }
   customAmount();
-  console.log('hello world')
+
   // Showing the credit card form
   function showCardForm() {
     // Button for the credit card

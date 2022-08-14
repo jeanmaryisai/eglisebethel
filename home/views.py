@@ -1,3 +1,4 @@
+from http.client import HTTPResponse
 import re
 from django import http
 import django
@@ -95,11 +96,18 @@ def sermons(request):
     return render(request,'home/sermons.html',context)
 
 def bay(request):
+    fund=models.fundRaiser.objects.all().filter(show=True)
     bay=models.bay.objects.get(show=True)
-    context={'bay':bay}
+    context={'bay':bay,'fund':fund}
     return render(request,'home/bay.html',context)
 
 def baylibre(request):
+    if request.method=="POST":
+        amout= request.POST['donation-amount']
+        name= request.POST['donation-frequency']
+        #ismember= request.POST['donation-type']
+        #paymentMethod= request.POST['donation-payment']
+        print(amout)
     bay=models.bay.objects.get(show=True)
     context={'bay':bay}
     return render(request,'home/baylibre.html',context)

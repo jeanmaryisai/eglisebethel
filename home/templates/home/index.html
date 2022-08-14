@@ -276,7 +276,7 @@
                     <span class="date">{{evenement_main_page.e1.startdate}}</span>
                     <h3><a href="#">{{evenement_main_page.e1.title}}</a></h3>
                     <p>{{evenement_main_page.e1.description}}</p>
-                    <a href="#">Read More <i class="icon-arrow-right3"></i></a>
+                    <a href="{% url 'singlevents' evenement_main_page.e1.slug %}">Read More <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
             <div class="col-md-4 animate-box">
@@ -284,7 +284,7 @@
                     <span class="date">{{evenement_main_page.e2.startdate}}</span>
                     <h3><a href="#">{{evenement_main_page.e2.title}}</a></h3>
                     <p>{{evenement_main_page.e2.description}}</p>
-                    <a href="#">Read More <i class="icon-arrow-right3"></i></a>
+                    <a href="{% url 'singlevents' evenement_main_page.e2.slug %}">Read More <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
             <div class="col-md-4 animate-box">
@@ -292,7 +292,7 @@
                     <span class="date">{{evenement_main_page.e3.startdate}}</span>
                     <h3><a href="#">{{evenement_main_page.e3.title}}</a></h3>
                     <p>{{evenement_main_page.e3.description}}</p>
-                    <a href="#">Read More <i class="icon-arrow-right3"></i></a>
+                    <a href="{% url 'singlevents' evenement_main_page.e3.slug %}">Read More <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
         </div>

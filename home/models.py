@@ -1,5 +1,8 @@
 
+import decimal
 from email.mime import image
+from logging import raiseExceptions
+from ssl import Purpose
 from django.db import models
 import datetime
 import pytz
@@ -375,22 +378,22 @@ class bay(models.Model):
         super(bay, self).save(*args, **kwargs)
     def __str__ (self):
         return self.title
-class participant(models.Model):
-    name=models.CharField(max_length=50)
-    montant=models.DecimalField(decimal_places=2, max_digits=19)
+
 class fundRaiser(models.Model):
     But=models.CharField(max_length=50)
     butArgent=models.DecimalField(decimal_places=2,max_digits=20)
-    participants= models.ManyToManyField(participant)
+    startupDate=models.DateField(auto_now=True)
+    show=models.BooleanField(default=True, null=True)
+
+    def __str__ (self):
+        return self.But
 
     @property
     def argentActuel(self):
-        y=0.00
-        try:
-            for x in self.participants.all:
-                y += x.montant
-        except:
-            pass
+        y=0
+        for x in participation.objects.all().filter(purpose_id=self.id):
+            y =y+ x.montant
+        
         return y
 
     @property
@@ -399,5 +402,23 @@ class fundRaiser(models.Model):
             return True
         else:
             return False
-        
 
+    @property
+    def pourcentage(self):
+        k=0.00
+        k=self.argentActuel/self.butArgent   
+        k= k*100
+        if k<0:
+            raiseExceptions
+        elif k>=100:
+            return 100
+        else:
+            return int(k)
+
+class participation(models.Model):
+    name=models.CharField(max_length=50)
+    montant=models.DecimalField(decimal_places=2, max_digits=19)
+    date=models.DateField(auto_now=True)
+    purpose=models.ForeignKey(fundRaiser,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name

@@ -25,3 +25,6 @@ admin.site.register(li_subtitle_about)
 admin.site.register(live,homeModels1)
 admin.site.register(bay)
 admin.site.register(Img)
+admin.site.register(fundRaiser)
+admin.site.register(participation)
+
