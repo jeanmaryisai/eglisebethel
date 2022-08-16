@@ -61,14 +61,6 @@
               <h3>Choose an amount</h3>
 
               <div class="row">
-                <div class="flex-sm-4">
-
-                  <div class="form__group">
-                    <input type="radio" value="oneTime" name="donation-amount" class="form__radio" id="one-time">
-                    <label for="one-time" class="form__label form__label--radio">One-time</label>
-                  </div><!-- .form__group ends -->
-
-                </div>
 
                 <div class="flex-sm-6 flex-md-2">
 
@@ -111,7 +103,7 @@
                   <div class="form__group">
                     <label for="custom" class="form__label form__label--custom"><span><i
                           class="ri-money-dollar-circle-line"></i></span></label>
-                    <input type="text" name="donation-amount" class="form__input" id="custom"
+                    <input type="number" name="donation-amount" class="form__input" id="custom"
                       placeholder="Enter a custom amount">
                   </div><!-- .form__group ends -->
 
@@ -122,15 +114,15 @@
             </div><!-- .donations__amount ends -->
 
             <div class="donations__frequency">
-              <h3>Choose a frequency</h3>
+              <h3>Votre nom</h3>
 
               <div class="row">
                 
                 <div class="flex-sm-4">
 
                   <div class="form__group">
-                    <input type="radio" value="oneTime" name="donation-amount" class="form__radio" id="one-time">
-                    <label for="one-time" class="form__label form__label--radio">One-time</label>
+                    <input type="radio" value="annonyme" name="donation-frequency" class="form__radio" id="one-time">
+                    <label for="one-time" class="form__label form__label--radio">je prefere rester annonyme</label>
                   </div><!-- .form__group ends -->
 
                 </div><!-- .flex-* ends -->
@@ -138,17 +130,8 @@
                 <div class="flex-sm-4">
 
                   <div class="form__group">
-                    <input type="radio" value="oneTime" name="donation-frequency" class="form__radio" id="monthly">
-                    <label for="monthly" class="form__label form__label--radio">Monthly</label>
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-sm-4">
-
-                  <div class="form__group">
-                    <input type="radio" value="oneTime" name="donation-frequency" class="form__radio" id="yearly">
-                    <label for="yearly" class="form__label form__label--radio">Yearly</label>
+                    <input type="text" name="donation-frequency" class="form__radio" id="monthly">
+                    <label for="monthly" class="form__label form__label--radio">Mon nom</label>
                   </div><!-- .form__group ends -->
 
                 </div><!-- .flex-* ends -->
@@ -158,15 +141,15 @@
             </div><!-- .donations__frequency ends -->
 
             <div class="donations__type">
-              <h3>Choose a donation type</h3>
+              <h3>Etes vous membre</h3>
 
               <div class="row">
 
                 <div class="flex-sm-6 flex-md-3">
 
                   <div class="form__group">
-                    <input type="radio" name="donation-type" class="form__radio" id="building-funds">
-                    <label for="building-funds" class="form__label form__label--radio">Building Funds</label>
+                    <input type="radio" name="donation-type" value="True" class="form__radio" id="building-funds">
+                    <label for="building-funds" class="form__label form__label--radio">Oui je suis membre</label>
                   </div><!-- .form__group ends -->
 
                 </div><!-- .flex-* ends -->
@@ -174,26 +157,8 @@
                 <div class="flex-sm-6 flex-md-3">
 
                   <div class="form__group">
-                    <input type="radio" name="donation-type" class="form__radio" id="church-anniversary">
-                    <label for="church-anniversary" class="form__label form__label--radio">Church Anniversary</label>
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-sm-6 flex-md-3">
-
-                  <div class="form__group">
-                    <input type="radio" name="donation-type" class="form__radio" id="pantry">
-                    <label for="pantry" class="form__label form__label--radio">Pantry</label>
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-sm-6 flex-md-3">
-
-                  <div class="form__group">
-                    <input type="radio" name="donation-type" class="form__radio" id="ministry">
-                    <label for="ministry" class="form__label form__label--radio">Ministries</label>
+                    <input type="radio" value="False" name="donation-type" class="form__radio" id="church-anniversary">
+                    <label for="church-anniversary" class="form__label form__label--radio">Non je ne le suis pas</label>
                   </div><!-- .form__group ends -->
 
                 </div><!-- .flex-* ends -->
@@ -210,125 +175,105 @@
                 <div class="flex-sm-6">
 
                   <div class="form__group">
-                    <input type="radio" name="donation-payment" class="form__radio" id="paypal">
-                    <label for="paypal" class="form__label form__label--radio">PayPal</label>
+                    <div id="paypal-button-container"></div>
+
+              <!-- Include the PayPal JavaScript SDK -->
+              <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+              <script>
+                // Render the PayPal button into #paypal-button-container
+                paypal.Buttons({
+        
+                    // Set up the transaction
+                    createOrder: function(data, actions) {
+                        return actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                    value: '88.44'
+                                }
+                            }]
+                        });
+                    },
+        
+                    // Finalize the transaction
+                    onApprove: function(data, actions) {
+                        return actions.order.capture().then(function(orderData) {
+                            // Successful capture! For demo purposes:
+                            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                            var transaction = orderData.purchase_units[0].payments.captures[0];
+                            alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+        
+                            // Replace the above to show a success message within this page, e.g.
+                            // const element = document.getElementById('paypal-button-container');
+                            // element.innerHTML = '';
+                            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                            // Or go to another URL:  actions.redirect('thank_you.html');
+                        });
+                    }
+        
+        
+                }).render('#paypal-button-container');
+            </script>
+          
+              <script>
+              
+                  // Render the PayPal button into #paypal-button-container
+                  paypal.Buttons({
+          
+                      style: {
+                          color:  'blue',
+                          shape:  'pill',
+                          label:  'pay',
+                          height: 40,
+                          display:'flex'
+                      }
+          
+                  }).render('#paypal-button-container');
+              </script>
                   </div><!-- .form__group ends -->
 
                 </div><!-- .flex-* ends -->
 
-                <div class="flex-sm-6">
-
-                  <div class="form__group">
-                    <input type="radio" name="donation-payment" class="form__radio" id="credit-card">
-                    <label for="credit-card" class="form__label form__label--radio">Credit card</label>
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
+                
 
               </div><!-- .row ends -->
 
             </div><!-- .donations__payment ends -->
 
-            <div class="credit-card-payment-form">
-
-              <div class="row">
-
-                <div class="flex-md-6 mar-b-sm">
-
-                  <div class="form__group">
-                    <input type="text" name="name-on-card" class="form__input" id="name-on-card"
-                      placeholder="Enter the name on card">
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-md-6 mar-b-sm">
-
-                  <div class="form__group">
-                    <input type="text" name="email-payment" class="form__input" id="email-payment"
-                      placeholder="Enter your email address">
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-md-6 mar-b-sm">
-
-                  <div class="form__group">
-                    <input type="text" name="billing-address-payment" class="form__input" id="billing-address-payment"
-                      placeholder="Enter your billing address">
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-md-6 mar-b-sm">
-
-                  <div class="form__group">
-                    <input type="text" name="billing-address-city-payment" class="form__input"
-                      id="billing-address-city-payment" placeholder="Enter your billing address city">
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-md-6 mar-b-sm">
-
-                  <div class="form__group">
-                    <input type="text" name="billing-address-state-payment" class="form__input"
-                      id="billing-address-state-payment" placeholder="Enter your billing address state">
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-md-6 mar-b-sm">
-
-                  <div class="form__group">
-                    <input type="text" name="billing-address-zipcode-payment" class="form__input"
-                      id="billing-address-zipcode-payment" placeholder="Enter your billing address zip code">
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-md-6 mar-b-sm">
-
-                  <div class="form__group">
-                    <input type="text" name="card-number-payment" class="form__input" id="card-number-payment"
-                      placeholder="Enter your card number">
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-md-6 mar-b-sm">
-
-                  <div class="form__group">
-                    <input type="text" name="card-expiration-payment" class="form__input" id="card-expiration-payment"
-                      placeholder="Enter your card expiration date (MM/YY)">
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-md-6 mar-b-sm">
-
-                  <div class="form__group">
-                    <input type="text" name="card-ccv-payment" class="form__input" id="card-ccv-payment"
-                      placeholder="Enter your card CCV">
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-md-6">
-
-                  <button class="button button-block-sm" type="submit">Donate</button>
-
-                </div><!-- .flex-* ends -->
-
-              </div><!-- .row ends -->
-
-            </div><!-- .credit-card-payment-form ends -->
+            
 
             <div class="paypal-link">
-              <a href="" class="button" target="_blank">Complete your donation on PayPal</a>
-            </div>
+              <div id="paypal-button-container"></div>
 
-          </form><!-- .form ends -->
+              <!-- Include the PayPal JavaScript SDK -->
+              <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+          
+              <script>
+                  // Render the PayPal button into #paypal-button-container
+                  paypal.Buttons({
+          
+                      style: {
+                          color:  'blue',
+                          shape:  'pill',
+                          label:  'pay',
+                          height: 40
+                      }
+          
+                  }).render('#paypal-button-container');
+              </script>
+              
+              <!-- <a href="" class="button" target="_blank">Complete your donation on PayPal</a> -->
+            </div>
+            <input type="submit" class="button" value="submit" >
+
+          </form>
+          <!-- .form ends -->
+
+          
+
+          <!-- Include the PayPal JavaScript SDK -->
+          
+      
+          
 
         </div><!-- .container ends -->
 
@@ -338,6 +283,10 @@
 
 {% endblock %}
 {% block js %}
+<script>
+  // Render the PayPal button into #paypal-button-container
+
+</script>
     <script src="{% static 'home/js/bay.js' %}" ></script>
     <script src="{% static 'home/js/plugin/jquery-card.js' %}" ></script>
 {% endblock %}

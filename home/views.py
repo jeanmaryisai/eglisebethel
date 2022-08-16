@@ -1,11 +1,15 @@
 from http.client import HTTPResponse
 import re
+from unicodedata import decimal
+from venv import create
 from django import http
 import django
 from django.shortcuts import render
 from . import models
 from django.core.mail import send_mail
 from datetime import date
+from decimal import Decimal
+from . import utils
 # Create your views here.
 def home (request):
     try:
@@ -102,12 +106,20 @@ def bay(request):
     return render(request,'home/bay.html',context)
 
 def baylibre(request):
+    give=False
     if request.method=="POST":
         amout= request.POST['donation-amount']
+        amout=Decimal(amout)
+        amout=float(amout)
         name= request.POST['donation-frequency']
-        #ismember= request.POST['donation-type']
+        ismember= request.POST['donation-type']
         #paymentMethod= request.POST['donation-payment']
-        print(amout)
+        #print(amout,name,ismember,paymentMethod)
+        #purpose , create=models.fundRaiser.objects.get_or_create(But='primary',butArgent=9999999999.99)
+        #models.participation.objects.create(name=name,montant=amout,purpose=purpose)
+        #give=True
+        url=utils.moncashPayment('45789',amout)
+        return render(request,url)
     bay=models.bay.objects.get(show=True)
-    context={'bay':bay}
+    context={'bay':bay,'give':give}
     return render(request,'home/baylibre.html',context)
