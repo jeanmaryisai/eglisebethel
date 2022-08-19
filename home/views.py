@@ -1,4 +1,5 @@
 from http.client import HTTPResponse
+import json
 import re
 from unicodedata import decimal
 from venv import create
@@ -51,7 +52,7 @@ def contact(request):
             email= request.POST['email']
             
             if msj != '':
-                msj= f'{name} vous a laissez un message... </br> {msj}'
+                msj= f'{name} vous a laissez un message... <br> {msj}'
                 send_mail('On vous laissez un message sur votre blog '
                     ,msj
                     ,'jeanmaryisai@gmail.com'
@@ -107,19 +108,33 @@ def bay(request):
 
 def baylibre(request):
     give=False
+    url="#"
     if request.method=="POST":
-        amout= request.POST['donation-amount']
-        amout=Decimal(amout)
-        amout=float(amout)
-        name= request.POST['donation-frequency']
-        ismember= request.POST['donation-type']
+        amout=0.00
+        data=json.loads(request.body)
+        amout=data['amout']
+        name=data['name']
+        member=data['ismember']
+        print(name)
+        #try:
+            #amout= request.POST['donation-amount']
+            
+        #except:
+            #amout= request.POST['donation-amount-custom']
+        #amout=Decimal(amout)
+        #amout=float(amout)
+        #name= request.POST['donation-name']
+        #ismember= request.POST['donation-type']
         #paymentMethod= request.POST['donation-payment']
-        #print(amout,name,ismember,paymentMethod)
+        #print(amout,name,ismember)
         #purpose , create=models.fundRaiser.objects.get_or_create(But='primary',butArgent=9999999999.99)
         #models.participation.objects.create(name=name,montant=amout,purpose=purpose)
         #give=True
-        url=utils.moncashPayment('45789',amout)
-        return render(request,url)
+        #url=utils.moncashPayment('45789',amout)
+        #print(url)
+        
     bay=models.bay.objects.get(show=True)
-    context={'bay':bay,'give':give}
+    
+    context={'bay':bay,'give':give,'url':url}
+    context={'bay':bay}
     return render(request,'home/baylibre.html',context)

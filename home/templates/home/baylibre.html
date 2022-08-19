@@ -7,250 +7,182 @@
 {% block body %}
 
 <div class="container-wrap">
-	<aside id="fh5co-hero">
-		<div class="flexslider">
-			<ul class="slides">
-			   <li style="background-image: url({{bay.hero_background.img.url}});">
-				   <div class="overlay"></div>
-				   <div class="container-fluid">
-					   <div class="row">
-						   <div class="col-md-6 col-md-offset-3 text-center slider-text">
-							   <div class="slider-text-inner">
-								   <h1>{{bay.title_hero}}</h1>
-									<h2>{{bay.subtitle_hero}}</h2>
-							   </div>
-						   </div>
-					   </div>
-				   </div>
-			   </li>
-			  </ul>
-		  </div>
-	</aside>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     <section class="donations default-section-spacing">
-
-        <div style="margin:20px ;">
-
-          <div class="section-heading text-center">
-            <span>Donation</span>
-            <h2>Donation</h2>
-          </div><!-- .section-heading ends -->
-
-          <div class="card-wrapper"></div>
-          <!-- needed for the card plugin. It does not show on smaller devices such as phone and tablet in portrait mode because there is not enough room -->
-
-          <form action="" method="post" class="form donations__form">
-              {%csrf_token%}
-            <div class="donations__amount">
-              <h3>Choose an amount</h3>
-
-              <div class="row">
-
-                <div class="flex-sm-6 flex-md-2">
-
-                  <div class="form__group">
-                    <input value="first" type="radio" name="donation-amount" class="form__radio" id="25">
-                    <label for="25" class="form__label form__label--radio">$25</label>
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-sm-6 flex-md-2">
-
-                  <div class="form__group">
-                    <input type="radio" name="donation-amount" class="form__radio" id="50">
-                    <label for="50" class="form__label form__label--radio">$50</label>
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-sm-6 flex-md-2">
-
-                  <div class="form__group">
-                    <input type="radio" name="donation-amount" class="form__radio" id="75">
-                    <label for="75" class="form__label form__label--radio">$75</label>
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-sm-6 flex-md-2">
-
-                  <div class="form__group">
-                    <input type="radio" name="donation-amount" class="form__radio" id="100">
-                    <label for="100" class="form__label form__label--radio">$100</label>
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-md-4">
-
-                  <div class="form__group">
-                    <label for="custom" class="form__label form__label--custom"><span><i
-                          class="ri-money-dollar-circle-line"></i></span></label>
-                    <input type="number" name="donation-amount" class="form__input" id="custom"
-                      placeholder="Enter a custom amount">
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-              </div><!-- .row ends -->
-
-            </div><!-- .donations__amount ends -->
-
-            <div class="donations__frequency">
-              <h3>Votre nom</h3>
-
-              <div class="row">
-                
-                <div class="flex-sm-4">
-
-                  <div class="form__group">
-                    <input type="radio" value="annonyme" name="donation-frequency" class="form__radio" id="one-time">
-                    <label for="one-time" class="form__label form__label--radio">je prefere rester annonyme</label>
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-sm-4">
-
-                  <div class="form__group">
-                    <input type="text" name="donation-frequency" class="form__radio" id="monthly">
-                    <label for="monthly" class="form__label form__label--radio">Mon nom</label>
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-              </div><!-- .row ends -->
-
-            </div><!-- .donations__frequency ends -->
-
-            <div class="donations__type">
-              <h3>Etes vous membre</h3>
-
-              <div class="row">
-
-                <div class="flex-sm-6 flex-md-3">
-
-                  <div class="form__group">
-                    <input type="radio" name="donation-type" value="True" class="form__radio" id="building-funds">
-                    <label for="building-funds" class="form__label form__label--radio">Oui je suis membre</label>
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                <div class="flex-sm-6 flex-md-3">
-
-                  <div class="form__group">
-                    <input type="radio" value="False" name="donation-type" class="form__radio" id="church-anniversary">
-                    <label for="church-anniversary" class="form__label form__label--radio">Non je ne le suis pas</label>
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-              </div><!-- .row ends -->
-
-            </div><!-- .donations__type ends -->
-
-            <div class="donations__payment">
-              <h3>Choose a payment type</h3>
-
-              <div class="row">
-
-                <div class="flex-sm-6">
-
-                  <div class="form__group">
-                    <div id="paypal-button-container"></div>
-
-              <!-- Include the PayPal JavaScript SDK -->
-             
-
-              
-                  </div><!-- .form__group ends -->
-
-                </div><!-- .flex-* ends -->
-
-                
-
-              </div><!-- .row ends -->
-
-            </div><!-- .donations__payment ends -->
-
-            
-
-            <div class="paypal-link">
-              <button type="submit"><div id="paypal-button-container"></div></button>
-
-              <script src="https://www.paypal.com/sdk/js?client-id=AYqNE3Z6VdCvPXR8aL44wpFlEJBA1ojyuzSbijDkV_J3Bb9Oft4bLA0wu72w8b38VOK6zCZX0uCeaswh&currency=USD"></script>
-              <script>
-                // Render the PayPal button into #paypal-button-container
-                paypal.Buttons({
-        
-                    // Set up the transaction
-                    createOrder: function(data, actions) {
-                        return actions.order.create({
-                            purchase_units: [{
-                                amount: {
-                                    value: parseFloat(88.4)
-                                }
-                            }]
-                        });
-                    },
-        
-                    // Finalize the transaction
-                    onApprove: function(data, actions) {
-                        return actions.order.capture().then(function(orderData) {
-                            // Successful capture! For demo purposes:
-                            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                            var transaction = orderData.purchase_units[0].payments.captures[0];
-                            alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
-                            location.reload
-                            // Replace the above to show a success message within this page, e.g.
-                            // const element = document.getElementById('paypal-button-container');
-                            // element.innerHTML = '';
-                            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                            // Or go to another URL:  actions.redirect('thank_you.html');
-                        });
-                    }
-        
-        
-                }).render('#paypal-button-container');
-            </script>
-          
-              
-              <!-- <a href="" class="button" target="_blank">Complete your donation on PayPal</a> -->
+  <aside id="fh5co-hero">
+    <div class="flexslider">
+      <ul class="slides">
+        <li style="background-image: url({{bay.hero_background.img.url}});">
+          <div class="overlay"></div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3 text-center slider-text">
+                <div class="slider-text-inner">
+                  <h1>{{bay.title_hero}}</h1>
+                  <h2>{{bay.subtitle_hero}}</h2>
+                </div>
+              </div>
             </div>
-            <input type="submit" class="button" value="submit" >
+          </div>
+        </li>
+      </ul>
+    </div>
+  </aside>
 
-          </form>
-          <!-- .form ends -->
 
-          
 
-          <!-- Include the PayPal JavaScript SDK -->
-          
-      
-          
 
-        </div><!-- .container ends -->
 
-      </section><!-- .donations ends -->
-      <!-- DONATIONS SECTION ENDS -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <section class="donations default-section-spacing">
+
+    <div style="margin:20px ;">
+
+      <div class="section-heading text-center">
+        <span>Donation</span>
+        <h2>Donation</h2>
+      </div><!-- .section-heading ends -->
+
+      <div class="card-wrapper"></div>
+      <!-- needed for the card plugin. It does not show on smaller devices such as phone and tablet in portrait mode because there is not enough room -->
+
+      <form action="" method="post" class="form donations__form">
+        {%csrf_token%}
+        <input type="hidden" id="url" value="{% url 'baylibre' %}">
+        <div class="donations__amount">
+          <h3>Choose an amount</h3>
+
+          <div class="row">
+
+            <div class="flex-sm-6 flex-md-2">
+
+              <div class="form__group">
+                <input value="25" type="radio" name="donation-amount" class="form__radio" id="25">
+                <label for="25" class="form__label form__label--radio">$25</label>
+              </div><!-- .form__group ends -->
+
+            </div><!-- .flex-* ends -->
+
+            <div class="flex-sm-6 flex-md-2">
+
+              <div class="form__group">
+                <input value="50" type="radio" name="donation-amount" class="form__radio" id="50">
+                <label for="50" class="form__label form__label--radio">$50</label>
+              </div><!-- .form__group ends -->
+
+            </div><!-- .flex-* ends -->
+
+            <div class="flex-sm-6 flex-md-2">
+
+              <div class="form__group">
+                <input value="75" type="radio" name="donation-amount" class="form__radio" id="75">
+                <label for="75" class="form__label form__label--radio">$75</label>
+              </div><!-- .form__group ends -->
+
+            </div><!-- .flex-* ends -->
+
+            <div class="flex-sm-6 flex-md-2">
+
+              <div class="form__group">
+                <input value="100" type="radio" name="donation-amount" class="form__radio" id="100">
+                <label for="100" class="form__label form__label--radio">$100</label>
+              </div><!-- .form__group ends -->
+
+            </div><!-- .flex-* ends -->
+
+            <div class="flex-md-4">
+
+              <div class="form__group">
+                <label for="custom" class="form__label form__label--custom"><span><i
+                      class="ri-money-dollar-circle-line"></i></span></label>
+                <input type="number" name="donation-amount-custom" class="form__input" id="custom"
+                  placeholder="Enter a custom amount">
+              </div><!-- .form__group ends -->
+
+            </div><!-- .flex-* ends -->
+
+          </div><!-- .row ends -->
+
+        </div><!-- .donations__amount ends -->
+
+        <div class="donations__name" style="margin: 20px 0px ;">
+          <h3>Votre nom</h3>
+
+          <div class="row">
+            <div class="flex-md-4">
+
+              <div class="form__group">
+                <input type="text" name="donation-name" class="form__input" id="custom_name"
+                  placeholder="Enter your name" required>
+              </div><!-- .form__group ends -->
+
+            </div><!-- .flex-* ends -->
+
+          </div><!-- .row ends -->
+
+        </div>
+
+        <div class="donations__type">
+          <h3>Etes vous membre</h3>
+
+          <div class="row">
+
+            <div class="flex-sm-6 flex-md-3">
+
+              <div class="form__group">
+                <input type="radio" name="donation-type" value="True" class="form__radio" id="building-funds">
+                <label for="building-funds" class="form__label form__label--radio">Oui je suis membre</label>
+              </div><!-- .form__group ends -->
+
+            </div><!-- .flex-* ends -->
+
+            <div class="flex-sm-6 flex-md-3">
+
+              <div class="form__group">
+                <input type="radio" value="False" name="donation-type" class="form__radio" id="church-anniversary">
+                <label for="church-anniversary" class="form__label form__label--radio">Non je ne le suis pas</label>
+              </div><!-- .form__group ends -->
+
+            </div><!-- .flex-* ends -->
+
+          </div><!-- .row ends -->
+
+        </div><!-- .donations__type ends -->
+
+        <div class="donations__payment">
+          <h3>Choose a payment type</h3>
+
+          <div class="row">
+
+            <div class="flex-sm-6">
+
+              <div class="form__group">
+                <div id="paypal-button-container">
+                </div>
+              </div><!-- .form__group ends -->
+
+            </div><!-- .flex-* ends -->
+
+
+
+          </div><!-- .row ends -->
+          <button type="submit"></button>
+
+      </form>
+    </div>
+    <h1 style="display: none;"><a href="{{url}}">Mon Cash Sandbox</a></h1><!-- .container ends -->
+
+  </section><!-- .donations ends -->
+  <!-- DONATIONS SECTION ENDS -->
 </div>
 
 {% endblock %}
@@ -259,6 +191,11 @@
   // Render the PayPal button into #paypal-button-container
 
 </script>
-    <script src="{% static 'home/js/bay.js' %}" ></script>
-    <script src="{% static 'home/js/plugin/jquery-card.js' %}" ></script>
+<script
+src="https://www.paypal.com/sdk/js?client-id=AYqNE3Z6VdCvPXR8aL44wpFlEJBA1ojyuzSbijDkV_J3Bb9Oft4bLA0wu72w8b38VOK6zCZX0uCeaswh&currency=USD"></script>
+
+<script src="{% static 'home/js/bay.js' %}"></script>
+
+<script src="{% static 'home/js/paypal.js' %}"></script>
+<script src="{% static 'home/js/plugin/jquery-card.js' %}"></script>
 {% endblock %}
