@@ -51,136 +51,166 @@
         <span>Donation</span>
         <h2>Donation</h2>
       </div><!-- .section-heading ends -->
-<div id="ele">
-      {%if give%}
-<h1>Merci!</h1>
-<h3>Merci pour votre don, Que l'Eternel tout puissant vous Benisse abondammement</h3>
-{%else%}
-      <form action="" method="post" class="form donations__form">
-        {%csrf_token%}
-        <input type="hidden" id="url" value="{% url 'baylibre' 'primary' %}">
-        <div class="donations__amount">
-          <h3>Choose an amount</h3>
+      <div id="ele">
+        {% if x.slug != "primary" %}
+        <div class="card-body">
+          <a href="{% url 'baylibre' x.slug %}" style="color: inherit; width: 100%;">
+            {% if x.iscomplete %}
+            <h1>Ce lever de fond est terminer, scroller pour donner a l'eglise ou retourner a la page precedente pour donner pour une autre cause</h1>
+            {%else%}
 
-          <div class="row">
+            <div class="progress default-progress">
+              <div class="progress-bar bg-gradient-1 progress-animated" style="width: {{x.pourcentage}}%; height:20px;"
+                role="progressbar">
+                <span class="sr-only">{{x.pourcentage}}% Complete</span>
+              </div>
+            </div>
+            <div class="d-flex align-items-end mt-2 pb-3 justify-content-between">
+              <span style="font-size:x-large;">{{x.title}}</span>
+              {%if x.endlessFund%}
 
-            <div class="flex-sm-6 flex-md-2">
-
-              <div class="form__group">
-                <input value="25" type="radio" name="donation-amount" class="form__radio" id="25">
-                <label for="25" class="form__label form__label--radio">$25</label>
-              </div><!-- .form__group ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-sm-6 flex-md-2">
-
-              <div class="form__group">
-                <input value="50" type="radio" name="donation-amount" class="form__radio" id="50">
-                <label for="50" class="form__label form__label--radio">$50</label>
-              </div><!-- .form__group ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-sm-6 flex-md-2">
-
-              <div class="form__group">
-                <input value="75" type="radio" name="donation-amount" class="form__radio" id="75">
-                <label for="75" class="form__label form__label--radio">$75</label>
-              </div><!-- .form__group ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-sm-6 flex-md-2">
-
-              <div class="form__group">
-                <input value="100" type="radio" name="donation-amount" class="form__radio" id="100">
-                <label for="100" class="form__label form__label--radio">$100</label>
-              </div><!-- .form__group ends -->
-
-            </div><!-- .flex-* ends -->
-
-            <div class="flex-md-4">
-
-              <div class="form__group">
-                <label for="custom" class="form__label form__label--custom"><span><i
-                      class="ri-money-dollar-circle-line"></i></span></label>
-                <input type="number" name="donation-amount-custom" class="form__input" id="custom"
-                  placeholder="Enter a custom amount">
-              </div><!-- .form__group ends -->
-
-            </div><!-- .flex-* ends -->
-
-          </div><!-- .row ends -->
-
-        </div><!-- .donations__amount ends -->
-
-        <div class="donations__name" style="margin: 20px 0px ;">
-          <h3>Votre nom</h3>
-
-          <div class="row">
-            <div class="flex-md-4">
-
-              <div class="form__group">
-                <input type="text" name="donation-name" class="form__input" id="custom_name"
-                  placeholder="Enter your name" required>
-              </div><!-- .form__group ends -->
-
-            </div><!-- .flex-* ends -->
-
-          </div><!-- .row ends -->
-
+              {%else%}
+              {% if x.iscomplete %}
+              <span class="fs-18"><span class="text-black pe-2">${{x.butArgent}} </span>/${{x.butArgent}}
+              </span>
+              {%else%}
+              <span class="fs-18"><span class="text-black pe-2">${{x.argentActuel}}
+                </span>/${{x.butArgent}} </span>
+              {%endif%}
+              {%endif%}
+            </div>
+            {%endif%}
+          </a>
         </div>
+        {%endif%}
+        <h1>{{purpose}}</h1>
+        {%if give%}
+        <h1>Merci!</h1>
+        <h3>Merci pour votre don, Que l'Eternel tout puissant vous Benisse abondammement</h3>
+        {%else%}
+        <form action="" method="post" class="form donations__form">
+          {%csrf_token%}
+          <input type="hidden" id="url" value="{% url 'baylibre' x.slug %}">
+          <div class="donations__amount">
+            <h3>Choose an amount</h3>
 
-        <div class="donations__type">
-          <h3>Etes vous membre</h3>
+            <div class="row">
 
-          <div class="row">
+              <div class="flex-sm-6 flex-md-2">
 
-            <div class="flex-sm-6 flex-md-3">
+                <div class="form__group">
+                  <input value="25" type="radio" name="donation-amount" class="form__radio" id="25">
+                  <label for="25" class="form__label form__label--radio">$25</label>
+                </div><!-- .form__group ends -->
 
-              <div class="form__group">
-                <input type="radio" name="donation-type" value="True" class="form__radio" id="building-funds">
-                <label for="building-funds" class="form__label form__label--radio">Oui je suis membre</label>
-              </div><!-- .form__group ends -->
+              </div><!-- .flex-* ends -->
 
-            </div><!-- .flex-* ends -->
+              <div class="flex-sm-6 flex-md-2">
 
-            <div class="flex-sm-6 flex-md-3">
+                <div class="form__group">
+                  <input value="50" type="radio" name="donation-amount" class="form__radio" id="50">
+                  <label for="50" class="form__label form__label--radio">$50</label>
+                </div><!-- .form__group ends -->
 
-              <div class="form__group">
-                <input type="radio" value="False" name="donation-type" class="form__radio" id="church-anniversary">
-                <label for="church-anniversary" class="form__label form__label--radio">Non je ne le suis pas</label>
-              </div><!-- .form__group ends -->
+              </div><!-- .flex-* ends -->
 
-            </div><!-- .flex-* ends -->
+              <div class="flex-sm-6 flex-md-2">
 
-          </div><!-- .row ends -->
+                <div class="form__group">
+                  <input value="75" type="radio" name="donation-amount" class="form__radio" id="75">
+                  <label for="75" class="form__label form__label--radio">$75</label>
+                </div><!-- .form__group ends -->
 
-        </div><!-- .donations__type ends -->
+              </div><!-- .flex-* ends -->
 
-        <div class="donations__payment">
-          <h3>Choose a payment type</h3>
+              <div class="flex-sm-6 flex-md-2">
 
-          <div class="row">
+                <div class="form__group">
+                  <input value="100" type="radio" name="donation-amount" class="form__radio" id="100">
+                  <label for="100" class="form__label form__label--radio">$100</label>
+                </div><!-- .form__group ends -->
 
-            <div class="flex-sm-6">
+              </div><!-- .flex-* ends -->
 
-              <div class="form__group">
-                <div id="paypal-button-container">
-                </div>
-              </div><!-- .form__group ends -->
+              <div class="flex-md-4">
 
-            </div><!-- .flex-* ends -->
+                <div class="form__group">
+                  <label for="custom" class="form__label form__label--custom"><span><i
+                        class="ri-money-dollar-circle-line"></i></span></label>
+                  <input type="number" name="donation-amount-custom" class="form__input" id="custom"
+                    placeholder="Enter a custom amount">
+                </div><!-- .form__group ends -->
+
+              </div><!-- .flex-* ends -->
+
+            </div><!-- .row ends -->
+
+          </div><!-- .donations__amount ends -->
+
+          <div class="donations__name" style="margin: 20px 0px ;">
+            <h3>Votre nom</h3>
+
+            <div class="row">
+              <div class="flex-md-4">
+
+                <div class="form__group">
+                  <input type="text" name="donation-name" class="form__input" id="custom_name"
+                    placeholder="Enter your name" required>
+                </div><!-- .form__group ends -->
+
+              </div><!-- .flex-* ends -->
+
+            </div><!-- .row ends -->
+
+          </div>
+
+          <div class="donations__type">
+            <h3>Etes vous membre</h3>
+
+            <div class="row">
+
+              <div class="flex-sm-6 flex-md-3">
+
+                <div class="form__group">
+                  <input type="radio" name="donation-type" value="True" class="form__radio" id="building-funds">
+                  <label for="building-funds" class="form__label form__label--radio">Oui je suis membre</label>
+                </div><!-- .form__group ends -->
+
+              </div><!-- .flex-* ends -->
+
+              <div class="flex-sm-6 flex-md-3">
+
+                <div class="form__group">
+                  <input type="radio" value="False" name="donation-type" class="form__radio" id="church-anniversary">
+                  <label for="church-anniversary" class="form__label form__label--radio">Non je ne le suis pas</label>
+                </div><!-- .form__group ends -->
+
+              </div><!-- .flex-* ends -->
+
+            </div><!-- .row ends -->
+
+          </div><!-- .donations__type ends -->
+
+          <div class="donations__payment">
+            <h3>Choose a payment type</h3>
+
+            <div class="row">
+
+              <div class="flex-sm-6">
+
+                <div class="form__group">
+                  <div id="paypal-button-container">
+                  </div>
+                </div><!-- .form__group ends -->
+
+              </div><!-- .flex-* ends -->
 
 
 
-          </div><!-- .row ends -->
-          <button type="submit"></button>
-
-      </form>
-      {%endif%}
-    </div>
+            </div><!-- .row ends -->
+        </form>
+        {%endif%}
+      </div>
     </div>
     <h1 style="display: none;"><a href="{{url}}">Mon Cash Sandbox</a></h1><!-- .container ends -->
 
@@ -195,7 +225,7 @@
 
 </script>
 <script
-src="https://www.paypal.com/sdk/js?client-id=AYqNE3Z6VdCvPXR8aL44wpFlEJBA1ojyuzSbijDkV_J3Bb9Oft4bLA0wu72w8b38VOK6zCZX0uCeaswh&currency=USD"></script>
+  src="https://www.paypal.com/sdk/js?client-id=AYqNE3Z6VdCvPXR8aL44wpFlEJBA1ojyuzSbijDkV_J3Bb9Oft4bLA0wu72w8b38VOK6zCZX0uCeaswh&currency=USD"></script>
 
 <script src="{% static 'home/js/bay.js' %}"></script>
 

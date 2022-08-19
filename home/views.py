@@ -1,5 +1,6 @@
 from http.client import HTTPResponse
 import json
+from turtle import title
 from django.shortcuts import redirect
 import re
 from unicodedata import decimal
@@ -102,15 +103,22 @@ def sermons(request):
     return render(request,'home/sermons.html',context)
 
 def bay(request):
-    fund=models.fundRaiser.objects.all().filter(show=True)
+    fund=reversed(models.fundRaiser.objects.filter(show=True).exclude(title="primary").order_by('startupDate'))[:5]
     bay=models.bay.objects.get(show=True)
     context={'bay':bay,'fund':fund}
     return render(request,'home/bay.html',context)
 
 def baylibre(request,slug):
+    purpose='true'
+    try:
+        purpose=models.fundRaiser.objects.get(slug=slug)
+    except:
+        if slug=='primary':
+            purpose=models.fundRaiser.objects.create(title=slug,slug=slug,butArgent=0,endlessFund=True)
+        else:
+            return render(request,'home/notFound.html')
     give=False
     url="#"
-    purpose=''
     if request.method=="POST":
         amout=0.00
         ismember=False
@@ -122,14 +130,16 @@ def baylibre(request,slug):
             ismember=True
         amout=Decimal(amout)
         #amout2=float(amout)
-        purpose , create=models.fundRaiser.objects.get_or_create(title='primary',butArgent=0,endlessFund=True)
-        models.participation.objects.create(name=name,montant=amout,purpose=purpose,isMember=ismember)
+        models.participation.objects.create(name=name,montant=amout,purpose_id=purpose.id,isMember=ismember)
         give=True
         #url=utils.moncashPayment('45789',amout2)
         #print(url)
-        return redirect('/home/')
-        
+        return redirect('/home/') 
     bay=models.bay.objects.get(show=True) 
-    context={'bay':bay,'give':give,'url':url,'purpose':purpose}
-    context={'bay':bay}
+    context={'bay':bay,'give':give,'url':url,'x':purpose}
     return render(request,'home/baylibre.html',context)
+
+def fundraisers(request):
+    fund=models.fundRaiser.objects.filter(show=True).exclude(title="primary")
+    context={'bay':bay,'fund':fund}
+    return render(request,'home/bay.html',context)

@@ -388,7 +388,7 @@ class fundRaiser(models.Model):
     endlessFund=models.BooleanField(default=False,null=True)
 
     def __str__ (self):
-        return self.But
+        return self.title
 
     @property
     def argentActuel(self):
@@ -409,6 +409,8 @@ class fundRaiser(models.Model):
 
     @property
     def pourcentage(self):
+        if self.endlessFund:
+            return 80
         k=0.00
         k=self.argentActuel/self.butArgent   
         k= k*100

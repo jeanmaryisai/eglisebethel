@@ -1,7 +1,7 @@
 const customAmountField = document.querySelector(".donations__form .donations__amount #custom");
 const currentAmount = document.querySelectorAll(".donations__form .donations__amount input[type='radio']");
 const currentType = document.querySelectorAll(".donations__form .donations__type input[type='radio']");
-
+const url= document.getElementById("url");
 let amout=0.00;
 let bool=true
 let ame='anonymous'
@@ -10,7 +10,7 @@ setInterval(()=>{
     const lame=document.getElementById('custom_name')
     if(lame != ''){
     ame=lame.value}
-    const url= document.getElementById("url");
+    
     amout=0.00;
 for (var i = 0; i < currentAmount.length; i++) {
     if (currentAmount[i].checked) {
