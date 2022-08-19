@@ -66,6 +66,7 @@
                 {% if x.iscomplete  %} <br>
                 <h2>No current Fundraiser. <br> <br> All previous FundRaisers are Complete ;)</h2>
                 {%else%}
+                    
                     <div class="progress default-progress">
                         <div class="progress-bar bg-gradient-1 progress-animated" style="width: {{x.pourcentage}}%; height:20px;" role="progressbar">
                             <span class="sr-only">{{x.pourcentage}}% Complete</span>
@@ -102,7 +103,7 @@
                         Participate to something greater than you
                         Cause everytime you give you helps somebady that potentially will give it to you back
                     </p>
-                </div><a href="{% url 'baylibre' %}" style="color: white ;"><button style="float: right;font-size: 3.5rem;color: white ; width: 50%;margin:20px 10px 10px 10px;padding: 10px 0;;box-shadow: 0px 0px 10px 4px rgba(68, 50, 85, 0.205); 
+                </div><a href="{% url 'baylibre' 'primary' %}" style="color: white ;"><button style="float: right;font-size: 3.5rem;color: white ; width: 50%;margin:20px 10px 10px 10px;padding: 10px 0;;box-shadow: 0px 0px 10px 4px rgba(68, 50, 85, 0.205); 
                 
                 ;" type="button" class="btn btn-info">Give  <i style="color:white ;font-size: 2.5rem;" class="icon icon-heart" ></i>
                 </a>

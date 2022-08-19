@@ -51,13 +51,14 @@
         <span>Donation</span>
         <h2>Donation</h2>
       </div><!-- .section-heading ends -->
-
-      <div class="card-wrapper"></div>
-      <!-- needed for the card plugin. It does not show on smaller devices such as phone and tablet in portrait mode because there is not enough room -->
-
+<div id="ele">
+      {%if give%}
+<h1>Merci!</h1>
+<h3>Merci pour votre don, Que l'Eternel tout puissant vous Benisse abondammement</h3>
+{%else%}
       <form action="" method="post" class="form donations__form">
         {%csrf_token%}
-        <input type="hidden" id="url" value="{% url 'baylibre' %}">
+        <input type="hidden" id="url" value="{% url 'baylibre' 'primary' %}">
         <div class="donations__amount">
           <h3>Choose an amount</h3>
 
@@ -178,6 +179,8 @@
           <button type="submit"></button>
 
       </form>
+      {%endif%}
+    </div>
     </div>
     <h1 style="display: none;"><a href="{{url}}">Mon Cash Sandbox</a></h1><!-- .container ends -->
 

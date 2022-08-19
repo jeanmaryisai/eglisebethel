@@ -380,10 +380,12 @@ class bay(models.Model):
         return self.title
 
 class fundRaiser(models.Model):
-    But=models.CharField(max_length=50, unique=True)
+    title=models.CharField(max_length=50, unique=True)
     butArgent=models.DecimalField(decimal_places=2,max_digits=20)
+    slug=models.CharField(max_length=60,null=True)
     startupDate=models.DateField(auto_now=True)
     show=models.BooleanField(default=True, null=True)
+    endlessFund=models.BooleanField(default=False,null=True)
 
     def __str__ (self):
         return self.But
@@ -398,6 +400,8 @@ class fundRaiser(models.Model):
 
     @property
     def iscomplete(self):
+        if self.endlessFund:
+            return False
         if self.argentActuel>=self.butArgent:
             return True
         else:

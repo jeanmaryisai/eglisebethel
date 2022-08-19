@@ -1,5 +1,6 @@
 from http.client import HTTPResponse
 import json
+from django.shortcuts import redirect
 import re
 from unicodedata import decimal
 from venv import create
@@ -106,35 +107,29 @@ def bay(request):
     context={'bay':bay,'fund':fund}
     return render(request,'home/bay.html',context)
 
-def baylibre(request):
+def baylibre(request,slug):
     give=False
     url="#"
+    purpose=''
     if request.method=="POST":
         amout=0.00
+        ismember=False
         data=json.loads(request.body)
         amout=data['amout']
         name=data['name']
-        member=data['ismember']
-        print(name)
-        #try:
-            #amout= request.POST['donation-amount']
-            
-        #except:
-            #amout= request.POST['donation-amount-custom']
-        #amout=Decimal(amout)
-        #amout=float(amout)
-        #name= request.POST['donation-name']
-        #ismember= request.POST['donation-type']
-        #paymentMethod= request.POST['donation-payment']
-        #print(amout,name,ismember)
-        #purpose , create=models.fundRaiser.objects.get_or_create(But='primary',butArgent=9999999999.99)
-        #models.participation.objects.create(name=name,montant=amout,purpose=purpose)
-        #give=True
-        #url=utils.moncashPayment('45789',amout)
+        iss=data['ismember']
+        if iss=='True':
+            ismember=True
+        amout=Decimal(amout)
+        #amout2=float(amout)
+        purpose , create=models.fundRaiser.objects.get_or_create(title='primary',butArgent=0,endlessFund=True)
+        models.participation.objects.create(name=name,montant=amout,purpose=purpose,isMember=ismember)
+        give=True
+        #url=utils.moncashPayment('45789',amout2)
         #print(url)
+        return redirect('/home/')
         
-    bay=models.bay.objects.get(show=True)
-    
-    context={'bay':bay,'give':give,'url':url}
+    bay=models.bay.objects.get(show=True) 
+    context={'bay':bay,'give':give,'url':url,'purpose':purpose}
     context={'bay':bay}
     return render(request,'home/baylibre.html',context)

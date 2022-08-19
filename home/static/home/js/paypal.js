@@ -1,23 +1,35 @@
 const customAmountField = document.querySelector(".donations__form .donations__amount #custom");
 const currentAmount = document.querySelectorAll(".donations__form .donations__amount input[type='radio']");
+const currentType = document.querySelectorAll(".donations__form .donations__type input[type='radio']");
+
 let amout=0.00;
 let bool=true
-let ame=''
+let ame='anonymous'
+let type=false
 setInterval(()=>{
     const lame=document.getElementById('custom_name')
-    ame=lame.value
+    if(lame != ''){
+    ame=lame.value}
     const url= document.getElementById("url");
-    submitform(url.value)
     amout=0.00;
 for (var i = 0; i < currentAmount.length; i++) {
     if (currentAmount[i].checked) {
       amout=currentAmount[i].value;
     }
   }
+  for (var i = 0; i < currentType.length; i++) {
+    if (currentType[i].checked) {
+      type=currentType[i].value;
+    }
+  }
   if(amout==0.00){
+    if(customAmountField.value != ''){
     amout=customAmountField.value
+    }
   }
 
+  //
+  //submitform(url.value)
 },1000)
 
 function getToken(name){
@@ -43,7 +55,7 @@ function submitform(url){
             'CONTENT-Type':'application/json',
             'X-CSRFToken':csrftoken
         },
-        body:JSON.stringify({'amout':amout,'name':ame,'ismember':'True'})
+        body:JSON.stringify({'amout':amout,'name':ame,'ismember':type})
     })
     .then((response)=>{
         return response.json()
@@ -68,16 +80,19 @@ paypal.Buttons({
     onApprove: function(data, actions) {
         return actions.order.capture().then(function(orderData) {
             // Successful capture! For demo purposes:
-            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+            //console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
             var transaction = orderData.purchase_units[0].payments.captures[0];
-            alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
-            location.reload
+            //alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+            submitform(url.value);
+            
             // Replace the above to show a success message within this page, e.g.
-            // const element = document.getElementById('paypal-button-container');
-            // element.innerHTML = '';
-            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+            const ele= document.getElementById('ele')
+             const element = document.getElementById('paypal-button-container');
+             element.innerHTML = '';
+             ele.innerHTML = '<h3>Merci pour votre don. <br><br> Que le Seigneur vous benisse abonadament!</h3>';
 
-            // Or go to another URL:  actions.redirect('thank_you.html');
+            actions.redirect('/home/baylibre');
+            location.reload;
           
         });
     }
