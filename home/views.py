@@ -30,6 +30,7 @@ def home (request):
     evenement_main_page=models.evenement_main_page.objects.get(show=True)
     secteur_main=models.secteur_main.objects.get(show=True)
     secteur=models.secteur.objects.all().filter(show=True)
+    
     e1=utils.ev(1)
     e2=utils.ev(2)
     e3=utils.ev(3)

@@ -16,8 +16,10 @@ def ev(n):
     evenement=models.evenement.objects.filter(show=True).order_by('startdate')
     e=evenement[::-1]
     n=n-1
-    return e[n]
-
+    try:
+        return e[n]
+    except:
+        return False
 def matches(sermon):
     sermons=models.Sermon.objects.all().exclude(title=sermon.title)
     tag=sermon.tags.all()

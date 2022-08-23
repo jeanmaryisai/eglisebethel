@@ -10,7 +10,7 @@ Sermons
 	<aside id="fh5co-hero">
 		<div class="flexslider">
 			<ul class="slides">
-			   <li style="background-image: url({{page.background.url}});">
+			   <li style="background-image: url({{page.background.img.url}});">
 				   <div class="overlay"></div>
 				   <div class="container-fluid">
 					   <div class="row">
@@ -57,7 +57,7 @@ Sermons
 			{% for x in list %}
 			<div class="col-md-4 text-center animate-box" >
 				<div class="sermon-entry">
-					<div class="sermon" style="background-image: url({{x.tumbnail.url}});">
+					<div class="sermon" style="background-image: url({{x.tumbnail.img.url}});">
 						<div class="play">
 							<a href="{{x.slug}}"><i class="icon-play3"></i></a>
 						</div>
@@ -92,7 +92,7 @@ Sermons
 			{% for x in sermon %}
 			<div class="col-md-4 text-center animate-box" >
 				<div class="sermon-entry">
-					<div class="sermon" style="background-image: url({{x.tumbnail.url}});">
+					<div class="sermon" style="background-image: url({{x.tumbnail.img.url}});">
 						<div class="play">
 							<a href="{{x.slug}}"><i class="icon-play3"></i></a>
 						</div>

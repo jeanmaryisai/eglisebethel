@@ -9,7 +9,7 @@
             <aside id="fh5co-hero">
                 <div class="flexslider">
                     <ul class="slides">
-                       <li style="background-image: url('{{live.tumnail.url}}');
+                       <li style="background-image: url('{{live.tumnail.img.url}}');
                             margin-bottom: 0px !important; ">
                            <div class="overlay"></div>
                            <div class="container-fluid">
@@ -38,7 +38,7 @@
 <aside id="fh5co-hero">
     <div class="flexslider">
         <ul class="slides">
-           <li style="background-image: url('{{live.tumnail.url}}');
+           <li style="background-image: url('{{live.tumnail.img.url}}');
                 margin-bottom: 0px !important; ">
                <div class="overlay"></div>
                <div class="container-fluid">
@@ -68,7 +68,7 @@
     <aside id="fh5co-hero">
         <div class="flexslider">
             <ul class="slides">
-               <li style="background-image: url('{{hero.vid1.backgroud.url}}');">
+               <li style="background-image: url('{{hero.vid1.backgroud.img.url}}');">
                    <div class="overlay"></div>
                    <div class="container-fluid">
                        <div class="row">
@@ -84,7 +84,7 @@
                        </div>
                    </div>
                </li>
-               <li style="background-image: url('{{hero.vid2.backgroud.url}}');">
+               <li style="background-image: url('{{hero.vid2.backgroud.img.url}}');">
                 <div class="overlay"></div>
                 <div class="container-fluid">
                     <div class="row">
@@ -100,7 +100,7 @@
                     </div>
                 </div>
             </li>
-            <li style="background-image: url('{{hero.vid3.backgroud.url}}');">
+            <li style="background-image: url('{{hero.vid3.backgroud.img.url}}');">
                 <div class="overlay"></div>
                 <div class="container-fluid">
                     <div class="row">
@@ -171,7 +171,7 @@
             {% for x in serviceSingle %}
             <div class="col-md-4 animate-box">
                 <div class="services">
-                    <a href="#" class="img-holder"><img class="img-responsive" src="{{x.imageBackground.url}}" alt="Free HTML5 Website Template by freehtml5.co"></a>
+                    <a href="#" class="img-holder"><img class="img-responsive" src="{{x.imageBackground.img.url}}" alt="Free HTML5 Website Template by freehtml5.co"></a>
                     <div class="desc">
                         <h3><a href="#">{{x.title}}</a></h3>
                         <p>{{x.description_bref}}</p>
@@ -194,7 +194,7 @@
         <div class="row">
             <div class="col-md-4 text-center animate-box">
                 <div class="sermon-entry">
-                    <div class="sermon" style="background-image: url({{Sermons_main_section.s1.tumbnail.url}});">
+                    <div class="sermon" style="background-image: url({{Sermons_main_section.s1.tumbnail.img.url}});">
                         <div class="play">
                             <a class="popup-vimeo" href="{{Sermons_main_section.s1.youtubeurl}}"><i class="icon-play3"></i></a>
                         </div>
@@ -205,7 +205,7 @@
             </div>
             <div class="col-md-4 text-center animate-box">
                 <div class="sermon-entry">
-                    <div class="sermon" style="background-image: url({{Sermons_main_section.s2.tumbnail.url}});">
+                    <div class="sermon" style="background-image: url({{Sermons_main_section.s2.tumbnail.img.url}});">
                         <div class="play">
                             <a class="popup-vimeo" href="{{Sermons_main_section.s2.youtubeurl}}"><i class="icon-play3"></i></a>
                         </div>
@@ -216,7 +216,7 @@
             </div>
             <div class="col-md-4 text-center animate-box">
                 <div class="sermon-entry">
-                    <div class="sermon" style="background-image: url({{Sermons_main_section.s3.tumbnail.url}});">
+                    <div class="sermon" style="background-image: url({{Sermons_main_section.s3.tumbnail.img.url}});">
                         <div class="play">
                             <a class="popup-vimeo" href="{{Sermons_main_section.s3.youtubeurl}}"><i class="icon-play3"></i></a>
                         </div>
@@ -271,6 +271,7 @@
             </div>
         </div>
         <div class="row">
+            {% if e1 %}
             <div class="col-md-4 animate-box">
                 <div class="events-entry">
                     <span class="date">{{e1.startdate}}</span>
@@ -279,6 +280,9 @@
                     <a href="{% url 'singlevents' e1.slug %}">Read More <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
+            {%else%}
+            <h3>Pas d'evenement</h3>
+            {%endif%}{% if e2 %}
             <div class="col-md-4 animate-box">
                 <div class="events-entry">
                     <span class="date">{{e2.startdate}}</span>
@@ -287,6 +291,7 @@
                     <a href="{% url 'singlevents' e2.slug %}">Read More <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
+            {%endif%}{% if e3 %}
             <div class="col-md-4 animate-box">
                 <div class="events-entry">
                     <span class="date">{{e3.startdate}}</span>
@@ -295,6 +300,7 @@
                     <a href="{% url 'singlevents' e3.slug %}">Read More <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
+            {%endif%}
         </div>
     </div>
 </div>
