@@ -1,5 +1,6 @@
 from http.client import HTTPResponse
 import json
+from tabnanny import check
 from turtle import title
 from django.shortcuts import redirect
 import re
@@ -29,6 +30,9 @@ def home (request):
     evenement_main_page=models.evenement_main_page.objects.get(show=True)
     secteur_main=models.secteur_main.objects.get(show=True)
     secteur=models.secteur.objects.all().filter(show=True)
+    e1=utils.ev(1)
+    e2=utils.ev(2)
+    e3=utils.ev(3)
 
     context={'hero':hero, 'firstSection':firstSection, 'statSection':statSection,
     'serviceSingle':serviceSingle,
@@ -39,7 +43,10 @@ def home (request):
         'secteur_main':secteur_main,
         'secteur':secteur,
         'active':1,
-        'live':live}
+        'live':live,
+        'e1':e1,
+        'e2':e2,
+        'e3':e3,}
     return render(request,'home/index.html',context)
 
 def contact(request):
@@ -93,19 +100,39 @@ def singlevents(request,slug):
     evenement_main_page=models.evenement_main_page.objects.get(show=True)
     evenement=models.evenement.objects.get(slug=slug)
     imgs=evenement.album.all
-    context={'page':evenement_main_page,'event':evenement,'imgs':imgs}
+    context={'page':evenement_main_page,'event':evenement,'imgs':imgs,}
     return render(request,'home/eventsingle.html',context)
 
-def sermons(request):
+def sermons(request,slug):
     sermon=models.Sermon.objects.all
+    tags=models.tag.objects.all()
     Sermons_main_section=models.Sermons_main_section.objects.get(show=True)
-    context={'page':Sermons_main_section,'sermon':sermon}
+    context={'page':Sermons_main_section,'sermon':sermon,'tags':tags}
+    try:
+        sermonJ=models.Sermon.objects.get(slug=slug)
+        list=utils.matches(sermonJ)['list']
+        print(list)
+        sermon=models.Sermon.objects.all().exclude(title=sermonJ)
+        context['sermonJ']=sermonJ
+        context['list']=list
+    except:
+        try:
+            slug=slug[:-2]
+            slugTest=models.tag.objects.get(title=slug)
+            xx=utils.matchOne(slug)
+            context['sermon']=xx
+            context['tag']=slug
+        except:
+            pass
+
     return render(request,'home/sermons.html',context)
 
 def bay(request):
-    fund=reversed(models.fundRaiser.objects.filter(show=True).exclude(title="primary").order_by('startupDate'))[:5]
+    fund=models.fundRaiser.objects.filter(show=True).exclude(title="primary").order_by('startupDate')
+    fund2=fund[::-1]
+    fund2=fund2[:5]
     bay=models.bay.objects.get(show=True)
-    context={'bay':bay,'fund':fund}
+    context={'bay':bay,'fund':fund2}
     return render(request,'home/bay.html',context)
 
 def baylibre(request,slug):
@@ -140,6 +167,8 @@ def baylibre(request,slug):
     return render(request,'home/baylibre.html',context)
 
 def fundraisers(request):
-    fund=models.fundRaiser.objects.filter(show=True).exclude(title="primary")
-    context={'bay':bay,'fund':fund}
-    return render(request,'home/bay.html',context)
+    fund=models.fundRaiser.objects.filter(show=True).exclude(title="primary").filter(endlessFund=True)
+    fund2=models.fundRaiser.objects.filter(show=True).exclude(title="primary").filter(endlessFund=False)
+    bay=models.bay.objects.get(show=True)
+    context={'bay':bay,'fund1':fund,'fund2':fund2}
+    return render(request,'home/fundraisers.html',context)

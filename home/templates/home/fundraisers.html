@@ -1,9 +1,107 @@
 {% extends 'home/base.html' %}
-{% load static %}{%block body%}
+{% load static %}
+{% block bay_active %} class="active" {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'home/css/css.css' %}">
+{% endblock %}{%block body%}
 <div class="container-wrap">
     <br><br>
-<h1 style="padding: 30px;">La page que vous cherchez n'a pas ete retrouvee </h1>
 
-<br><br>
+    <div class="row">
+        <div class="col-xl-6 col-xxl-7">
+            <div class="" style="height: fit-content;align-items: left;">
+                <div class="card-header border-0 pb-0">
+                    <div>
+                        <h4 class="card-title mb-2">Lever de fond a fond defini</h4>
+                        <span class="fs-12">Donner pour une cause bien defini et aafniowq adfo iad ioad ioad </span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% for x in fund2 %}
+                    <a href="{% url 'baylibre' x.slug %}" style="color: inherit; width: 100%;">
+                        {% if x.iscomplete %}
+                        {%else%}
+
+                        <div class="progress default-progress">
+                            <div class="progress-bar bg-gradient-1 progress-animated"
+                                style="width: {{x.pourcentage}}%; height:20px;" role="progressbar">
+                                <span class="sr-only">{{x.pourcentage}}% Complete</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-end mt-2 pb-3 justify-content-between">
+                            <span style="font-size: large;">{{x.title}}</span>
+                            {%if x.endlessFund%}
+
+                            {%else%}
+                            {% if x.iscomplete %}
+                            <span class="fs-18"><span class="text-black pe-2">${{x.butArgent}}
+                                </span>/${{x.butArgent}}
+                            </span>
+                            {%else%}
+                            <span class="fs-18"><span class="text-black pe-2">${{x.argentActuel}}
+                                </span>/${{x.butArgent}} </span>
+                            {%endif%}
+                            {%endif%}
+                        </div>
+                        {%endif%}
+                    </a>
+                    <br><br>
+                    {%endfor%}
+                </div>
+            </div>
+
+        </div>
+
+        {%if fund2%}
+        <div class="col-xl-10 col-xxl-5">
+
+            <div class="" style="height: fit-content;">
+                <div class="card-header border-0 pb-0">
+                    <div>
+                        <h4 class="card-title mb-2">Lever de fond indefini</h4>
+                        <span class="fs-12">Donnerpour une cause , donnez pour la construction et autre cause daf ladf
+                            lad f</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% for x in fund1 %}
+                    <a href="{% url 'baylibre' x.slug %}" style="color: inherit; width: 100%;">
+                        {% if x.iscomplete %}
+                        {%else%}
+
+                        <div class="progress default-progress">
+                            <div class="progress-bar bg-gradient-1 progress-animated"
+                                style="width: {{x.pourcentage}}%; height:20px;" role="progressbar">
+                                <span class="sr-only">{{x.pourcentage}}% Complete</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-end mt-2 pb-3 justify-content-between">
+                            <span>{{x.title}}</span>
+                            {%if x.endlessFund%}
+
+                            {%else%}
+                            {% if x.iscomplete %}
+                            <span class="fs-18"><span class="text-black pe-2">${{x.butArgent}}
+                                </span>/${{x.butArgent}}
+                            </span>
+                            {%else%}
+                            <span class="fs-18"><span class="text-black pe-2">${{x.argentActuel}}
+                                </span>/${{x.butArgent}} </span>
+                            {%endif%}
+                            {%endif%}
+                        </div>
+                        {%endif%}
+                    </a>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+        {%else%}
+        <h2>Pas de lever de fonds en cours</h2>
+        {%endif%}
+
+    </div>
+
+    <br><br>
 </div>
 {%endblock%}

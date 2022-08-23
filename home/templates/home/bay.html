@@ -30,8 +30,8 @@
     <div id="fh5co-contact">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-                <h2>Vous nous aidez a aidez les autre</h2>
-                <p>Nous travaillons de concert avec la caumunautee pour aggrandir le travail de Dieu</p>
+                <h2>{{bay.intro_title}}</h2>
+                <p>{{bay.intro_subtitle}}</p>
             </div>
         </div>
 
@@ -47,10 +47,8 @@
                     </svg>
                 </span>
                 <div>
-                    <h3 class="text-white">Get managed by Dompet’s Virtual Assistant</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim </p>
-                    <a class="text-white" href="javascript:void(0);">Learn more >></a>
+                    <h3 class="text-white">{{bay.verse_title}}</h3>
+                    <p>{{bay.verse_text}}</p>
                 </div>
             </div>
         </div>
@@ -61,73 +59,75 @@
                 <div class="" style="height: fit-content;">
                     <div class="card-header border-0 pb-0">
                         <div>
-                            <h4 class="card-title mb-2">FundRaisers</h4>
-                            <span class="fs-12">Lorem ipsum dolor sit amet, consectetur</span>
+                            <h4 class="card-title mb-2">{{bay.fundraiser_title}}</h4>
+                            <span class="fs-12">{{bay.fundraiser_subtitle}}</span>
                         </div>
                     </div>
                     <div class="card-body">
-                            
                         {% for x in fund %}
                         <a href="{% url 'baylibre' x.slug %}" style="color: inherit; width: 100%;">
-                        {% if x.iscomplete %}
-                        {%else%}
-
-                        <div class="progress default-progress">
-                            <div class="progress-bar bg-gradient-1 progress-animated"
-                                style="width: {{x.pourcentage}}%; height:20px;" role="progressbar">
-                                <span class="sr-only">{{x.pourcentage}}% Complete</span>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-end mt-2 pb-3 justify-content-between">
-                            <span>{{x.title}}</span>
-                            {%if x.endlessFund%}
-
-                            {%else%}
                             {% if x.iscomplete %}
-                            <span class="fs-18"><span class="text-black pe-2">${{x.butArgent}} </span>/${{x.butArgent}}
-                            </span>
                             {%else%}
-                            <span class="fs-18"><span class="text-black pe-2">${{x.argentActuel}}
-                                </span>/${{x.butArgent}} </span>
+
+                            <div class="progress default-progress">
+                                <div class="progress-bar bg-gradient-1 progress-animated"
+                                    style="width: {{x.pourcentage}}%; height:20px;" role="progressbar">
+                                    <span class="sr-only">{{x.pourcentage}}% Complete</span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-end mt-2 pb-3 justify-content-between">
+                                <span>{{x.title}}</span>
+                                {%if x.endlessFund%}
+
+                                {%else%}
+                                {% if x.iscomplete %}
+                                <span class="fs-18"><span class="text-black pe-2">${{x.butArgent}}
+                                    </span>/${{x.butArgent}}
+                                </span>
+                                {%else%}
+                                <span class="fs-18"><span class="text-black pe-2">${{x.argentActuel}}
+                                    </span>/${{x.butArgent}} </span>
+                                {%endif%}
+                                {%endif%}
+                            </div>
                             {%endif%}
-                            {%endif%}
-                        </div>
-                        {%endif%}
-                    </a>
+                        </a>
                         {%endfor%}
                     </div>
                     <div class="card-footer border-0 pt-0" style="font-size:3rem ;">
-                        <a href="javascript:void(0);" class="btn btn-outline-primary d-block btn-lg">
-                            <h2>View all Fundraisers</h2>
+                        <a href="{% url 'fundraisers' %}" class="btn btn-outline-primary d-block btn-lg">
+                            <h2>{{bay.fundraiser_button}}</h2>
                         </a>
                     </div>
                 </div>
-            </div>{%endif%}
+            </div>
+            {%else%}
+            <h2>Pas de lever de fonds en cours</h2>
+            {%endif%}
             <div class="col-xl-6 col-xxl-7">
                 <div class="" style="height: fit-content;align-items: left;">
                     <div class="card-header d-flex flex-wrap border-0 pb-0">
                         <div class="me-auto mb-sm-0 mb-3">
-                            <h4 class="card-title mb-2">Give, and give </h4>
-                            <span class="fs-12">Lorem ipsum dolor sit amet, consectetur</span>
+                            <h4 class="card-title mb-2">{{bay.give_title}} </h4>
+                            <span class="fs-12">{{bay.give_subtitle}}</span>
                         </div>
 
 
                     </div>
                     <div class="card-body">
-                        <p> Give something special for the god Sake
-                            Participate to something greater than you
-                            Cause everytime you give you helps somebady that potentially will give it to you back
+                        <p> {{bay.give_text}}
                         </p>
-                    </div><a href="{% url 'baylibre' 'primary' %}" style="color: white ;"><button style="float: right;font-size: 3.5rem;color: white ; width: 50%;margin:20px 10px 10px 10px;padding: 10px 0;;box-shadow: 0px 0px 10px 4px rgba(68, 50, 85, 0.205); 
+                    </div>
+                    <div><a href="{% url 'baylibre' 'primary' %}" style="color: white ;"><button style="float: right;font-size: 3.5rem;color: white ; width: 50%;margin:20px 10px 10px 10px;padding: 10px 0;;box-shadow: 0px 0px 10px 4px rgba(68, 50, 85, 0.205); 
                 
-                ;" type="button" class="btn btn-info">Give <i style="color:white ;font-size: 2.5rem;"
-                                class="icon icon-heart"></i>
-                    </a>
+                ;" type="button" class="btn btn-info">{{bay.give_button}} <i style="color:white ;font-size: 2.5rem;"
+                                    class="icon icon-heart"></i>
+                        </a>
+                    </div>
                 </div>
+
             </div>
 
         </div>
-
     </div>
-</div>
-{%endblock%}
+    {%endblock%}

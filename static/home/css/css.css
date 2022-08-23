@@ -788,6 +788,15 @@ progress {
   flex: 0 0 auto;
   width: 100%; }
 
+  .tag{
+    color: gray; 
+    background-color:rgb(226, 242, 255);
+     margin:5px;
+      margin-left:0;
+      padding: 5px;
+      border-radius: 7px;
+  }
+
 .row-cols-2 > * {
   flex: 0 0 auto;
   width: 50%; }

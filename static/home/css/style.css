@@ -1388,3 +1388,12 @@ input[type="text"] {
   height: 100%;
 }
 /*# sourceMappingURL=style.css.map */
+
+.tag{
+  color: gray; 
+  background-color:rgb(226, 242, 255);
+   margin:5px;
+		margin-left:0;
+    padding: 5px;
+    border-radius: 7px;
+}

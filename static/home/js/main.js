@@ -148,7 +148,7 @@
 
 			var $this = $(this);
 			$this
-				.find('.dropdown')
+				.find('.dropdown-menu')
 				.css('display', 'block')
 				.addClass('animated-fast fadeInUpMenu');
 
@@ -986,5 +986,13 @@ Toastr
         });
 })(jQuery);
 
-console.log('hello world')
+
+function unhide(){
+    const menu=document.getElementById('tttt')
+    if(menu.style.display=="block"){
+        menu.style.display="none"
+    }else{
+    menu.style.display = "block"
+    }
+}
 

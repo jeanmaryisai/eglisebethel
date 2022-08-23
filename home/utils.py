@@ -1,5 +1,8 @@
 from http import client
+import re
+from turtle import title
 import moncashify
+from . import models
 
 def moncashPayment(id,money):
     client_id='5963fcd6da676836aa985d13ee53bef7'
@@ -8,3 +11,44 @@ def moncashPayment(id,money):
     payment = moncash.payment(id, money)
     url=payment.get_redirect_url()
     return url
+
+def ev(n):
+    evenement=models.evenement.objects.filter(show=True).order_by('startdate')
+    e=evenement[::-1]
+    n=n-1
+    return e[n]
+
+def matches(sermon):
+    sermons=models.Sermon.objects.all().exclude(title=sermon.title)
+    tag=sermon.tags.all()
+    tage=[]
+    for x in tag:
+        tage.append(x.title)
+    matches={}
+    for x in sermons:
+        ma=0
+        for y in x.tags.all():
+            if y.title in tage:
+                ma =ma +1
+        if ma>0:        
+            matches[x.title]=ma
+    sortedmatches=dict(sorted(matches.items(),key=lambda item:item[1],reverse=True))
+
+    lis=list(sortedmatches.keys())
+    li=[]
+    for x in lis:
+        li.append(models.Sermon.objects.get(title=x))
+    return {'list':li,'dict':sortedmatches}
+
+def matchOne(tag):
+    sermons=models.Sermon.objects.all()
+    sermon=[]
+    
+    for x in sermons:
+        tage=[]
+        for y in x.tags.all():
+            tage.append(y.title)
+        if tag in tage:
+            print(x.title)
+            sermon.append(x)
+    return sermon

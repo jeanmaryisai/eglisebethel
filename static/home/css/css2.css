@@ -684,6 +684,16 @@ s {
   margin-bottom: 0;
 }
 
+.tag{
+  color: gray; 
+  background-color:rgb(226, 242, 255);
+   margin:5px;
+		margin-left:0;
+    padding: 5px;
+    border-radius: 7px;
+  width: fit-content;
+}
+
 @media screen and (min-width: 0em) {
   .row .flex-sm-1,
   .row .flex-sm-2,

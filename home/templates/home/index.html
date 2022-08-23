@@ -19,8 +19,8 @@
                                            <div class="slider-text-inner">
                                                <h1>{{live.title}}</h1>
                                                 <h2>{{live.description}}, <a href="#" target="_blank">nous somme live !!!</h2>
-                                                <br><h2 id="count-down" data-time="{{live.startdate|date:'M d, Y h:m:s '}}">Live strats in 3 hours 26 minutes 30 secondes</h3>
-                                                <p><a class="btn btn-primary btn-demo popup-vimeo" href="#"> <i class="icon-play4"></i > <span id="linked">Regarder le live avec nous</span></a></p>
+                                                <br><h2 id="count-down" data-time="{{live.startdate|date:'M d, Y h:m:s: '}}">Live strats in 3 hours 26 minutes 30 secondes</h3>
+                                                <p><a class="btn btn-primary btn-demo popup-vimeo" href=""> <i class="icon-play4"></i > <span id="linked">Regarder le live avec nous</span></a></p>
                                            </div>
                                        </div>
                                    </div>
@@ -77,7 +77,7 @@
                                    <div class="slider-text-inner">
                                        <h1>{{hero.vid1.heading}}</h1>
                                         <h2>{{hero.vid1.submenu1}}, <a href="#" target="_blank">{{hero.vid1.submenu2}}</a></h2>
-                                        <p><a class="btn btn-primary btn-demo popup-vimeo" href="#"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
+                                        <p><a class="btn btn-primary btn-demo popup-vimeo" href="https://youtube.com"> <i class="icon-play4"></i> Watch Video</a> <a class="btn btn-primary btn-learn">Join us here! <i class="icon-arrow-right3"></i></a></p>
                                    </div>
                                </div>
                            </div>
@@ -175,7 +175,7 @@
                     <div class="desc">
                         <h3><a href="#">{{x.title}}</a></h3>
                         <p>{{x.description_bref}}</p>
-                        <a href="url ('{{x.slug}}')">Read More <i class="icon-arrow-right3"></i></a>
+                        <!-- <a href="url ('{{x.slug}}')">Read More <i class="icon-arrow-right3"></i></a> -->
                     </div>
                 </div>
             </div>
@@ -188,7 +188,7 @@
             <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
                 <h2>{{Sermons_main_section.title}}</h2>
                 <p>{{Sermons_main_section.submenu}}</p>
-                <h4><a href="#" target="_blank">Tout voir <i class="icon-arrow-right3"></i></a></h4>
+                <h4><a href="{% url 'sermons' -1 %}" target="_blank">Tout voir <i class="icon-arrow-right3"></i></a></h4>
             </div>
         </div>
         <div class="row">
@@ -273,26 +273,26 @@
         <div class="row">
             <div class="col-md-4 animate-box">
                 <div class="events-entry">
-                    <span class="date">{{evenement_main_page.e1.startdate}}</span>
-                    <h3><a href="#">{{evenement_main_page.e1.title}}</a></h3>
-                    <p>{{evenement_main_page.e1.description}}</p>
-                    <a href="{% url 'singlevents' evenement_main_page.e1.slug %}">Read More <i class="icon-arrow-right3"></i></a>
+                    <span class="date">{{e1.startdate}}</span>
+                    <h3><a href="#">{{e1.title}}</a></h3>
+                    <p>{{e1.description}}</p>
+                    <a href="{% url 'singlevents' e1.slug %}">Read More <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
             <div class="col-md-4 animate-box">
                 <div class="events-entry">
-                    <span class="date">{{evenement_main_page.e2.startdate}}</span>
-                    <h3><a href="#">{{evenement_main_page.e2.title}}</a></h3>
-                    <p>{{evenement_main_page.e2.description}}</p>
-                    <a href="{% url 'singlevents' evenement_main_page.e2.slug %}">Read More <i class="icon-arrow-right3"></i></a>
+                    <span class="date">{{e2.startdate}}</span>
+                    <h3><a href="#">{{e2.title}}</a></h3>
+                    <p>{{e2.description}}</p>
+                    <a href="{% url 'singlevents' e2.slug %}">Read More <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
             <div class="col-md-4 animate-box">
                 <div class="events-entry">
-                    <span class="date">{{evenement_main_page.e3.startdate}}</span>
-                    <h3><a href="#">{{evenement_main_page.e3.title}}</a></h3>
-                    <p>{{evenement_main_page.e3.description}}</p>
-                    <a href="{% url 'singlevents' evenement_main_page.e3.slug %}">Read More <i class="icon-arrow-right3"></i></a>
+                    <span class="date">{{e3.startdate}}</span>
+                    <h3><a href="#">{{e3.title}}</a></h3>
+                    <p>{{e3.description}}</p>
+                    <a href="{% url 'singlevents' e3.slug %}">Read More <i class="icon-arrow-right3"></i></a>
                 </div>
             </div>
         </div>

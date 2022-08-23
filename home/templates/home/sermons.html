@@ -6,6 +6,7 @@ Sermons
 {% block sermon_active %} class='active'{% endblock %}
 {% block body %}
 <div class="container-wrap">
+	{%if sermonJ%}{%else%}
 	<aside id="fh5co-hero">
 		<div class="flexslider">
 			<ul class="slides">
@@ -25,6 +26,7 @@ Sermons
 			  </ul>
 		  </div>
 	</aside>
+	
 	<div id="fh5co-sermon">
 		<div class="row animate-box">
 			<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
@@ -32,13 +34,67 @@ Sermons
 				<p>{{page.submenu}}</p>
 			</div>
 		</div>
+		{%endif%}
+		{%if sermonJ%}
+		
+		<div>
+			<iframe width="100%" height="500" src="{{sermonJ.youtubeurl}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
+		<br>
+		<div style="margin:20px ;">
+		<h3>{{sermonJ.title}}</h3>
+		{%for x in sermonJ.tags.all%}
+		<a href="{%url 'sermons' x.title|add:'-1' %}">
+		<small class="tag">    #{{x.title}}</small>
+		</a>
+		{%endfor%}
+		<br>
+		<span>{{sermonJ.orator}}</span>
+		<br><br>
+		
+		<h3>Related sermons</h3>
 		<div class="row">
-			{% for x in sermon %}
-			<div class="col-md-4 text-center animate-box">
+			{% for x in list %}
+			<div class="col-md-4 text-center animate-box" >
 				<div class="sermon-entry">
 					<div class="sermon" style="background-image: url({{x.tumbnail.url}});">
 						<div class="play">
-							<a class="popup-vimeo" href="x.youtubeurl"><i class="icon-play3"></i></a>
+							<a href="{{x.slug}}"><i class="icon-play3"></i></a>
+						</div>
+					</div>
+					<h3>{{x.title}}</h3>
+					<span>{{x.orator}}</span>
+				</div>
+			</div>
+
+			{% endfor %}	
+		</div>
+		<br>
+		<h3>Tout les sermons</h3>
+		{%endif%}
+		<div class="dropdown">
+			<button onclick="unhide()" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+			  Themes
+			</button>
+			<ul class="dropdown-menu" id="tttt">
+				<li><a class="dropdown-item" href="{% url 'sermons' -1 %}">Tout</a></li>
+				{%for t in tags%}
+			  <li><a class="dropdown-item" href="{% url 'sermons' t.title|add:'-1' %}">{{t.title}}</a></li>
+			  
+				{%endfor%}
+			</ul>
+		  </div>
+		<div class="row">
+			{%if tag%}
+			<h3 class="tag" style="margin-left: 15px;">#{{tag}}</h3>
+			<br>
+			{%endif%}
+			{% for x in sermon %}
+			<div class="col-md-4 text-center animate-box" >
+				<div class="sermon-entry">
+					<div class="sermon" style="background-image: url({{x.tumbnail.url}});">
+						<div class="play">
+							<a href="{{x.slug}}"><i class="icon-play3"></i></a>
 						</div>
 					</div>
 					<h3>{{x.title}}</h3>
@@ -47,7 +103,16 @@ Sermons
 			</div>
 
 			{% endfor %}
+			{%if tag%}
+			<a href="{% url 'sermons' -1 %}"  style="margin-left: 15px;"><h4>voir tout <i class="icon-arrow-right3"></i></h4></a>	
+			{%endif%}
 		</div>
 	</div>
-</div>             
+	</div>
+</div>
+
 {% endblock %}
+{%block js%}
+<script src="{% static 'home/js/yt.js'%}"></script>
+
+{%endblock%}

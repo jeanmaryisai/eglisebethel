@@ -1,5 +1,5 @@
 setInterval(()=>{
-    console.log('hi')
+    
 	const divcounter=document.getElementById('count-down')
     const linked=document.getElementById('linked')
     const time= divcounter.dataset['time']
@@ -9,11 +9,12 @@ setInterval(()=>{
 
     // create new Date object for different city
     // using supplied offset
-    var now = new Date(utc + (3600000*'-4'))
-
+    var now = new Date(utc + (3600000*'-16'+(60000*'7')))
+    //time2=time2+50000000
+    now=Date.parse(now)
     const nowd= new Date().getTime()
     const diff= time2-now
-    const d= Math.floor((time2/ (1000 * 60 * 60 *24)) - (now / (1000 * 60 * 60*24 )))
+    const d= Math.floor(diff/ (1000 * 60 * 60 *24))
     const h= Math.floor(((time2/ (1000 * 60 * 60)) - (now / (1000 * 60 * 60 )))%24)
     const m= Math.floor(((time2/ (1000 * 60 )) - (now / (1000 * 60  )))%60)
     const s= Math.floor(((time2/ (1000)) - (now / (1000)))%60)

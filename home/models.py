@@ -1,23 +1,31 @@
 
 import decimal
 from email.mime import image
+from lib2to3.pgen2.token import SLASHEQUAL
 from logging import raiseExceptions
 from ssl import Purpose
 from django.db import models
 import datetime
 import pytz
 from django.utils.dateparse import parse_duration
+from . import utils
+
 
 #from datetime import datetime, date, time, timedelta
 # Create your models here.
 
+class Img(models.Model):
+    description=models.TextField(null=True)
+    img=models.ImageField()
+    def __str__(self):
+        return self.description
 class heroSingle(models.Model):
     name= models.CharField(max_length=39,unique=True)
     heading= models.TextField()
     submenu1= models.TextField()
     submenu2= models.CharField(max_length=50)
-    backgroud=models.ImageField(null=True, upload_to='media/images/%y')
-    video=models.FileField(null=True, upload_to='media/videos/%y')
+    backgroud=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
+    video=models.FileField(null=True)
     def __str__ (self):
         return self.name
 
@@ -97,7 +105,7 @@ class statSection(models.Model):
 class serviceSingle(models.Model):
     title= models.CharField(max_length=50,unique=True)
     slug= models.SlugField(unique=True)
-    imageBackground=models.FileField(null=True, upload_to='media/images/%y')
+    imageBackground=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
     description_bref=models.TextField()
     description= models.TextField()
     horraire=models.CharField(max_length=15)
@@ -127,16 +135,24 @@ class Service(models.Model):
 
         super(Service, self).save(*args, **kwargs)
 
-class Sermon(models.Model):
-    title= models.CharField(max_length=30,unique=True)
-    orator=models.CharField(max_length=20)
-    tumbnail= models.FileField(upload_to='media/images/%y')
-    youtubeurl=models.TextField()
-    show=models.BooleanField(default=True, null=True)
-        
+class tag(models.Model):
+    title=models.CharField(max_length=50,unique=True)
 
     def __str__ (self):
         return self.title
+class Sermon(models.Model):
+    title= models.CharField(max_length=30,unique=True)
+    slug=models.SlugField(max_length=40,unique=True,null=True)
+    orator=models.CharField(max_length=20)
+    tumbnail= models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
+    youtubeurl=models.TextField()
+    show=models.BooleanField(default=True, null=True)
+    tags=models.ManyToManyField(tag)
+        
+    def __str__ (self):
+        return self.title
+
+
 
 class Sermons_main_section(models.Model):
     title=models.CharField(max_length=30,unique=True, default="Nos Sermons")
@@ -145,7 +161,7 @@ class Sermons_main_section(models.Model):
     s1= models.ForeignKey(Sermon,on_delete=models.CASCADE,related_name='s1')
     s2= models.ForeignKey(Sermon,on_delete=models.CASCADE,related_name='s2')
     s3= models.ForeignKey(Sermon,on_delete=models.CASCADE,related_name='s3')
-    background=models.FileField(upload_to='media/images/%y', null=True)
+    background=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
     def __str__ (self):
         return self.title
     def save(self, *args, **kwargs):
@@ -190,10 +206,6 @@ class verset_main_page(models.Model):
             
         super(verset_main_page, self).save(*args, **kwargs)
 
-
-class Img(models.Model):
-    description=models.TextField(null=True)
-    img=models.ImageField(upload_to='media/images/%y')
 class evenement(models.Model):
     
     title=models.CharField(max_length=50,unique=True)
@@ -236,11 +248,8 @@ class evenement(models.Model):
 class evenement_main_page(models.Model):
     title=models.CharField(max_length=30,unique=True)
     subtitle=models.TextField()
-    e1=models.ForeignKey(evenement,on_delete=models.CASCADE,related_name='e1')
-    e2=models.ForeignKey(evenement,on_delete=models.CASCADE,related_name='e2')
-    e3=models.ForeignKey(evenement,on_delete=models.CASCADE,related_name='e3')
     show=models.BooleanField(default=True)
-    background=models.FileField(upload_to='media/images/%y', null=True)
+    background=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
 
     def __str__ (self):
         return self.title
@@ -283,7 +292,7 @@ class secteur(models.Model):
     title=models.CharField(max_length=40,null=True,blank=True,unique=True)
     description= models.TextField(null=True,blank=True,unique=True,default= 'this is the default populated description')
     slug=models.SlugField(null=True,blank=True)
-    tumbail= models.FileField(null=True ,upload_to='media/images/%y')
+    tumbail= models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
     titit= models.CharField(max_length=50,null=True,blank=True)
     show=models.BooleanField(default=True, null=True)
         
@@ -292,7 +301,7 @@ class secteur(models.Model):
 
 class contact_page(models.Model):
     title=models.CharField(max_length=30, default='standard')
-    hero_img= models.FileField(upload_to='media/images/%y')
+    hero_img=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
     title_hero=models.CharField(max_length=30, default='Contactez Nous')
     subtile_hero= models.TextField(default="Laissez nous un message, vos demande de prieres.")
     title=models.CharField(max_length=30, default='Contactez Nous')
@@ -321,7 +330,7 @@ class contact_page(models.Model):
 
 class about_page(models.Model):
     title=models.CharField(max_length=30, default='standard')
-    hero_img= models.FileField(upload_to='media/images/%y')
+    hero_img=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
     title_hero=models.CharField(max_length=30, default='A propos de nous')
     subtile_hero= models.TextField(default="Nous somme une eglise protestante situe en Haiti")
     show=models.BooleanField(default=True)
@@ -356,7 +365,7 @@ class wrapper_about_page(models.Model):
 
 class live(evenement):
     link=models.URLField()
-    tumnail=models.ImageField(upload_to='media/images/%y',null=True)
+    backgroud=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
     autoclosed=models.BooleanField(default=False, null=True)
 class bay(models.Model):
     title=models.CharField(default="Standard1",max_length=50)
@@ -364,6 +373,19 @@ class bay(models.Model):
     subtitle_hero= models.TextField(null=True)
     show=models.BooleanField(default=True)
     hero_background=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True,related_name="hero")
+    intro_title=models.CharField(null=True ,max_length=50)
+    intro_subtitle=models.TextField(null=True)
+    verse_title=models.TextField(null=True)
+    verse_text=models.TextField(null=True)
+    fundraiser_title=models.TextField(null=True)
+    fundRaiser_subtitle=models.TextField(null=True)
+    fundraiser_button=models.CharField(max_length=50, null=True)
+    give_title=models.TextField(null=True)
+    give_subtitle=models.CharField(max_length=50, null=True)
+    give_text=models.TextField(null=True)
+    give_button=models.CharField(max_length=50, null=True)
+
+
     def save(self, *args, **kwargs):
         if self.show== True:
             self.show= False
