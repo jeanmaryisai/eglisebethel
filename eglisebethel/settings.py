@@ -137,4 +137,11 @@ EMAIL_PORT= '587'
 EMAIL_HOST_USER='jeanmaryisai@gmail.com'
 EMAIL_HOST_PASSWORD='46B5863CB0D083F266E0609BBDD71538380F'
 EMAIL_USE_TLS=True
-# EMAIL_USE_SSL= False
+EMAIL_USE_SSL= False
+
+# EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST= 'smtp.gmail.com'
+# EMAIL_PORT= '587'
+# EMAIL_HOST_USER='alciusdukens@gmail.com'
+# EMAIL_HOST_PASSWORD='DukeRuthie'
+# EMAIL_USE_TLS=True

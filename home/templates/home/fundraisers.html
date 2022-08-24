@@ -92,6 +92,9 @@
                         </div>
                         {%endif%}
                     </a>
+                    {%empty%}
+                    <h2>Pas de lever de fond pour l'instant</h2>
+                    <br><a href="{%url 'bay' %}"><h4>Clicker ici  pour retourner a la section de Don</h4></a>
                     {%endfor%}
                 </div>
             </div>

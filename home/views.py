@@ -1,5 +1,7 @@
 from http.client import HTTPResponse
+import imp
 import json
+from pickle import EMPTY_TUPLE
 from tabnanny import check
 from turtle import title
 from django.shortcuts import redirect
@@ -14,6 +16,10 @@ from django.core.mail import send_mail
 from datetime import date
 from decimal import Decimal
 from . import utils
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.template.loader import render_to_string
+from django.contrib import admin
 # Create your views here.
 def home (request):
     try:
@@ -55,29 +61,29 @@ def contact(request):
     contact = models.contact_page.objects.get(show=True)
     context={'contact':contact,'error':errorpost}
     if request.method=="POST":
-        
         try:
             name= request.POST['name']
             msj= request.POST['message']
             email= request.POST['email']
-            
             if msj != '':
-                msj= f'{name} vous a laissez un message... <br> {msj}'
+                from django.contrib.auth import get_user_model
+                User = get_user_model()
+                users = User.objects.all().filter(is_staff=True)
+                emails=[]
+                for i in users:
+                    emails.append(i.email)
+                msj= f'{name} vous a laissez un message... {msj}'
                 send_mail('On vous laissez un message sur votre blog '
                     ,msj
                     ,'jeanmaryisai@gmail.com'
-                    ,['jeanmaryisai@gmail.com',]
+                    ,emails
                     ,
                 )
                 errorpost=False
+                context['name']=name
+                return render(request,'home/contact.html',context)
         except:
             pass
-        context={'contact':contact,'error':errorpost,'name':name}
-        return render(request,'home/contact.html',context)
-        
-            
-    contact = models.contact_page.objects.get(show=True)
-    context={'contact':contact,'error':errorpost}
     return render(request,'home/contact.html',context)
 
 def about(request):

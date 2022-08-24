@@ -42,6 +42,8 @@ Evennements
 					<a href="{% url 'singlevents' x.slug %}">Read More <i class="icon-arrow-right3"></i></a>
 				</div>
 			</div>
+			{%empty%}
+			<h2>Pas d'evenements encore enregistrer</h2>
 			{% endfor %}
 			
 		</div>

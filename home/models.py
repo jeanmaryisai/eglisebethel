@@ -8,6 +8,8 @@ from django.db import models
 import datetime
 import pytz
 from django.utils.dateparse import parse_duration
+
+from home.views import events
 from . import utils
 
 
@@ -19,6 +21,13 @@ class Img(models.Model):
     img=models.ImageField()
     def __str__(self):
         return self.description
+
+class Img2(models.Model):
+    description=models.TextField(null=True)
+    img=models.ImageField()
+    def __str__(self):
+        return self.description
+
 class heroSingle(models.Model):
     name= models.CharField(max_length=39,unique=True)
     heading= models.TextField()
@@ -106,9 +115,7 @@ class serviceSingle(models.Model):
     title= models.CharField(max_length=50,unique=True)
     slug= models.SlugField(unique=True)
     imageBackground=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
-    description_bref=models.TextField()
     description= models.TextField()
-    horraire=models.CharField(max_length=15)
     show= models.BooleanField(default=True)
 
     def __str__ (self):
@@ -151,9 +158,6 @@ class Sermon(models.Model):
         
     def __str__ (self):
         return self.title
-
-
-
 class Sermons_main_section(models.Model):
     title=models.CharField(max_length=30,unique=True, default="Nos Sermons")
     submenu=models.TextField(default="Profitez de nos Sermons")
@@ -214,7 +218,7 @@ class evenement(models.Model):
     description=models.CharField(max_length=100,null=True)
     isprimaray=models.BooleanField(default=False,null=True)
     estimatedDuration=models.DurationField(null=True)
-    album=models.ManyToManyField(Img,null=True,blank=True)
+    album=models.ManyToManyField(Img2,null=True,blank=True)
     show=models.BooleanField(default=True)
     cover=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True,related_name="Backgroud")
     fulldescription=models.TextField(null=True)
@@ -295,6 +299,7 @@ class secteur(models.Model):
     tumbail= models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
     titit= models.CharField(max_length=50,null=True,blank=True)
     show=models.BooleanField(default=True, null=True)
+    events=models.ManyToManyField(evenement)
         
     def __str__ (self):
         return self.title
@@ -310,7 +315,7 @@ class contact_page(models.Model):
     address=models.CharField(max_length=50, default='Rue Louverture Rebecca prolongee #32')
     telphone=models.CharField(max_length=30, default='+509 43 89 0007')
     email=models.EmailField()
-    siteweb=models.CharField(max_length=20)
+    siteweb=models.CharField(max_length=50)
     show=models.BooleanField(default=True)
     def __str__ (self):
         return self.title
