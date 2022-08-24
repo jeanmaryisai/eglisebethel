@@ -34,7 +34,7 @@ class heroSingle(models.Model):
     submenu1= models.TextField()
     submenu2= models.CharField(max_length=50)
     backgroud=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
-    video=models.FileField(null=True)
+    video=models.URLField(null=True)
     def __str__ (self):
         return self.name
 

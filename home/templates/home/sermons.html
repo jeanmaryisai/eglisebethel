@@ -52,7 +52,7 @@ Sermons
 		<span>{{sermonJ.orator}}</span>
 		<br><br>
 		
-		<h3>Related sermons</h3>
+		<h3>Sermons similaiare</h3>
 		<div class="row">
 			{% for x in list %}
 			<div class="col-md-4 text-center animate-box" >
@@ -66,7 +66,8 @@ Sermons
 					<span>{{x.orator}}</span>
 				</div>
 			</div>
-
+			{%empty%}
+			<h3> Pas de sermon similaire trouvee</h3>
 			{% endfor %}	
 		</div>
 		<br>
@@ -101,7 +102,8 @@ Sermons
 					<span>{{x.orator}}</span>
 				</div>
 			</div>
-
+			{%empty%}
+			<h2>Pas de sermons encore disponible</h2>
 			{% endfor %}
 			{%if tag%}
 			<a href="{% url 'sermons' -1 %}"  style="margin-left: 15px;"><h4>voir tout <i class="icon-arrow-right3"></i></h4></a>	
