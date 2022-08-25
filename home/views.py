@@ -1,25 +1,12 @@
-from http.client import HTTPResponse
-import imp
+
 import json
-from pickle import EMPTY_TUPLE
-from tabnanny import check
-from turtle import title
 from django.shortcuts import redirect
-import re
-from unicodedata import decimal
-from venv import create
-from django import http
-import django
 from django.shortcuts import render
 from . import models
 from django.core.mail import send_mail
-from datetime import date
 from decimal import Decimal
 from . import utils
-from django.core.mail import EmailMessage
-from django.conf import settings
-from django.template.loader import render_to_string
-from django.contrib import admin
+
 # Create your views here.
 def home (request):
     try:
@@ -84,7 +71,8 @@ def contact(request):
                 return render(request,'home/contact.html',context)
         except:
             pass
-    return render(request,'home/contact.html',context)
+    else:
+        return render(request,'home/contact.html',context)
 
 def about(request):
     secteur_main=models.secteur_main.objects.get(show=True)
