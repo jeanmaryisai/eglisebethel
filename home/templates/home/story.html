@@ -1,0 +1,47 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %}
+A propos de Nous
+{% endblock %}
+{% block about_active %}class='active'{% endblock %}
+{% block body %}
+<div class="container-wrap">
+    <aside id="fh5co-hero">
+        <div class="flexslider">
+            <ul class="slides">
+                <li style="background-image: url({{about.hero_img.img.url}}); height: 300px;">
+                    <div class="overlay" style="display:none ;"></div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3 text-center slider-text">
+                                <div class="slider-text-inner">
+                                    <h1>{{about.title_hero}}</h1>
+                                    <h2>{{about.subtile_hero}}</a></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <div class="container" style="width:100%;">
+        <h1>Notre Histoire</h1>
+        {% for x in story %}
+            {%if x.title%}
+                <br>
+                <h4>{{x.title}}</h4>
+            {%endif%}
+            {%if x.types.name == "note"%}
+                <blockquote>
+            {%endif%}
+
+                    <p>{{x.text}}</p>
+            {%if x.types.name == "note"%}
+                </blockquote>
+            {%endif%}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

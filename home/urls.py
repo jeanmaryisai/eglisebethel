@@ -12,4 +12,6 @@ urlpatterns = [path('', views.home, name='home'),
                 path('baylibre/<slug:slug>', views.baylibre, name='baylibre'),
                 path('contact', views.contact, name='contact'),
                 path('fundraisers', views.fundraisers, name='fundraisers'),
+                path('story', views.story, name='story'),
+
 ]

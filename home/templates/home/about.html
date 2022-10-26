@@ -28,10 +28,10 @@ A propos de Nous
 		<div id="fh5co-about">
 			<div class="row">
 				<div class="col-md-4">
-					<h3>Verset quotidien</h3>
+					<h3>Notre histoire</h3>
 					<blockquote class="dailyVerse">
-						<p>&ldquo;{{verset.verset}}&rdquo;</p>
-						<span>{{verset.ref}}</span>
+						<p>&ldquo; {{p.text | slice:150}} ....&rdquo;</p>
+						<span><a href="{% url 'story' %}">Read More <i class="icon-arrow-right3"></i></a></span>
 					</blockquote>
 				</div>
 				{% for x in wrapper %}
@@ -40,7 +40,7 @@ A propos de Nous
 					<p>{{x.paragraph}}</p>
 					<ul class="ministries-list">
 					{% for y in x.wrapper_about_page.all %}
-					<li><i class="icon-check"></i>y.title</li>
+					<li><i class="icon-check"></i>{{y.title}}</li>
 					{% endfor %}
 				</ul>
 					</div>

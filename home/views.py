@@ -9,6 +9,7 @@ from . import utils
 
 # Create your views here.
 def home (request):
+    utils.instantiateAll()
     try:
         live=models.live.objects.all().filter(show=True)
     except:
@@ -70,19 +71,25 @@ def contact(request):
                 context['name']=name
                 return render(request,'home/contact.html',context)
         except:
-            pass
+            return render(request,'home/contact.html',context)
     else:
         return render(request,'home/contact.html',context)
 
 def about(request):
     secteur_main=models.secteur_main.objects.get(show=True)
     secteur=models.secteur.objects.all
-    verset_main_page=models.verset_main_page.objects.get(show=True)
     about=models.about_page.objects.get(show=True)
     wrapper=models.wrapper_about_page.objects.all
+    story=models.story.objects.get(show=True)
+    paragraph=10
+    try:
+        paragraph=story.paragraph_set.all().get(apercu=True)
+    except:
+        paragraph=story.paragraph_set.all().order_by('rank').first()
+    
     context={'about':about,'secteur_main':secteur_main,
     'secteur':secteur,
-    'wrapper':wrapper,'verset':verset_main_page.v1}
+    'wrapper':wrapper,'p':paragraph}
     return render(request,'home/about.html',context)
 
 def events(request):
@@ -167,3 +174,10 @@ def fundraisers(request):
     bay=models.bay.objects.get(show=True)
     context={'bay':bay,'fund1':fund,'fund2':fund2}
     return render(request,'home/fundraisers.html',context)
+
+def story(request):
+    about=models.about_page.objects.get(show=True)
+    story=models.story.objects.get(show=True)
+    paragraph=story.paragraph_set.all().order_by('rank')
+    context={'about':about,'story':paragraph,}
+    return render(request,'home/story.html',context)

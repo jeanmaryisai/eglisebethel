@@ -9,21 +9,21 @@ contactez nous
 	<aside id="fh5co-hero">
 		<div class="flexslider">
 			<ul class="slides">
-			   <li style="background-image: url({{contact.hero_img.img.url}});">
-				   <div class="overlay"></div>
-				   <div class="container-fluid">
-					   <div class="row">
-						   <div class="col-md-6 col-md-offset-3 text-center slider-text">
-							   <div class="slider-text-inner">
-								   <h1>{{contact.title_hero}}</h1>
+				<li style="background-image: url({{contact.hero_img.img.url}});">
+					<div class="overlay"></div>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-6 col-md-offset-3 text-center slider-text">
+								<div class="slider-text-inner">
+									<h1>{{contact.title_hero}}</h1>
 									<h2>{{contact.subtile_hero}}</h2>
-							   </div>
-						   </div>
-					   </div>
-				   </div>
-			   </li>
-			  </ul>
-		  </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
 	</aside>
 	<div id="fh5co-contact">
 		<div class="row animate-box">
@@ -44,42 +44,47 @@ contactez nous
 			</div>
 			<div class="col-md-7 col-md-pull-2 animate-box">
 
-				
+
 				<div class="row">
-					{% if name  %}
+
+					{% if name %}
 					<h2>Merci de nous avoir ecris {{name}}</h2>
-					<p>Nous esperons que vous nous visiterai merci beaucoup a vous, vos supports comptesnt beaucoup pour nous.</p>
+					<p>Nous esperons que vous nous visiterai merci beaucoup a vous, vos supports comptesnt beaucoup pour
+						nous.</p>
 					{%else%}
+					
 					<form action="" method="post">
+						<h3 style="margin:20px ;">
+							{%if error%}Nous avons du mal a traiter votre requete. Priere de reessayer{%endif%}
+						</h3>
 						{% csrf_token %}
-					<div class="col-md-6">
-						<div class="form-group">
-							<input type="text" name="name" class="form-control" placeholder="Name" required>
+						<div class="col-md-6">
+							<div class="form-group">
+								<input type="text" name="name" class="form-control" placeholder="Name" required>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<input type="email" name='email' class="form-control" placeholder="Email" required>
+						<div class="col-md-6">
+							<div class="form-group">
+								<input type="email" name='email' class="form-control" placeholder="Email" required>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="form-group">
-							<input type="textarea" class="form-control" required name="message" cols="30" rows="7" placeholder="Message"></input>
+						<div class="col-md-12">
+							<div class="form-group">
+								<input type="textarea" class="form-control" required name="message" cols="30" rows="7"
+									placeholder="Message"></input>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="form-group">
-							<input type="submit" id="btn" value="Envoyee" class="btn btn-primary btn-modify">
+						<div class="col-md-12">
+							<div class="form-group">
+								<input type="submit" id="btn" value="Envoyee" class="btn btn-primary btn-modify">
+							</div>
 						</div>
-					</div>
 					</form>
 					{%endif%}
 				</div>
-			
+
 			</div>
 		</div>
 	</div>
-</div>     
+</div>
 {% endblock %}
-
-

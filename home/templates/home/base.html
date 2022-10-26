@@ -11,8 +11,8 @@
 
     </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="//" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	<meta name="description" content="Site officiel de la 3eme eglise de Dieu de Petion-Ville, Haiti(Bethel)" />
+	<meta name="keywords" content="eglise,church,gospel,evangile,Bethel,haiti,Petion-Ville,online,bay,bondye,mirak,miracle" />
 	<meta name="author" content="isaijeanmary.online" />
 
   	<!-- Facebook and Twitter integration -->
@@ -119,6 +119,7 @@
 					</div><!-- .section-heading ends -->
 	
 					<div class="time-location__time">
+						{%block horraire%}{%endblock%}
 	
 					  <div class="info">
 						<div class="day bold">Sunday:</div>
@@ -131,7 +132,7 @@
 	
 					  <div class="info">
 						<div class="location bold">Location:</div>
-						<div class="location-info"><span>Rue louverture #32 adfjkljddc dfa dfa</span></div>
+						<div class="location-info"><span>{%block address%}{%endblock%}</span></div>
 					  </div>
 	
 					</div><!-- .time-location__time ends -->

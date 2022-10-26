@@ -4,12 +4,12 @@ from email.mime import image
 from lib2to3.pgen2.token import SLASHEQUAL
 from logging import raiseExceptions
 from ssl import Purpose
+from tkinter import CASCADE
+from unicodedata import name
 from django.db import models
 import datetime
 import pytz
 from django.utils.dateparse import parse_duration
-
-from home.views import events
 from . import utils
 
 
@@ -22,12 +22,6 @@ class Img(models.Model):
     def __str__(self):
         return self.description
 
-class Img2(models.Model):
-    description=models.TextField(null=True)
-    img=models.ImageField()
-    def __str__(self):
-        return self.description
-
 class heroSingle(models.Model):
     name= models.CharField(max_length=39,unique=True)
     heading= models.TextField()
@@ -35,6 +29,7 @@ class heroSingle(models.Model):
     submenu2= models.CharField(max_length=50)
     backgroud=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
     video=models.URLField(null=True)
+    
     def __str__ (self):
         return self.name
 
@@ -158,6 +153,9 @@ class Sermon(models.Model):
         
     def __str__ (self):
         return self.title
+
+
+
 class Sermons_main_section(models.Model):
     title=models.CharField(max_length=30,unique=True, default="Nos Sermons")
     submenu=models.TextField(default="Profitez de nos Sermons")
@@ -218,7 +216,7 @@ class evenement(models.Model):
     description=models.CharField(max_length=100,null=True)
     isprimaray=models.BooleanField(default=False,null=True)
     estimatedDuration=models.DurationField(null=True)
-    album=models.ManyToManyField(Img2,null=True,blank=True)
+    album=models.ManyToManyField(Img)
     show=models.BooleanField(default=True)
     cover=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True,related_name="Backgroud")
     fulldescription=models.TextField(null=True)
@@ -299,7 +297,6 @@ class secteur(models.Model):
     tumbail= models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
     titit= models.CharField(max_length=50,null=True,blank=True)
     show=models.BooleanField(default=True, null=True)
-    events=models.ManyToManyField(evenement)
         
     def __str__ (self):
         return self.title
@@ -315,7 +312,7 @@ class contact_page(models.Model):
     address=models.CharField(max_length=50, default='Rue Louverture Rebecca prolongee #32')
     telphone=models.CharField(max_length=30, default='+509 43 89 0007')
     email=models.EmailField()
-    siteweb=models.CharField(max_length=50)
+    siteweb=models.CharField(max_length=20)
     show=models.BooleanField(default=True)
     def __str__ (self):
         return self.title
@@ -361,7 +358,7 @@ class li_subtitle_about(models.Model):
         return self.title
     
 class wrapper_about_page(models.Model):
-    wrapper_about_page=models.ManyToManyField(li_subtitle_about,blank=True)
+    wrapper_about_page=models.ManyToManyField(li_subtitle_about)
     title=models.CharField(max_length=100)
     paragraph=models.TextField(null=True)
 
@@ -408,7 +405,7 @@ class bay(models.Model):
 
 class fundRaiser(models.Model):
     title=models.CharField(max_length=50, unique=True)
-    butArgent=models.DecimalField(decimal_places=2,max_digits=20)
+    butArgent=models.DecimalField(decimal_places=2,max_digits=20,default=0)
     slug=models.CharField(max_length=60,null=True)
     startupDate=models.DateField(auto_now=True)
     show=models.BooleanField(default=True, null=True)
@@ -456,3 +453,93 @@ class participation(models.Model):
     isMember= models.BooleanField(null=True)
     def __str__(self):
         return self.name
+
+class Link(models.Model):
+    name=models.CharField(max_length=30)
+    link=models.URLField()
+    def __str__(self):
+        return self.name
+
+class Horaires(models.Model):
+    nom_service=models.CharField(max_length=50)
+    horaire=models.CharField(max_length=20)
+    def __str__(self):
+        return self.name
+
+
+class infoGeneral(models.Model):
+    name=models.CharField(max_length=30,default='Stantard')
+    links=models.ManyToManyField(Link)
+    horaires=models.ManyToManyField(Horaires)
+    address=models.TextField()
+    def __str__(self):
+        return self.name
+
+class article(models.Model):
+    title=models.CharField(max_length=30)
+    def __str__(self) -> str:
+        return self.title
+    show=models.BooleanField(default=True)
+    @property
+    def isStory():
+        return False
+
+class typeParagraph(models.Model):
+    name=models.CharField(max_length=30)
+    def __str__(self) -> str:
+        return self.name
+
+class paragraph(models.Model):
+    name=models.CharField(max_length=30)
+    show=models.BooleanField(default=True)
+    text=models.TextField(default='Type the content here')
+    rank=models.IntegerField()
+    title=models.TextField(null=True,blank=True)
+    apercu=models.BooleanField(default=False)
+    blank_line_after=models.BooleanField(default=True)
+    types=models.ForeignKey(typeParagraph,on_delete=models.CASCADE)
+    article=models.ForeignKey(article ,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if self.show== True:
+            self.show= False
+            try:
+                heros= paragraph.objects.get(show=True)
+                heros.show=False
+                heros.save()
+            except:
+                pass
+            self.show=True
+        
+        if self.apercu== True:
+            self.apercu= False
+            try:
+                heros= paragraph.objects.filter(article_id=self.article.id).get(apercu=True)
+                heros.apercu=False
+                heros.save()
+            except:
+                pass
+            self.apercu=True
+            
+        super(paragraph, self).save(*args, **kwargs)
+
+
+class story(article):
+    def isStory():
+        return True
+    def save(self, *args, **kwargs):
+        if self.show== True:
+            self.show= False
+            try:
+                heros= story.objects.get(show=True)
+                heros.show=False
+                heros.save()
+            except:
+                pass
+            self.show=True
+            
+        super(story, self).save(*args, **kwargs)
+
+

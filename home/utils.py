@@ -42,6 +42,11 @@ def matches(sermon):
         li.append(models.Sermon.objects.get(title=x))
     return {'list':li,'dict':sortedmatches}
 
+def instantiateAll():
+    models.typeParagraph.objects.get_or_create(name='standard')
+    models.typeParagraph.objects.get_or_create(name='todo')
+    models.typeParagraph.objects.get_or_create(name='note')
+
 def matchOne(tag):
     sermons=models.Sermon.objects.all()
     sermon=[]
