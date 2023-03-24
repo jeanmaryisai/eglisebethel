@@ -1,0 +1,53 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %}
+Article
+{% endblock %}
+{% block events_active %}class='active'{% endblock %}
+{% block body %}
+<div class="container-wrap">
+	<aside id="fh5co-hero">
+		<div class="flexslider">
+			<ul class="slides">
+			   <li style="background-image: url({{page.background.img.url}});">
+				   <div class="overlay"></div>
+				   <div class="container-fluid">
+					   <div class="row">
+						   <div class="col-md-6 col-md-offset-3 text-center slider-text">
+							   <div class="slider-text-inner">
+								   <h1>Nos articles</h1>
+									<h2>Lisez nos articles</h2>
+							   </div>
+						   </div>
+					   </div>
+				   </div>
+			   </li>
+			  </ul>
+		  </div>
+	</aside>
+	<div id="fh5co-events">
+		<div class="row animate-box">
+			<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+				<h2>Nos article traite de divers </h2>
+				<p>{{page.subtitle}}</p>
+			</div>
+		</div>
+		<div class="row">
+			{% for x in event %}
+			<div class="col-md-4 animate-box">
+				<div class="events-entry">
+					<span class="date">{{x.startdate}}</span>
+					<h3><a href="#">{{x.title}}</a></h3>
+					{% for y in x.secteur.all %}
+					<code> <a href="{% url 'departement' y.slug %}">{{y.title}}</a></code>
+					{% endfor %}
+					<p>{{x.description}}</p>
+					<a href="{% url 'singlevents' x.slug %}">Read More <i class="icon-arrow-right3"></i></a>
+				</div>
+			</div>
+			{% endfor %}
+			
+		</div>
+	</div>
+</div>             
+{% endblock %}

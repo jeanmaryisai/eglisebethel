@@ -7,12 +7,12 @@ import pytz
 
 #from datetime import datetime, date, time, timedelta
 # Create your models here.
-
 class Img(models.Model):
     description=models.TextField(null=True)
     img=models.ImageField()
     def __str__(self):
         return self.description
+
 class heroSingle(models.Model):
     name= models.CharField(max_length=39,unique=True)
     heading= models.TextField()
@@ -108,7 +108,6 @@ class serviceSingle(models.Model):
     def __str__ (self):
         return self.title
 
-
 class Service(models.Model):
     title=models.CharField(max_length=30,unique=True, default="Services")
     submenu=models.TextField(default="Nos horraires nous permettent de vous offrir une large evantaille de possibilitee pour vous de nous assister")    
@@ -134,6 +133,7 @@ class tag(models.Model):
 
     def __str__ (self):
         return self.title
+
 class Sermon(models.Model):
     title= models.CharField(max_length=30,unique=True)
     slug=models.SlugField(max_length=40,unique=True,null=True)
@@ -145,8 +145,6 @@ class Sermon(models.Model):
         
     def __str__ (self):
         return self.title
-
-
 
 class Sermons_main_section(models.Model):
     title=models.CharField(max_length=30,unique=True, default="Nos Sermons")
@@ -300,8 +298,6 @@ class secteur_main(models.Model):
             
         super(secteur_main, self).save(*args, **kwargs)
 
-
-
 class contact_page(models.Model):
     title=models.CharField(max_length=30, default='standard')
     hero_img=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
@@ -350,7 +346,6 @@ class about_page(models.Model):
             
         super(about_page, self).save(*args, **kwargs)
 
-
 class li_subtitle_about(models.Model):
     title=models.CharField(max_length=50)
     show=models.BooleanField(default=True, null=True)
@@ -370,6 +365,7 @@ class live(evenement):
     link=models.URLField()
     backgroud=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
     autoclosed=models.BooleanField(default=False, null=True)
+
 class bay(models.Model):
     title=models.CharField(default="Standard1",max_length=50)
     title_hero=models.CharField( default="Bay Bondye",max_length=50)
@@ -462,6 +458,7 @@ class article(models.Model):
     show=models.BooleanField(default=True)
     img=models.ForeignKey(Img,on_delete=models.CASCADE,null=True)
     slug=models.SlugField()
+    tags=models.ManyToManyField(tag)
 
     def __str__(self) -> str:
         return self.titre
@@ -478,7 +475,6 @@ class article(models.Model):
             self.isprimary=True
             
         super(article, self).save(*args, **kwargs)
-
 
 class paragraph(models.Model):
     titre=models.TextField()

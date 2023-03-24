@@ -179,6 +179,7 @@ def articles(request):
     return render(request,'home/articles.html',context)
 
 def article(request,slug):
+    tags=models.tag.objects.all()
     article=models.article.objects.get(slug=slug)
-    context={'article':article}
+    context={'article':article,'tags':tags}
     return render(request,'home/article.html',context)
