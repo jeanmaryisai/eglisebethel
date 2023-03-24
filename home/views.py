@@ -1,17 +1,8 @@
-from http.client import HTTPResponse
 import json
-from tabnanny import check
-from turtle import title
 from django.shortcuts import redirect
-import re
-from unicodedata import decimal
-from venv import create
-from django import http
-import django
 from django.shortcuts import render
 from . import models
 from django.core.mail import send_mail
-from datetime import date
 from decimal import Decimal
 from . import utils
 # Create your views here.

@@ -1,14 +1,8 @@
 
-import decimal
-from email.mime import image
-from lib2to3.pgen2.token import SLASHEQUAL
 from logging import raiseExceptions
-from ssl import Purpose
 from django.db import models
 import datetime
 import pytz
-from django.utils.dateparse import parse_duration
-from . import utils
 
 
 #from datetime import datetime, date, time, timedelta
