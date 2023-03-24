@@ -460,6 +460,7 @@ class article(models.Model):
     sous_titre=models.TextField()
     isprimary=models.BooleanField(default=False)
     show=models.BooleanField(default=True)
+    img=models.ForeignKey(Img,on_delete=models.CASCADE,null=True)
     slug=models.SlugField()
 
     def __str__(self) -> str:

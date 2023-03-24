@@ -12,4 +12,6 @@ urlpatterns = [path('home/', views.home, name='home'),
                 path('home/contact', views.contact, name='contact'),
                 path('home/fundraisers', views.fundraisers, name='fundraisers'),
                 path('home/departement/<slug:slug>', views.departement, name='departement'),
+                path('home/articles',views.articles, name='articles'),
+                path('home/article/<slug:slug>',views.articles,name='article')
 ]

@@ -171,3 +171,14 @@ def fundraisers(request):
     bay=models.bay.objects.get(show=True)
     context={'bay':bay,'fund1':fund,'fund2':fund2}
     return render(request,'home/fundraisers.html',context)
+
+def articles(request):
+    articles=models.article.objects.filter(show=True)
+    Sermons_main_section=models.Sermons_main_section.objects.get(show=True)
+    context={'page':Sermons_main_section,'articles':articles}
+    return render(request,'home/articles.html',context)
+
+def article(request,slug):
+    article=models.article.objects.get(slug=slug)
+    context={'article':article}
+    return render(request,'home/article.html',context)
