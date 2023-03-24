@@ -200,6 +200,22 @@ class verset_main_page(models.Model):
             
         super(verset_main_page, self).save(*args, **kwargs)
 
+class secteur(models.Model):
+    title=models.CharField(max_length=40,null=True,blank=True,unique=True)
+    description= models.TextField(null=True,blank=True,unique=True,default= 'this is the default populated description')
+    slug=models.SlugField(null=True,blank=True)
+    tumbail= models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
+    titit = models.CharField(max_length=50,null=True,blank=True)
+    show=models.BooleanField(default=True, null=True)
+    quantity_of_members=models.IntegerField(default=0)
+
+    @property
+    def events(self):
+        return evenement.objects.all().filter(secteur=self)
+
+    def __str__ (self):
+        return self.title
+
 class evenement(models.Model):
     
     title=models.CharField(max_length=50,unique=True)
@@ -212,6 +228,8 @@ class evenement(models.Model):
     show=models.BooleanField(default=True)
     cover=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True,related_name="Backgroud")
     fulldescription=models.TextField(null=True)
+    secteur=models.ManyToManyField(secteur)
+
 
     @property
     def isExpired(self): 
@@ -282,16 +300,7 @@ class secteur_main(models.Model):
             
         super(secteur_main, self).save(*args, **kwargs)
 
-class secteur(models.Model):
-    title=models.CharField(max_length=40,null=True,blank=True,unique=True)
-    description= models.TextField(null=True,blank=True,unique=True,default= 'this is the default populated description')
-    slug=models.SlugField(null=True,blank=True)
-    tumbail= models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
-    titit= models.CharField(max_length=50,null=True,blank=True)
-    show=models.BooleanField(default=True, null=True)
-        
-    def __str__ (self):
-        return self.title
+
 
 class contact_page(models.Model):
     title=models.CharField(max_length=30, default='standard')

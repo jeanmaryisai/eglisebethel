@@ -1,22 +1,22 @@
 {% extends 'home/base.html' %}
 {% load static %}
 {% block title %}
-Evennements
+{{ departement.title }}
 {% endblock %}
-{% block events_active %}class='active'{% endblock %}
+{% block about_active %}class='active'{% endblock %}
 {% block body %}
 <div class="container-wrap">
 	<aside id="fh5co-hero">
 		<div class="flexslider">
 			<ul class="slides">
-			   <li style="background-image: url({{page.background.img.url}});">
+			   <li style="background-image: url({{tumbail.img.url}});">
 				   <div class="overlay"></div>
 				   <div class="container-fluid">
 					   <div class="row">
 						   <div class="col-md-6 col-md-offset-3 text-center slider-text">
 							   <div class="slider-text-inner">
-								   <h1>{{page.title}}</h1>
-									<h2>Vivez tout nos events ici et maintenant</h2>
+								   <h1>{{departement.title}}</h1>
+									<h2>{{departement.description}}</h2>
 							   </div>
 						   </div>
 					   </div>
@@ -28,8 +28,8 @@ Evennements
 	<div id="fh5co-events">
 		<div class="row animate-box">
 			<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-				<h2>{{page.title}}</h2>
-				<p>{{page.subtitle}}</p>
+				<h2>Quelque de nos Evennements</h2>
+				<p> Ce secteur compte environ {{departement.quantity_of_members}} membres.</p>
 			</div>
 		</div>
 		<div class="row">
@@ -38,7 +38,7 @@ Evennements
 				<div class="events-entry">
 					<span class="date">{{x.startdate}}</span>
 					<h3><a href="#">{{x.title}}</a></h3>
-					{% for y in x.secteur.all %}
+                    {% for y in x.secteur.all %}
 					<code> <a href="{% url 'departement' y.slug %}">{{y.title}}</a></code>
 					{% endfor %}
 					<p>{{x.description}}</p>
@@ -51,4 +51,3 @@ Evennements
 	</div>
 </div>             
 {% endblock %}
-

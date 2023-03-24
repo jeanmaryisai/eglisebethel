@@ -158,6 +158,13 @@ def baylibre(request,slug):
     context={'bay':bay,'give':give,'url':url,'x':purpose}
     return render(request,'home/baylibre.html',context)
 
+def departement(request,slug):
+    d=models.secteur.objects.get(slug=slug)
+    events=d.events
+    context={'departement':d,'event':events}
+    return render(request,'home/departement.html',context)
+
+
 def fundraisers(request):
     fund=models.fundRaiser.objects.filter(show=True).exclude(title="primary").filter(endlessFund=True)
     fund2=models.fundRaiser.objects.filter(show=True).exclude(title="primary").filter(endlessFund=False)
