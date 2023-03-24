@@ -103,7 +103,6 @@ def sermons(request,slug):
     try:
         sermonJ=models.Sermon.objects.get(slug=slug)
         list=utils.matches(sermonJ)['list']
-        print(list)
         sermon=models.Sermon.objects.all().exclude(title=sermonJ)
         context['sermonJ']=sermonJ
         context['list']=list
@@ -172,14 +171,29 @@ def fundraisers(request):
     context={'bay':bay,'fund1':fund,'fund2':fund2}
     return render(request,'home/fundraisers.html',context)
 
-def articles(request):
-    articles=models.article.objects.filter(show=True)
-    Sermons_main_section=models.Sermons_main_section.objects.get(show=True)
-    context={'page':Sermons_main_section,'articles':articles}
-    return render(request,'home/articles.html',context)
-
-def article(request,slug):
+def articles(request,slug):
     tags=models.tag.objects.all()
-    article=models.article.objects.get(slug=slug)
-    context={'article':article,'tags':tags}
-    return render(request,'home/article.html',context)
+    arti=models.article.objects.filter(show=True)   
+    context={'tags':tags,'articles':arti}
+
+    # sermon=models.Sermon.objects.all
+    # tags=models.tag.objects.all()
+    Sermons_main_section=models.Sermons_main_section.objects.get(show=True)
+    context['page']=Sermons_main_section
+    try:
+        articleJ=models.article.objects.get(slug=slug)
+        relatedarticle=utils.matchesarticle(articleJ)['list']
+        # sermon=models.Sermon.objects.all().exclude(title=sermonJ)
+        context['articleJ']=articleJ
+        context['list']=relatedarticle
+    except:
+        try:
+            slug=slug[:-2]
+            slugTest=models.tag.objects.get(title=slug)
+            xx=utils.matchOnearticle(slug)
+            context['articles']=xx
+            context['tag']=slug
+        except:
+            pass
+
+    return render(request,'home/articles.html',context)

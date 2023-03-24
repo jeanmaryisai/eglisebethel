@@ -80,6 +80,7 @@
 							{% block home_active %}{% endblock %}
 							><a href="{% url 'home' %}">Aceuil</a></li>
 							<li {% block sermon_active %}{% endblock %}><a href="{% url 'sermons' -1 %}">Sermons</a></li>
+							<li {% block article_active %}{% endblock %}><a href="{% url 'articles' -1 %}">Articles</a></li>
 							<!-- <li class="has-dropdown {% block secteur_active %}{% endblock %}">
 								<a href="news.html">Secteurs</a>
 								<ul class="dropdown">

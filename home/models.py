@@ -459,10 +459,13 @@ class article(models.Model):
     img=models.ForeignKey(Img,on_delete=models.CASCADE,null=True)
     slug=models.SlugField()
     tags=models.ManyToManyField(tag)
-
+    autor=models.CharField(max_length=100)
     def __str__(self) -> str:
-        return self.titre
-    
+        return self.title
+    @property
+    def paragraphs(self):
+        return paragraph.objects.filter(article=self).order_by('rang')
+
     def save(self, *args, **kwargs):
         if self.isprimary== True:
             self.isprimary= False
@@ -477,9 +480,9 @@ class article(models.Model):
         super(article, self).save(*args, **kwargs)
 
 class paragraph(models.Model):
-    titre=models.TextField()
-    sous_titre=models.TextField()
-    text=models.TextField()
+    titre=models.TextField(null=True,blank=True)
+    sous_titre=models.TextField(null=True,blank=True)
+    text=models.TextField(null=True,blank=True)
     rang=models.IntegerField()
     article=models.ForeignKey(article,on_delete=models.CASCADE)
     def __str__(self) -> str:

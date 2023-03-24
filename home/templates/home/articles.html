@@ -1,11 +1,12 @@
 {% extends 'home/base.html' %}
 {% load static %}
 {% block title %}
-Article
+Articles
 {% endblock %}
-{% block events_active %}class='active'{% endblock %}
+{% block article_active %} class='active'{% endblock %}
 {% block body %}
 <div class="container-wrap">
+	{%if articleJ%}{%else%}
 	<aside id="fh5co-hero">
 		<div class="flexslider">
 			<ul class="slides">
@@ -16,7 +17,7 @@ Article
 						   <div class="col-md-6 col-md-offset-3 text-center slider-text">
 							   <div class="slider-text-inner">
 								   <h1>Nos articles</h1>
-									<h2>Lisez nos articles</h2>
+									<h2>Lisez nos article, elle traite de presque tout</h2>
 							   </div>
 						   </div>
 					   </div>
@@ -25,29 +26,101 @@ Article
 			  </ul>
 		  </div>
 	</aside>
-	<div id="fh5co-events">
+	
+	<div id="fh5co-sermon">
 		<div class="row animate-box">
 			<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-				<h2>Nos article traite de divers </h2>
-				<p>{{page.subtitle}}</p>
+				<h2>Articles</h2>
+				<p>Lorem ipsum dolor sit amet.</p>
 			</div>
 		</div>
+	{%endif%}
+	{%if articleJ%}
+	<div id="fh5co-sermon">
+		<div>
+			<h1>{{articleJ.title}}</h1>
+            <h4>{{articleJ.sous_titre}}</h4>
+            <div style="margin:20px ;">
+                {%for x in articleJ.tags.all%}
+                    <a href="{%url 'articles' x.title|add:'-1' %}">
+                    <small class="tag">   #{{x.title}}</small>
+                    </a>
+                {%endfor%}
+            
+            
+        </div>
+            <br><br>
+            {% for x in articleJ.paragraphs %}
+
+                <h3>{{x.titre}}</h3>
+                <h5>{{x.sous_titre}}</h5>
+                <p>{{x.text}}</p>
+                <br>
+
+            {%endfor%}
+		</div>
+		<br>
+
+		
+		<h3>Related articles</h3>
 		<div class="row">
-			{% for x in event %}
-			<div class="col-md-4 animate-box">
-				<div class="events-entry">
-					<span class="date">{{x.startdate}}</span>
-					<h3><a href="#">{{x.title}}</a></h3>
-					{% for y in x.secteur.all %}
-					<code> <a href="{% url 'departement' y.slug %}">{{y.title}}</a></code>
-					{% endfor %}
-					<p>{{x.description}}</p>
-					<a href="{% url 'singlevents' x.slug %}">Read More <i class="icon-arrow-right3"></i></a>
+			{% for x in list %}
+			<div class="col-md-4 text-center animate-box" >
+				<div class="sermon-entry">
+					<div class="sermon" style="background-image: url({{x.img.img.url}});">
+						<div class="play">
+							<a href="{{x.slug}}"><i class="icon-file-text"></i></a>
+						</div>
+					</div>
+					<h3>{{x.title}}</h3>
 				</div>
 			</div>
+
+			{% endfor %}	
+		</div>
+		<br>
+		<h3>Tout les articles</h3>
+		{%endif%}
+		<div class="dropdown">
+			<button onclick="unhide()" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+			  Themes
+			</button>
+			<ul class="dropdown-menu" id="tttt">
+				<li><a class="dropdown-item" href="{% url 'articles' -1 %}">Tout</a></li>
+				{%for t in tags%}
+			  <li><a class="dropdown-item" href="{% url 'articles' t.title|add:'-1' %}">{{t.title}}</a></li>
+			  
+				{%endfor%}
+			</ul>
+		  </div>
+		<div class="row">
+			{%if tag%}
+			<h3 class="tag" style="margin-left: 15px;">#{{tag}}</h3>
+			<br>
+			{%endif%}
+			{% for x in articles %}
+			<div class="col-md-4 text-center animate-box" >
+				<div class="sermon-entry">
+					<div class="sermon" style="background-image: url({{x.img.img.url}});">
+						<div class="play">
+							<a href="{{x.slug}}"><i class="icon-file-text"></i></a>
+						</div>
+					</div>
+					<h3>{{x.title}}</h3>
+					<span>{{x.autor}}</span>
+				</div>
+			</div>
+
 			{% endfor %}
-			
+			{%if tag%}
+			<a href="{% url 'articles' -1 %}"  style="margin-left: 15px;"><h4>voir tout <i class="icon-arrow-right3"></i></h4></a>	
+			{%endif%}
 		</div>
 	</div>
-</div>             
+	</div>
+</div>
+
 {% endblock %}
+{%block js%}
+
+{%endblock%}

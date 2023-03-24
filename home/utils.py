@@ -51,6 +51,40 @@ def matchOne(tag):
         for y in x.tags.all():
             tage.append(y.title)
         if tag in tage:
-            print(x.title)
             sermon.append(x)
     return sermon
+
+def matchOnearticle(tag):
+    sermons=models.article.objects.all()
+    sermon=[]
+    
+    for x in sermons:
+        tage=[]
+        for y in x.tags.all():
+            tage.append(y.title)
+        if tag in tage:
+            sermon.append(x)
+    return sermon
+
+def matchesarticle(article):
+    sermons=models.article.objects.all().exclude(slug=article.slug)
+    tag=article.tags.all()
+    tage=[]
+    for x in tag:
+        tage.append(x.title)
+
+    matches={}
+    for x in sermons:
+        ma=0
+        for y in x.tags.all():
+            if y.title in tage:
+                ma =ma +1
+        if ma>0:        
+            matches[x.title]=ma
+    sortedmatches=dict(sorted(matches.items(),key=lambda item:item[1],reverse=True))
+
+    lis=list(sortedmatches.keys())
+    li=[]
+    for x in lis:
+        li.append(models.article.objects.get(title=x))
+    return {'list':li,'dict':sortedmatches}
