@@ -224,7 +224,7 @@ class evenement(models.Model):
     description=models.CharField(max_length=100,null=True)
     isprimaray=models.BooleanField(default=False,null=True)
     estimatedDuration=models.DurationField(null=True)
-    album=models.ManyToManyField(Img,null=True,blank=True)
+    album=models.ManyToManyField(Img)
     show=models.BooleanField(default=True)
     cover=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True,related_name="Backgroud")
     fulldescription=models.TextField(null=True)
@@ -454,3 +454,40 @@ class participation(models.Model):
     isMember= models.BooleanField(null=True)
     def __str__(self):
         return self.name
+
+class article(models.Model):
+    title=models.TextField()
+    sous_titre=models.TextField()
+    isprimary=models.BooleanField(default=False)
+    show=models.BooleanField(default=True)
+    slug=models.SlugField()
+
+    def __str__(self) -> str:
+        return self.titre
+    
+    def save(self, *args, **kwargs):
+        if self.isprimary== True:
+            self.isprimary= False
+            try:
+                heros= article.objects.get(isprimary=True)
+                heros.isprimary=False
+                heros.save()
+            except:
+                pass
+            self.isprimary=True
+            
+        super(article, self).save(*args, **kwargs)
+
+
+class paragraph(models.Model):
+    titre=models.TextField()
+    sous_titre=models.TextField()
+    text=models.TextField()
+    rang=models.IntegerField()
+    article=models.ForeignKey(article,on_delete=models.CASCADE)
+    def __str__(self) -> str:
+        return self.titre
+
+
+
+

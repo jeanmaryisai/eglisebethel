@@ -28,4 +28,6 @@ admin.site.register(Img)
 admin.site.register(fundRaiser,homeModels1)
 admin.site.register(participation)
 admin.site.register(tag)
+admin.site.register(article,homeModels1)
+admin.site.register(paragraph)
 
