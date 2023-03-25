@@ -77,9 +77,16 @@ def about(request):
     verset_main_page=models.verset_main_page.objects.get(show=True)
     about=models.about_page.objects.get(show=True)
     wrapper=models.wrapper_about_page.objects.all
+
     context={'about':about,'secteur_main':secteur_main,
     'secteur':secteur,
-    'wrapper':wrapper,'verset':verset_main_page.v1}
+    'wrapper':wrapper}
+
+    try:
+        context['bio']=models.article.objects.filter(show=True).get(isprimary=True).paragraphs[0].text[:150]
+        context['slugArticle']=models.article.objects.filter(show=True).get(isprimary=True).slug
+    except:
+        context['verset']=verset_main_page.v1
     return render(request,'home/about.html',context)
 
 def events(request):
@@ -96,10 +103,10 @@ def singlevents(request,slug):
     return render(request,'home/eventsingle.html',context)
 
 def sermons(request,slug):
-    sermon=models.Sermon.objects.all
+    
     tags=models.tag.objects.all()
     Sermons_main_section=models.Sermons_main_section.objects.get(show=True)
-    context={'page':Sermons_main_section,'sermon':sermon,'tags':tags}
+    context={'page':Sermons_main_section,'tags':tags}
     try:
         sermonJ=models.Sermon.objects.get(slug=slug)
         list=utils.matches(sermonJ)['list']
@@ -114,7 +121,8 @@ def sermons(request,slug):
             context['sermon']=xx
             context['tag']=slug
         except:
-            pass
+            sermon=models.Sermon.objects.all
+            context['sermon']=sermon
 
     return render(request,'home/sermons.html',context)
 
@@ -173,8 +181,8 @@ def fundraisers(request):
 
 def articles(request,slug):
     tags=models.tag.objects.all()
-    arti=models.article.objects.filter(show=True)   
-    context={'tags':tags,'articles':arti}
+       
+    context={'tags':tags}
 
     # sermon=models.Sermon.objects.all
     # tags=models.tag.objects.all()
@@ -193,7 +201,9 @@ def articles(request,slug):
             xx=utils.matchOnearticle(slug)
             context['articles']=xx
             context['tag']=slug
+           
         except:
-            pass
+            arti=models.article.objects.filter(show=True)
+            context['articles']=arti
 
     return render(request,'home/articles.html',context)

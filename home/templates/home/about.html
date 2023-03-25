@@ -28,11 +28,21 @@ A propos de Nous
 		<div id="fh5co-about">
 			<div class="row">
 				<div class="col-md-4">
+					{% if verset %}
 					<h3>Verset quotidien</h3>
 					<blockquote class="dailyVerse">
 						<p>&ldquo;{{verset.verset}}&rdquo;</p>
 						<span>{{verset.ref}}</span>
 					</blockquote>
+					{%else%}
+					<h3>Biographie de l'eglise</h3>
+					<blockquote class="dailyVerse">
+						<p>&ldquo;{{bio}}........&rdquo;</p>
+						<a href="{% url 'articles' slugArticle %}"  style="margin-left: 15px;"><h4>voir tout <i class="icon-arrow-right3"></i></h4></a>	
+			
+						<span>{{verset.ref}}</span>
+					</blockquote>
+					{%endif%}
 				</div>
 				{% for x in wrapper %}
 				<div class="col-md-4">
@@ -40,7 +50,7 @@ A propos de Nous
 					<p>{{x.paragraph}}</p>
 					<ul class="ministries-list">
 					{% for y in x.wrapper_about_page.all %}
-					<li><i class="icon-check"></i>y.title</li>
+					<li><i class="icon-check"></i>{{y.title}}</li>
 					{% endfor %}
 				</ul>
 					</div>
@@ -61,7 +71,7 @@ A propos de Nous
 				{% for x in secteur %}
 				<div class="col-md-3 animate-box">
 					<div class="news">
-						<a href="#" class="img-holder"><img class="img-responsive" src="{{x.tumbail.img.url}}" alt="Free HTML5 Website Template by freehtml5.co"></a>
+						<a href="#" class="img-holder"><img class="img-responsive" src="{{x.tumbail.img.url}}" alt="img"></a>
 						<div class="desc">
 							<span class="date">{{x.titit}}</span>
 							<h3><a href="#">{{x.title}}</a></h3>

@@ -101,8 +101,7 @@ class serviceSingle(models.Model):
     slug= models.SlugField(unique=True)
     imageBackground=models.ForeignKey(Img,on_delete=models.SET_NULL,null=True)
     description_bref=models.TextField()
-    description= models.TextField()
-    horraire=models.CharField(max_length=15)
+    horraire=models.CharField(max_length=25)
     show= models.BooleanField(default=True)
 
     def __str__ (self):

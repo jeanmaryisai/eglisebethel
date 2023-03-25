@@ -59,6 +59,8 @@ Articles
 
             {%endfor%}
 		</div>
+		<strong><hr></strong>
+		
 		<br>
 
 		
@@ -76,11 +78,14 @@ Articles
 				</div>
 			</div>
 
-			{% endfor %}	
+			{% endfor %}
+			<a href="{% url 'articles' -1 %}"  style="margin-left: 15px;"><h4>voir tout les articles<i class="icon-arrow-right3"></i></h4></a>	
+				
 		</div>
+		<hr>
+		
 		<br>
-		<h3>Tout les articles</h3>
-		{%endif%}
+		{%else%}
 		<div class="dropdown">
 			<button onclick="unhide()" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 			  Themes
@@ -110,12 +115,18 @@ Articles
 					<span>{{x.autor}}</span>
 				</div>
 			</div>
-
+			{% empty %}
+				<h3>Pas d'article sous ce theme.</h3>
+				<a href="{% url 'sermons' tag|add:'-1' %}"  style="margin-left: 15px;"><h4>voir des videos sous ce theme <i class="icon-arrow-right3"></i></h4></a>	
+			
+				<br>
 			{% endfor %}
 			{%if tag%}
-			<a href="{% url 'articles' -1 %}"  style="margin-left: 15px;"><h4>voir tout <i class="icon-arrow-right3"></i></h4></a>	
+			
+			<a href="{% url 'articles' -1 %}"  style="margin-left: 15px;"><h4>voir tout les articles<i class="icon-arrow-right3"></i></h4></a>	
 			{%endif%}
 		</div>
+		{%endif%}
 	</div>
 	</div>
 </div>

@@ -171,9 +171,10 @@
             {% for x in serviceSingle %}
             <div class="col-md-4 animate-box">
                 <div class="services">
-                    <a href="#" class="img-holder"><img class="img-responsive" src="{{x.imageBackground.img.url}}" alt="Free HTML5 Website Template by freehtml5.co"></a>
+                    <a href="#" class="img-holder"><img class="img-responsive" src="{{x.imageBackground.img.url}}" alt="img"></a>
                     <div class="desc">
                         <h3><a href="#">{{x.title}}</a></h3>
+                        <code>{{x.horraire}}</code>
                         <p>{{x.description_bref}}</p>
                         <!-- <a href="url ('{{x.slug}}')">Read More <i class="icon-arrow-right3"></i></a> -->
                     </div>
