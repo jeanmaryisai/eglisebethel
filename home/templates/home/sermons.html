@@ -17,7 +17,7 @@ Sermons
 						   <div class="col-md-6 col-md-offset-3 text-center slider-text">
 							   <div class="slider-text-inner">
 								   <h1>{{page.title}}</h1>
-									<h2>Abonne vous a notre page youtube <a href="#" target="_blank">clicker ici</a></h2>
+									<h2>Abonne vous a notre page youtube <a href="{{credentials.youtube}}" target="_blank">clicker ici</a></h2>
 							   </div>
 						   </div>
 					   </div>
@@ -68,7 +68,7 @@ Sermons
 			</div>
 
 			{% endfor %}<a href="{% url 'sermons' -1 %}"  style="margin-left: 15px;"><h4>voir tout <i class="icon-arrow-right3"></i></h4></a>	
-			`]	
+			
 		</div><hr>
 		<br>
 		{%else%}

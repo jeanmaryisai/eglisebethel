@@ -308,7 +308,13 @@ class contact_page(models.Model):
     address=models.CharField(max_length=50, default='Rue Louverture Rebecca prolongee #32')
     telphone=models.CharField(max_length=30, default='+509 43 89 0007')
     email=models.EmailField()
-    siteweb=models.CharField(max_length=20)
+    isai_url=models.URLField(default='https://isai.up.railway.app')
+    siteweb=models.URLField()
+    youtube=models.URLField()
+    facebook=models.URLField()
+    horraire_dimanche_Matin=models.CharField(max_length=25,default='7h:00am - 10h:00am')
+    horraire_dimanche_apres_midi=models.CharField(max_length=25,default='5h:00m - 8h:00pm')
+    google_map=models.URLField()
     show=models.BooleanField(default=True)
     def __str__ (self):
         return self.title
@@ -486,6 +492,9 @@ class paragraph(models.Model):
     article=models.ForeignKey(article,on_delete=models.CASCADE)
     def __str__(self) -> str:
         return self.titre
+
+
+    
 
 
 
