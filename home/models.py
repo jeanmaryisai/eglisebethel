@@ -1,4 +1,3 @@
-
 from logging import raiseExceptions
 from django.db import models
 import datetime
@@ -492,10 +491,3 @@ class paragraph(models.Model):
     article=models.ForeignKey(article,on_delete=models.CASCADE)
     def __str__(self) -> str:
         return self.titre
-
-
-    
-
-
-
-

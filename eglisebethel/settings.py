@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -83,6 +84,47 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'egliseBethelSite',
+#         'USER':'isaijeanmary',
+#         'PASSWORD':'mirlanda',
+#         'HOST':'database-1.cxoucylzgifl.us-east-2.rds.amazonaws.com',
+#         'PORT':'5432',
+
+#     }
+# }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'demo2',
+        'USER':'isaijeanmary',
+        'PASSWORD':'mirlanda',
+        'HOST':'database-2.conwvrw5lyko.sa-east-1.rds.amazonaws.com',
+        'PORT':'5432',
+
+    }
+}
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'demo',
+#         'USER':'isaijeanmary',
+#         'PASSWORD':'mirlanda',
+#         'HOST':'database-1.conwvrw5lyko.sa-east-1.rds.amazonaws.com',
+#         'PORT':'3306',
+#         'OPTIONS': {
+#             'sql_mode': 'STRICT_TRANS_TABLES',
+#         },
+
+#     }
+# }
 
 
 # Password validation
@@ -139,3 +181,11 @@ EMAIL_HOST_USER='jeanmaryisai@gmail.com'
 EMAIL_HOST_PASSWORD='46B5863CB0D083F266E0609BBDD71538380F'
 EMAIL_USE_TLS=True
 # EMAIL_USE_SSL= False
+
+AWS_ACCESS_KEY_ID='AKIA5RU6IJ3K2RQW3IXG'
+AWS_SECRET_ACCESS_KEY='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'
+AWS_STORAGE_BUCKET_NAME='eglisebethelbucket'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL=None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
