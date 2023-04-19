@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
     'home',
     'storages',
 ]
@@ -105,26 +107,13 @@ DATABASES = {
         'NAME': 'demo2',
         'USER':'isaijeanmary',
         'PASSWORD':'mirlanda',
-        'HOST':'database-2.conwvrw5lyko.sa-east-1.rds.amazonaws.com',
+        'HOST':'bethelsite.conwvrw5lyko.sa-east-1.rds.amazonaws.com',
         'PORT':'5432',
 
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'demo',
-#         'USER':'isaijeanmary',
-#         'PASSWORD':'mirlanda',
-#         'HOST':'database-1.conwvrw5lyko.sa-east-1.rds.amazonaws.com',
-#         'PORT':'3306',
-#         'OPTIONS': {
-#             'sql_mode': 'STRICT_TRANS_TABLES',
-#         },
 
-#     }
-# }
 
 
 # Password validation
