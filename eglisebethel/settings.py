@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-yeq##8cyr-zf@3lm-mop(_zn7zq4zt@e@%rzl+vw-1-h(3lj^w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bethel-eglise.up.railway.app','127.0.0.1','bethel-eglise.com']
+
 
 
 # Application definition
