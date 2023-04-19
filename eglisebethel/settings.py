@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-yeq##8cyr-zf@3lm-mop(_zn7zq4zt@e@%rzl+vw-1-h(3lj^w
 DEBUG = True
 
 ALLOWED_HOSTS = ['bethel-eglise.up.railway.app','127.0.0.1','bethel-eglise.com']
+CSRF_TRUSTED_ORIGINS = ['https://*.bethel-eglise.up.railway.app','https://*.bethel-eglise.com']
 
 
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -151,10 +153,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
+STATIC_URL = '/static/'
 MEDIA_URL='/images/'
-MEDIA_ROOT= os.path.join(BASE_DIR,'static/image')
+STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+MEDIA_ROOT= os.path.join(BASE_DIR,'images')
 
 
 
