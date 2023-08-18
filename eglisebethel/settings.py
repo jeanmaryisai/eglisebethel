@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
+from decouple import config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -90,33 +91,16 @@ DATABASES = {
     }
 }
 
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'egliseBethelSite',
-#         'USER':'isaijeanmary',
-#         'PASSWORD':'mirlanda',
-#         'HOST':'database-1.cxoucylzgifl.us-east-2.rds.amazonaws.com',
-#         'PORT':'5432',
-
-#     }
-# }
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'demo2',
-        'USER':'isaijeanmary',
-        'PASSWORD':'mirlanda',
-        'HOST':'bethelsite.conwvrw5lyko.sa-east-1.rds.amazonaws.com',
-        'PORT':'5432',
-
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
-
-
 
 
 # Password validation
@@ -167,18 +151,24 @@ MEDIA_ROOT= os.path.join(BASE_DIR,'images')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email setting
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-EMAIL_HOST= 'smtp.elasticemail.com'
-EMAIL_PORT= '587'
-EMAIL_HOST_USER='jeanmaryisai@gmail.com'
-EMAIL_HOST_PASSWORD='46B5863CB0D083F266E0609BBDD71538380F'
-EMAIL_USE_TLS=True
+EMAIL_USE_TLS= True
+EMAIL_USE_SSL= False
 # EMAIL_USE_SSL= False
 
-AWS_ACCESS_KEY_ID='AKIA5RU6IJ3K2RQW3IXG'
-AWS_SECRET_ACCESS_KEY='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'
-AWS_STORAGE_BUCKET_NAME='eglisebethelbucket'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_SIGNATURE_VERSION = config('AWS_S3_SIGNATURE_VERSION')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')
+
+
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL=None
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
