@@ -12,19 +12,28 @@
     </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Site officielle de l'Eglise de Dieu Bethel(Petion-Ville)" />
-	<meta name="keywords" content="Dieu,dieux,eglise,Bethel,Haiti,Petion-Ville,Phillipeau,foi,combat,verset,Christ,chretien,libre,religion,Jean Mary,Volvick,Loudvick,Isai" />
-	<meta name="author" content="eglise de Dieu Bethel" />
+	<meta name="keywords" content="Dieu,dieux,eglise,Bethel,eglise,dezermithe,dezemit,Ayiti,Haiti,Petion-Ville,Phillipeau,foi,combat,verset,Christ,chretien,libre,religion,Jean Mary,Volvick,Loudvick,Isai,{%block keywords%}{%endblock%}" />
+
+
+	<meta name="author" content="Eglise de Dieu Bethel" />
 	<script type="text/javascript" id="zsiqchat">var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode: "3197ce7a8b8fa734c9e41d3b549d51ecd02bbe07d1359b1dd91c31f9707bef0ec68c2cdac73dd78ce345d5e91df71855", values:{},ready:function(){}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zoho.com/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);</script>
-  	<!-- Facebook and Twitter integration -->
+  	
+	
+	{% block meta %}
+	<!-- Facebook and Twitter integration -->
 	<meta property="og:title" content="Eglise de Dieu Bethel(Petion-Ville)"/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
+	<meta property="og:image" content="{{hero.vid1.backgroud.img.url}}"/>
+	<meta property="og:site_name" content="Eglise de Dieu de Bethel, Petion-Ville"/>
 	<meta property="og:description" content="Site officielle de l'Eglise de Dieu Bethel(Petion-Ville)"/>
 	<meta name="twitter:title" content="Eglise de Dieu Bethel(Petion-Ville)" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
+
 	<meta name="twitter:card" content="" />
+
+	{% endblock %}	<meta name="twitter:image" content="{{hero.vid1.backgroud.img.url}}" />
+	<meta name="twitter:url" content="{{ request.build_absolute_uri }}" />
+	<meta property="og:url" content="{{ request.build_absolute_uri }}">
+
+
 
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet"
@@ -115,14 +124,14 @@
 				  <div class="time-location__content default-section-spacing">
 	
 					<div class="section-heading">
-					  <span>Time and location</span>
-					  <h2>Come and worship with us</h2>
+					  <span>Heure et Date:</span>
+					  <h2>Viens adorer avec nous</h2>
 					</div><!-- .section-heading ends -->
 	
 					<div class="time-location__time">
 	
 					  <div class="info">
-						<div class="day bold">Sunday:</div>
+						<div class="day bold">Dimanche:</div>
 						<div class="time">
 						  <span>{{credentials.horraire_dimanche_Matin}}(service de matin)</span>
 						  <span>{{credentials.horraire_dimanche_apres_midi}} (service apres-midi )</span>
@@ -210,6 +219,14 @@
 	<script src="{% static 'home/js/jquery.countTo.js' %}"></script>
 	<!-- Main -->
 	<script src="{% static 'home/js/main.js' %}"></script>
+
+	<script>
+		function checkEnter(event) {
+			if (event.keyCode === 13 || (event.target.value.length === 300 && event.target.value.trim() !== '')) {
+				document.getElementById('search-form').submit();
+			}
+		}
+		</script>
     {% block js %}{% endblock %}
 </body>
 </html>

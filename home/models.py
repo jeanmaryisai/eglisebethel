@@ -454,10 +454,11 @@ class participation(models.Model):
     isMember= models.BooleanField(null=True)
     def __str__(self):
         return self.name
-
+from ckeditor.fields import RichTextField
 class article(models.Model):
     title=models.TextField()
     sous_titre=models.TextField()
+    paragraphs=RichTextField()
     isprimary=models.BooleanField(default=False)
     show=models.BooleanField(default=True)
     img=models.ForeignKey(Img,on_delete=models.CASCADE,null=True)
@@ -466,9 +467,13 @@ class article(models.Model):
     autor=models.CharField(max_length=100)
     def __str__(self) -> str:
         return self.title
+    
     @property
-    def paragraphs(self):
-        return paragraph.objects.filter(article=self).order_by('rang')
+    def tags_text(self):
+        a=''
+        for x in self.tags.all:
+            a += f"{x.title}, "
+        return a
 
     def save(self, *args, **kwargs):
         if self.isprimary== True:
@@ -483,11 +488,5 @@ class article(models.Model):
             
         super(article, self).save(*args, **kwargs)
 
-class paragraph(models.Model):
-    titre=models.TextField(null=True,blank=True)
-    sous_titre=models.TextField(null=True,blank=True)
-    text=models.TextField(null=True,blank=True)
-    rang=models.IntegerField()
-    article=models.ForeignKey(article,on_delete=models.CASCADE)
-    def __str__(self) -> str:
-        return self.titre
+
+    

@@ -4,6 +4,12 @@ from .models import *
 class homeModels1(admin.ModelAdmin):
     prepopulated_fields= {'slug':('title',)}
 
+from ckeditor.widgets import CKEditorWidget
+
+class YourModelAdmin(admin.ModelAdmin):
+
+    prepopulated_fields= {'slug':('title',)}
+
 admin.site.register(hero)
 admin.site.register(heroSingle)
 admin.site.register(firstSection)
@@ -28,6 +34,5 @@ admin.site.register(Img)
 admin.site.register(fundRaiser,homeModels1)
 admin.site.register(participation)
 admin.site.register(tag)
-admin.site.register(article,homeModels1)
-admin.site.register(paragraph)
+admin.site.register(article,YourModelAdmin)
 

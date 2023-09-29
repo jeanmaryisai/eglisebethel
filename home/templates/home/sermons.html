@@ -3,6 +3,122 @@
 {% block title %}
 Sermons
 {% endblock %}
+
+
+{%if sermonJ%}
+
+
+{% block meta %}
+
+
+<!-- Meta balises pour Facebook -->
+<meta property="og:title" content="{{sermonJ.title}}">
+<meta property="og:description" content="{{sermonJ.title}} par {{sermonJ.orator}}">
+<meta property="og:type" content="article">
+
+<meta property="og:image" content="{{x.img.img.url}}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Meta balises pour Instagram -->
+<meta property="og:site_name" content="{{sermonJ.title}}">
+<meta property="og:description" content="{{sermonJ.title}} de {{sermonJ.orator}}">
+<meta property="og:image" content="{{x.img.img.url}}">
+<meta property="og:image:width" content="1080">
+<meta property="og:image:height" content="1080">
+
+<!-- Meta balises pour WhatsApp -->
+<meta property="og:description" content="{{sermonJ.title}} par {{sermonJ.orator}}">
+
+<!-- Autres méta-informations -->
+<meta name="description" content="sermon {{sermonJ.title}} par {{sermonJ.orator}} ">
+
+<meta name="author" content="Bethel Magasine">
+
+
+<style>
+	.search-box {
+		width: fit-content;
+		height: fit-content;
+		position: relative;
+	}
+
+	.input-search {
+		height: 50px;
+		width: 50px;
+		border-style: none;
+		padding: 10px;
+		font-size: 18px;
+		letter-spacing: 2px;
+		outline: none;
+		border-radius: 25px;
+		transition: all .5s ease-in-out;
+		background-color: rgba(91, 207, 197, 0.2);
+		;
+		padding-right: 40px;
+		color: #545454;
+	}
+
+	.input-search::placeholder {
+		color: rgba(47, 47, 47, 0.5);
+		font-size: 18px;
+		letter-spacing: 2px;
+		font-weight: 100;
+	}
+
+	.btn-search {
+		width: 50px;
+		height: 50px;
+		border-style: none;
+		font-size: 20px;
+		font-weight: bold;
+		outline: none;
+		cursor: pointer;
+		border-radius: 50%;
+		position: absolute;
+		right: 0px;
+		color: #3a3a3a;
+		background-color: transparent;
+		pointer-events: painted;
+	}
+
+	.btn-search:focus~.input-search {
+		width: 300px;
+		border-radius: 0px;
+		background-color: transparent;
+		border-bottom: 1px solid rgba(67, 108, 76, 0.785);
+		transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+	}
+
+	.input-search:focus {
+		width: 300px;
+		border-radius: 0px;
+		background-color: transparent;
+		border-bottom: 1px solid rgba(255, 255, 255, .5);
+		transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+	}
+</style>
+
+
+{% endblock %}
+
+{% block keywords %}
+
+{%for x in sermonJ.tags.all%}
+{{x.title}},
+{%endfor%}{{sermonJ.orator}}
+
+{% endblock %}
+
+{%else%}
+
+
+
+{%endif%}
+
+
+
+
 {% block sermon_active %} class='active'{% endblock %}
 {% block body %}
 <div class="container-wrap">
@@ -10,23 +126,24 @@ Sermons
 	<aside id="fh5co-hero">
 		<div class="flexslider">
 			<ul class="slides">
-			   <li style="background-image: url({{page.background.img.url}});">
-				   <div class="overlay"></div>
-				   <div class="container-fluid">
-					   <div class="row">
-						   <div class="col-md-6 col-md-offset-3 text-center slider-text">
-							   <div class="slider-text-inner">
-								   <h1>{{page.title}}</h1>
-									<h2>Abonne vous a notre page youtube <a href="{{credentials.youtube}}" target="_blank">clicker ici</a></h2>
-							   </div>
-						   </div>
-					   </div>
-				   </div>
-			   </li>
-			  </ul>
-		  </div>
+				<li style="background-image: url({{page.background.img.url}});">
+					<div class="overlay"></div>
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-6 col-md-offset-3 text-center slider-text">
+								<div class="slider-text-inner">
+									<h1>{{page.title}}</h1>
+									<h2>Abonne vous a notre page youtube <a href="{{credentials.youtube}}"
+											target="_blank">clicker ici</a></h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
 	</aside>
-	
+
 	<div id="fh5co-sermon">
 		<div class="row animate-box">
 			<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
@@ -36,82 +153,110 @@ Sermons
 		</div>
 		{%endif%}
 		{%if sermonJ%}
-		
+
 		<div>
-			<iframe width="100%" height="500" src="{{sermonJ.youtubeurl}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<iframe width="100%" height="500" src="{{sermonJ.youtubeurl}}" title="YouTube video player" frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen></iframe>
 		</div>
 		<br>
 		<div style="margin:20px ;">
-		<h3>{{sermonJ.title}}</h3>
-		{%for x in sermonJ.tags.all%}
-		<a href="{%url 'sermons' x.title|add:'-1' %}">
-		<small class="tag">    #{{x.title}}</small>
-		</a>
-		{%endfor%}
-		<br>
-		<span>{{sermonJ.orator}}</span>
-		<hr><br>
-		
-		<h3>Related sermons</h3>
-		<div class="row">
-			{% for x in list %}
-			<div class="col-md-4 text-center animate-box" >
-				<div class="sermon-entry">
-					<div class="sermon" style="background-image: url({{x.tumbnail.img.url}});">
-						<div class="play">
-							<a href="{{x.slug}}"><i class="icon-play3"></i></a>
-						</div>
-					</div>
-					<h3>{{x.title}}</h3>
-					<span>{{x.orator}}</span>
-				</div>
-			</div>
-
-			{% endfor %}<a href="{% url 'sermons' -1 %}"  style="margin-left: 15px;"><h4>voir tout <i class="icon-arrow-right3"></i></h4></a>	
-			
-		</div><hr>
-		<br>
-		{%else%}
-		<div class="dropdown">
-			<button onclick="unhide()" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-			  Themes
-			</button>
-			<ul class="dropdown-menu" id="tttt">
-				<li><a class="dropdown-item" href="{% url 'sermons' -1 %}">Tout</a></li>
-				{%for t in tags%}
-			  <li><a class="dropdown-item" href="{% url 'sermons' t.title|add:'-1' %}">{{t.title}}</a></li>
-			  
-				{%endfor%}
-			</ul>
-		</div>
-		<div class="row">
-			{%if tag%}
-			<h3 class="tag" style="margin-left: 15px;">#{{tag}}</h3>
+			<h3>{{sermonJ.title}}</h3>
+			{%for x in sermonJ.tags.all%}
+			<a href="{%url 'sermons' x.title|add:'-1' %}">
+				<small class="tag"> #{{x.title}}</small>
+			</a>
+			{%endfor%}
 			<br>
-			{%endif%}
-			{% for x in sermon %}
-			<div class="col-md-4 text-center animate-box" >
-				<div class="sermon-entry">
-					<div class="sermon" style="background-image: url({{x.tumbnail.img.url}});">
-						<div class="play">
-							<a href="{{x.slug}}"><i class="icon-play3"></i></a>
+			<span>{{sermonJ.orator}}</span>
+			<hr><br>
+
+			<h3>Related sermons</h3>
+			<div class="row">
+				{% for x in list %}
+				<div class="col-md-4 text-center animate-box">
+					<div class="sermon-entry">
+						<div class="sermon" style="background-image: url({{x.tumbnail.img.url}});">
+							<div class="play">
+								<a href="{{x.slug}}"><i class="icon-play3"></i></a>
+							</div>
 						</div>
+						<h3>{{x.title}}</h3>
+						<span>{{x.orator}}</span>
 					</div>
-					<h3>{{x.title}}</h3>
-					<span>{{x.orator}}</span>
 				</div>
+
+				{% endfor %}<a href="{% url 'sermons' -1 %}" style="margin-left: 15px;">
+					<h4>voir tout <i class="icon-arrow-right3"></i></h4>
+				</a>
+
 			</div>
-			{% empty %}
-				<h3>Pas de sermons sous ce theme.</h3>
-				<a href="{% url 'articles' tag|add:'-1' %}"  style="margin-left: 15px;"><h4>voir des articles sous ce theme <i class="icon-arrow-right3"></i></h4></a>	
+			<hr>
+			<br>
+			{%else%}
+			<span style="margin-right: 15px;">
+				<div class="search-box">
+					<form id="search-form" action="" method="GET">
+						<button class="btn-search"><i class="icon-search"></i></button>
+						<input type="text" class="input-search" id="search-input" name="q"
+							placeholder="Rechercher n'importe quoi..." onkeydown="checkEnter(event)">
+					</form>
+				</div>
+			</span><span>
+				<div class="dropdown">
+					<button onclick="unhide()" class="btn btn-primary dropdown-toggle" type="button"
+						data-bs-toggle="dropdown" aria-expanded="false">
+						Themes
+					</button>
+					<ul class="dropdown-menu" id="tttt">
+						<li><a class="dropdown-item" href="{% url 'sermons' -1 %}">Tout</a></li>
+						{%for t in tags%}
+						<li><a class="dropdown-item" href="{% url 'sermons' t.title|add:'-1' %}">{{t.title}}</a></li>
+
+						{%endfor%}
+					</ul>
+				</div>
+			</span>
+
+			<div class="row">
+				{%if tag%}
+				<h3 class="tag" style="margin-left: 15px;">#{{tag}}</h3>
 				<br>
-			{% endfor %}
-			{%if tag%}
-			<a href="{% url 'sermons' -1 %}"  style="margin-left: 15px;"><h4>voir tout <i class="icon-arrow-right3"></i></h4></a>	
+				{%endif%}
+				{%if isSearch%}
+				<h3 class="tag" style="margin-left: 15px;">Résultats des recherches pour {{query}}</h3>
+				<a href="{% url 'sermons' -1 %}" style="margin-left: 15px;">
+					<h4>voir tout les sermons<i class="icon-arrow-right3"></i></h4>
+				</a>
+				<br><hr><br>c
+				{%endif%}
+				{% for x in sermon %}
+				<div class="col-md-4 text-center animate-box">
+					<div class="sermon-entry">
+						<div class="sermon" style="background-image: url({{x.tumbnail.img.url}});">
+							<div class="play">
+								<a href="{{x.slug}}"><i class="icon-play3"></i></a>
+							</div>
+						</div>
+						<h3>{{x.title}}</h3>
+						<span>{{x.orator}}</span>
+					</div>
+				</div>
+				{% empty %}
+				<h3>Pas de sermons sous ce theme.</h3>
+				<a href="{% url 'articles' tag|add:'-1' %}" style="margin-left: 15px;">
+					<h4>voir des articles sous ce theme <i class="icon-arrow-right3"></i></h4>
+				</a>
+				<br>
+				{% endfor %}
+				{%if tag%}
+				<a href="{% url 'sermons' -1 %}" style="margin-left: 15px;">
+					<h4>voir tout <i class="icon-arrow-right3"></i></h4>
+				</a>
+				{%endif%}
+			</div>
 			{%endif%}
 		</div>
-		{%endif%}
-	</div>
 	</div>
 </div>
 

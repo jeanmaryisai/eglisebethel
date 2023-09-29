@@ -4,6 +4,7 @@ from django.shortcuts import render
 from . import models
 from django.core.mail import send_mail
 from decimal import Decimal
+from django.db.models import Count, Q
 from . import utils
 # Create your views here.
 def home (request):
@@ -121,18 +122,45 @@ def sermons(request,slug):
             context['sermon']=xx
             context['tag']=slug
         except:
-            sermon=models.Sermon.objects.all
-            context['sermon']=sermon
+            query = request.GET.get('q', '')  # Récupérez le terme de recherche de la requête GET
+            # Effectuez une recherche dans les champs désirés
+            sermons = models.Sermon.objects.filter(
+                Q(title__icontains=query) |  # Recherche dans le titre (insensible à la casse)
+                # Q(sous_titre__icontains=query) |  # Recherche dans le sous-titre (insensible à la casse)
+                Q(orator__icontains=query) |  # Recherche dans l'auteur (insensible à la casse)
+                Q(youtubeurl__icontains=query) |  # Recherche dans le contenu (insensible à la casse)
+                Q(tags__title__icontains=query)  # Recherche dans les tags (insensible à la casse)
+            )
+
+            # Annoter les résultats avec le nombre d'occurrences du terme de recherche
+            sermons = sermons.annotate(num_occurrences=Count(
+                'title', filter=Q(title__icontains=query)) +
+                # Count('sous_titre', filter=Q(sous_titre__icontains=query)) +
+                Count('orator', filter=Q(orator__icontains=query)) +
+                Count('youtubeurl', filter=Q(youtubeurl__icontains=query)) +
+                Count('tags', filter=Q(tags__title__icontains=query)) )
+            # Trier les résultats par nombre d'occurrences décroissantes
+            sermons = sermons.order_by('-num_occurrences')
+            context['query']=query
+            if query!= '':
+                context['isSearch']=True
+            context['sermon']=sermons.filter(show=True)
+
+
+            # sermon=models.Sermon.objects.all
+            # context['sermon']=sermon
 
     return render(request,'home/sermons.html',context)
 
 def bay(request):
-    fund=models.fundRaiser.objects.filter(show=True).exclude(title="primary").order_by('startupDate')
-    fund2=fund[::-1]
-    fund2=fund2[:5]
+    # fund=models.fundRaiser.objects.filter(show=True).exclude(title="primary").order_by('startupDate')
+    # fund2=fund[::-1]
+    # fund2=fund2[:5]
     bay=models.bay.objects.get(show=True)
-    context={'bay':bay,'fund':fund2}
-    return render(request,'home/bay.html',context)
+    context={'bay':bay,
+            #  'fund':fund2
+             }
+    return render(request,'home/bay copy.html',context)
 
 def baylibre(request,slug):
     purpose='true'
@@ -203,7 +231,28 @@ def articles(request,slug):
             context['tag']=slug
            
         except:
-            arti=models.article.objects.filter(show=True)
-            context['articles']=arti
+            query = request.GET.get('q', '')  # Récupérez le terme de recherche de la requête GET
+            # Effectuez une recherche dans les champs désirés
+            articles = models.article.objects.filter(
+                Q(title__icontains=query) |  # Recherche dans le titre (insensible à la casse)
+                Q(sous_titre__icontains=query) |  # Recherche dans le sous-titre (insensible à la casse)
+                Q(autor__icontains=query) |  # Recherche dans l'auteur (insensible à la casse)
+                Q(paragraphs__icontains=query) |  # Recherche dans le contenu (insensible à la casse)
+                Q(tags__title__icontains=query)  # Recherche dans les tags (insensible à la casse)
+            )
+
+            # Annoter les résultats avec le nombre d'occurrences du terme de recherche
+            articles = articles.annotate(num_occurrences=Count(
+                'title', filter=Q(title__icontains=query)) +
+                Count('sous_titre', filter=Q(sous_titre__icontains=query)) +
+                Count('autor', filter=Q(autor__icontains=query)) +
+                Count('paragraphs', filter=Q(paragraphs__icontains=query)) +
+                Count('tags', filter=Q(tags__title__icontains=query)) )
+            # Trier les résultats par nombre d'occurrences décroissantes
+            articles = articles.order_by('-num_occurrences')
+            context['query']=query
+            if query!='':
+                context['isSearch']=True
+            context['articles']=articles.filter(show=True)
 
     return render(request,'home/articles.html',context)
